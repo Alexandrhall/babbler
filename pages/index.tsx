@@ -10,8 +10,12 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   useEffect(() => {
-    getDocs(collection(database, "test")).then((data) => {
-      console.log(data);
+    console.log("hej");
+
+    getDocs(collection(database, "test")).then((snapshot) => {
+      snapshot.forEach((doc) => {
+        console.log(doc.data());
+      });
     });
   }, []);
   return (
