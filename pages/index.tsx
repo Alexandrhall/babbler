@@ -5,19 +5,25 @@ import styles from "../styles/Home.module.css";
 import { useEffect } from "react";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { database } from "../firebase";
-
-const inter = Inter({ subsets: ["latin"] });
+import Button from "@mui/material/Button";
 
 export default function Home() {
-  useEffect(() => {
-    console.log("hej");
+  const handleClick = () => {
+    addDoc(collection(database, "test"), {
+      testing: "testing",
+    }).then((data) => {
+      console.log(data);
+    });
+  };
 
-    getDocs(collection(database, "test")).then((snapshot) => {
+  useEffect(() => {
+    getDocs(collection(database, "users")).then((snapshot) => {
       snapshot.forEach((doc) => {
         console.log(doc.data());
       });
     });
   }, []);
+
   return (
     <>
       <Head>
@@ -28,6 +34,11 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <h1>Hello there</h1>
+        <div>
+          <Button variant="contained" onClick={handleClick}>
+            Klicka här
+          </Button>
+        </div>
       </main>
     </>
   );
