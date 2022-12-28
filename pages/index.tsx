@@ -8,10 +8,12 @@ import Button from "@mui/material/Button";
 import { useAppDispatch, useAppSelector } from "../src/redux/hooks";
 import { decrement, increment } from "../src/redux/counterSlice";
 import Test from "../src/components/Test";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const count = useAppSelector((state) => state.counter.value);
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const handleClick = () => {
     try {
@@ -68,6 +70,14 @@ export default function Home() {
             }}
           >
             Minska med 1
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => {
+              router.push("/login");
+            }}
+          >
+            login
           </Button>
           <Test />
         </div>
