@@ -6,8 +6,13 @@ import { useEffect } from "react";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { database } from "../firebase";
 import Button from "@mui/material/Button";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { decrement, increment } from "../redux/counterSlice";
 
 export default function Home() {
+  const count = useAppSelector((state) => state.counter.value);
+  const dispatch = useAppDispatch();
+
   const handleClick = () => {
     addDoc(collection(database, "test"), {
       testing: "testing",
@@ -17,12 +22,18 @@ export default function Home() {
   };
 
   useEffect(() => {
+    console.log(count);
+
     getDocs(collection(database, "users")).then((snapshot) => {
       snapshot.forEach((doc) => {
         console.log(doc.data());
       });
     });
   }, []);
+
+  useEffect(() => {
+    console.log(count);
+  }, [dispatch]);
 
   return (
     <>
@@ -38,6 +49,23 @@ export default function Home() {
           <Button variant="contained" onClick={handleClick}>
             Klicka här
           </Button>
+          <Button
+            variant="contained"
+            onClick={() => {
+              dispatch(increment());
+            }}
+          >
+            Öka med 1
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => {
+              dispatch(decrement());
+            }}
+          >
+            Minska med 1
+          </Button>
+          <h1>{count}</h1>
         </div>
       </main>
     </>
