@@ -7,8 +7,9 @@ import React, {
 } from "react";
 import { signInWithEmailAndPassword, User } from "firebase/auth";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { auth } from "../firebase";
+import { auth, database } from "../firebase";
 import { updateDetails } from "../redux/auth";
+import { doc, getDoc } from "firebase/firestore";
 
 interface IChildren {
   children: JSX.Element | JSX.Element[];
@@ -57,33 +58,34 @@ export const AuthProvider = ({ children }: IChildren) => {
     return unsubscribe;
   }, []);
 
-  //   useEffect(() => {
-  //     if (currentUser) {
-  //       const getUser = async () => {
-  //         try {
-  //           const promise = await getUserDetails(currentUser.uid);
-  //           if (promise && promise) {
-  //             dispatch(
-  //               updateDetails({
-  //                 user: {
-  //                   id: promise.id,
-  //                   role: promise.role,
-  //                   email: promise.email,
-  //                 } as IUserDetails,
-  //                 msg: "",
-  //               })
-  //             );
-  //           } else {
-  //             logoutFailedLogin();
-  //           }
-  //         } catch (err) {
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     const getUser = async () => {
+  //       try {
+  //         // const promise = await getUserDetails(currentUser.uid);
+  //         const promise = await getDoc(doc(database, "users", currentUser.uid))
+  //         if (promise && promise) {
+  //           dispatch(
+  //             updateDetails({
+  //               user: {
+  //                 id: promise.id,
+  //                 role: promise.role,
+  //                 email: promise.email,
+  //               } as IUserDetails,
+  //               msg: "",
+  //             })
+  //           );
+  //         } else {
   //           logoutFailedLogin();
-  //           console.log("Promise error", err);
   //         }
-  //       };
-  //       getUser();
-  //     }
-  //   }, [currentUser, dispatch, logoutFailedLogin]);
+  //       } catch (err) {
+  //         logoutFailedLogin();
+  //         console.log("Promise error", err);
+  //       }
+  //     };
+  //     getUser();
+  //   }
+  // }, [currentUser, dispatch, logoutFailedLogin]);
 
   return (
     <AuthContext.Provider value={currentUser}>

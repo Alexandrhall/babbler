@@ -18,6 +18,20 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASURMENT_ID,
 };
 
+export const getCurrentUser = () => {
+  /**
+   * When we return this promise the promise will resolve to the correct user value if there is one,
+   * else it will return null
+   * Reject will catch any errors inside the API listener
+   */
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
+};
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const database = getFirestore(app);

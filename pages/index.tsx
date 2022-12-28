@@ -1,12 +1,16 @@
 import Head from "next/head";
 import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { database } from "../src/firebase";
 import Button from "@mui/material/Button";
 import { useAppDispatch, useAppSelector } from "../src/redux/hooks";
-import { decrement, increment } from "../src/redux/counterSlice";
+import {
+  decrement,
+  increment,
+  incrementByAmount,
+} from "../src/redux/counterSlice";
 import Test from "../src/components/Test";
 import { useRouter } from "next/router";
 
@@ -14,6 +18,7 @@ export default function Home() {
   const count = useAppSelector((state) => state.counter.value);
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const [number, setNumber] = useState(0);
 
   const handleClick = () => {
     try {
@@ -52,9 +57,9 @@ export default function Home() {
       <main className={styles.main}>
         <h1>Hello there</h1>
         <div>
-          <Button variant="contained" onClick={handleClick}>
+          {/* <Button variant="contained" onClick={handleClick}>
             Klicka här
-          </Button>
+          </Button> */}
           <Button
             variant="contained"
             onClick={() => {
@@ -79,6 +84,27 @@ export default function Home() {
           >
             login
           </Button>
+          <div>
+            <input
+              type="number"
+              name="number"
+              onChange={(e) => {
+                if (e.target.value === "") {
+                  setNumber(0);
+                } else {
+                  setNumber(parseInt(e.target.value));
+                }
+              }}
+              value={number}
+            />
+            <button
+              onClick={() => {
+                dispatch(incrementByAmount(number));
+              }}
+            >
+              Öka med {number}
+            </button>
+          </div>
           <Test />
         </div>
       </main>
