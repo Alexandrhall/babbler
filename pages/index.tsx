@@ -1,24 +1,28 @@
 import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
 import { useEffect } from "react";
 import { collection, addDoc, getDocs } from "firebase/firestore";
-import { database } from "../firebase";
+import { database } from "../src/firebase";
 import Button from "@mui/material/Button";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { decrement, increment } from "../redux/counterSlice";
+import { useAppDispatch, useAppSelector } from "../src/redux/hooks";
+import { decrement, increment } from "../src/redux/counterSlice";
+import Test from "../src/components/Test";
 
 export default function Home() {
   const count = useAppSelector((state) => state.counter.value);
   const dispatch = useAppDispatch();
 
   const handleClick = () => {
-    addDoc(collection(database, "test"), {
-      testing: "testing",
-    }).then((data) => {
-      console.log(data);
-    });
+    try {
+      addDoc(collection(database, "test"), {
+        testing: "testing",
+      }).then((data) => {
+        console.log(data.id);
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
@@ -65,7 +69,7 @@ export default function Home() {
           >
             Minska med 1
           </Button>
-          <h1>{count}</h1>
+          <Test />
         </div>
       </main>
     </>
