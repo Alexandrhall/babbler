@@ -1,4 +1,6 @@
 import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 import router from "next/router";
 import React, { FormEvent, useEffect, useRef, useState } from "react";
 import { login, useAuth } from "../src/contexts/authContext";
@@ -43,13 +45,17 @@ function Login() {
   }, [auth, user, router]);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input type="email" ref={emailRef} required />
-        <input type="password" ref={passwordRef} required />
-        <button type="submit">Login</button>
-      </form>
-      <p>login {count}</p>
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <Card sx={{ width: "400px", height: "200px" }}>
+        <CardContent>
+          <form onSubmit={handleSubmit}>
+            <input type="email" ref={emailRef} required />
+            <input type="password" ref={passwordRef} required />
+            <button type="submit">Login</button>
+          </form>
+          <p>login {count}</p>
+        </CardContent>
+      </Card>
       <Button
         variant="contained"
         onClick={() => {

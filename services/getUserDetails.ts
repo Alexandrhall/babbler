@@ -20,7 +20,7 @@ export const getUserDetails = async (
     return { id: id, ...docSnap.data() } as IUserDetails;
   } else {
     // doc.data() will be undefined in this case
-    // console.log("No such document!");
+    console.log("No such document!");
     return undefined;
   }
 };

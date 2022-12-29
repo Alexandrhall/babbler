@@ -13,11 +13,11 @@ import {
 } from "../src/redux/counterSlice";
 import Test from "../src/components/Test";
 import { useRouter } from "next/router";
-import { AuthContext, logout, useAuth } from "../src/contexts/authContext";
+import { logout, useAuth } from "../src/contexts/authContext";
 import { updateDetails } from "../src/redux/auth";
 
 export default function Home() {
-  const count = useAppSelector((state) => state.counter.value);
+  // const count = useAppSelector((state) => state.counter.value);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [number, setNumber] = useState(0);
