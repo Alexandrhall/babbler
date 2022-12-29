@@ -9,7 +9,7 @@ export interface authState {
   msg: string;
 }
 
-const initialState: authState = {
+export const initialState: authState = {
   user: {
     id: "",
     role: "",

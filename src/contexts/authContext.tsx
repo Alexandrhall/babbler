@@ -9,10 +9,16 @@ import { signInWithEmailAndPassword, User } from "firebase/auth";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { auth, database } from "../firebase";
 import { updateDetails } from "../redux/auth";
-import { doc, getDoc } from "firebase/firestore";
+import getUserDetails from "../../services/getUserDetails";
 
 interface IChildren {
   children: JSX.Element | JSX.Element[];
+}
+
+export interface IUserDetails {
+  id: string;
+  role: string;
+  email: string;
 }
 
 export const AuthContext = createContext<User | null>(null);
@@ -58,34 +64,38 @@ export const AuthProvider = ({ children }: IChildren) => {
     return unsubscribe;
   }, []);
 
-  // useEffect(() => {
-  //   if (currentUser) {
-  //     const getUser = async () => {
-  //       try {
-  //         // const promise = await getUserDetails(currentUser.uid);
-  //         const promise = await getDoc(doc(database, "users", currentUser.uid))
-  //         if (promise && promise) {
-  //           dispatch(
-  //             updateDetails({
-  //               user: {
-  //                 id: promise.id,
-  //                 role: promise.role,
-  //                 email: promise.email,
-  //               } as IUserDetails,
-  //               msg: "",
-  //             })
-  //           );
-  //         } else {
-  //           logoutFailedLogin();
-  //         }
-  //       } catch (err) {
-  //         logoutFailedLogin();
-  //         console.log("Promise error", err);
-  //       }
-  //     };
-  //     getUser();
-  //   }
-  // }, [currentUser, dispatch, logoutFailedLogin]);
+  useEffect(() => {
+    if (currentUser) {
+      const getUser = async () => {
+        try {
+          const promise = await getUserDetails(currentUser.uid);
+          // const promise = await getDoc(doc(database, "users", currentUser.uid))
+          if (promise && promise) {
+            dispatch(
+              updateDetails({
+                user: {
+                  id: promise.id,
+                  role: promise.role,
+                  email: promise.email,
+                } as IUserDetails,
+                msg: "",
+              })
+            );
+          } else {
+            logoutFailedLogin();
+          }
+        } catch (err) {
+          logoutFailedLogin();
+          console.log("Promise error", err);
+        }
+      };
+      getUser();
+    }
+  }, [currentUser, dispatch, logoutFailedLogin]);
+
+  useEffect(() => {
+    console.log(currentUser?.uid);
+  }, [currentUser]);
 
   return (
     <AuthContext.Provider value={currentUser}>

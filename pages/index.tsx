@@ -13,12 +13,15 @@ import {
 } from "../src/redux/counterSlice";
 import Test from "../src/components/Test";
 import { useRouter } from "next/router";
+import { AuthContext, logout, useAuth } from "../src/contexts/authContext";
+import { updateDetails } from "../src/redux/auth";
 
 export default function Home() {
   const count = useAppSelector((state) => state.counter.value);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [number, setNumber] = useState(0);
+  const user = useAuth();
 
   const handleClick = () => {
     try {
@@ -32,19 +35,17 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
-    console.log(count);
+  // useEffect(() => {
+  //   getDocs(collection(database, "users")).then((snapshot) => {
+  //     snapshot.forEach((doc) => {
+  //       console.log(doc.data());
+  //     });
+  //   });
+  // }, []);
 
-    getDocs(collection(database, "users")).then((snapshot) => {
-      snapshot.forEach((doc) => {
-        console.log(doc.data());
-      });
-    });
+  useEffect(() => {
+    user === null ? router.push("/login") : router.push("/");
   }, []);
-
-  useEffect(() => {
-    console.log(count);
-  }, [dispatch]);
 
   return (
     <>
@@ -84,7 +85,25 @@ export default function Home() {
           >
             login
           </Button>
-          <div>
+          <Button
+            variant="contained"
+            onClick={() => {
+              logout();
+              dispatch(
+                updateDetails({
+                  user: {
+                    id: "",
+                    role: "",
+                    email: "",
+                  },
+                  msg: "",
+                })
+              );
+            }}
+          >
+            logout
+          </Button>
+          {/* <div>
             <input
               type="number"
               name="number"
@@ -104,7 +123,7 @@ export default function Home() {
             >
               Öka med {number}
             </button>
-          </div>
+          </div> */}
           <Test />
         </div>
       </main>
