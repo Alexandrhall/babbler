@@ -99,6 +99,7 @@ export default function Home() {
                   msg: "",
                 })
               );
+              router.push("/login");
             }}
           >
             logout
