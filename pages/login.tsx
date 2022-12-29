@@ -45,8 +45,22 @@ function Login() {
   }, [auth, user, router]);
 
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
-      <Card sx={{ width: "400px", height: "200px" }}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <Card
+        sx={{
+          width: "500px",
+          height: "420px",
+          borderRadius: "10px",
+          backgroundColor: "#313131",
+        }}
+      >
         <CardContent>
           <form onSubmit={handleSubmit}>
             <input type="email" ref={emailRef} required />
@@ -59,7 +73,9 @@ function Login() {
       <Button
         variant="contained"
         onClick={() => {
-          router.push("/");
+          if (user) {
+            router.push("/");
+          }
         }}
       >
         Home
