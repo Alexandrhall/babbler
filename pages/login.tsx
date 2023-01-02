@@ -42,7 +42,7 @@ function Login() {
     if (user && auth.user.id !== "") {
       router.push("/");
     }
-  }, [auth, user, router]);
+  }, [auth, user]);
 
   return (
     <div

@@ -45,7 +45,7 @@ export default function Home() {
 
   useEffect(() => {
     user === null ? router.push("/login") : router.push("/");
-  }, []);
+  }, [user, router]);
 
   return (
     <>
