@@ -1,7 +1,5 @@
-import Head from "next/head";
-import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, ReactNode, useEffect, useRef, useState } from "react";
 import {
   collection,
   addDoc,
@@ -9,7 +7,6 @@ import {
   query,
   orderBy,
   limit,
-  FieldValue,
   serverTimestamp,
 } from "firebase/firestore";
 import { database } from "../src/firebase";
@@ -25,8 +22,13 @@ import { useRouter } from "next/router";
 import { logout, useAuth } from "../src/contexts/authContext";
 import { updateDetails } from "../src/redux/auth";
 import { IUserDetails } from "../services/getUserDetails";
+import ChatRoom from "../src/components/ChatRoom";
 
-export default function Home() {
+interface IChildren {
+  children: JSX.Element[];
+}
+
+export default function Home({ children }: IChildren): ReactNode {
   // const count = useAppSelector((state) => state.counter.value);
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -66,7 +68,6 @@ export default function Home() {
   //       console.log(doc.data());
   //     });
   //   });
-  // }, []);
 
   useEffect(() => {
     user === null ? router.push("/login") : router.push("/");
@@ -75,8 +76,7 @@ export default function Home() {
   return (
     <>
       <main className={styles.main}>
-        <h1>Hello there</h1>
-
+        <ChatRoom />
         <div>
           <Button
             variant="contained"

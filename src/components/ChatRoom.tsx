@@ -7,69 +7,81 @@ import {
   query,
   serverTimestamp,
 } from "firebase/firestore";
-import { FormEvent, useEffect, useRef } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { useAuth } from "../contexts/authContext";
 import { database } from "../firebase";
 import React from "react";
 
-interface userObj {
-  uid: string;
-  photoUrl?: string | null;
-}
-
 interface messageArray {
-  createdAt: number;
+  createdAt: {
+    seconds: number;
+    nanoseconds: number;
+  };
   uid: string;
   text: string;
 }
 
-const chatRoom = async (): Promise<JSX.Element> => {
+const chatRoom = () => {
   const user = useAuth();
   const dummy = useRef<HTMLSpanElement>();
   const messageRef = collection(database, "messages");
   const q = query(messageRef, orderBy("createdAt"), limit(25));
-  const array: messageArray[] = [];
-  await getDocs(q).then((snapshot) => {
-    snapshot.forEach((doc) => {
-      array.push(doc.data() as messageArray);
+  const [messArray, setMessArray] = useState<messageArray[]>([]);
+
+  const [formValue, setFormValue] = useState<string>("");
+
+  const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    await addDoc(messageRef, {
+      text: formValue,
+      createdAt: serverTimestamp(),
+      uid: user!.uid,
     });
-  });
 
-  //   useEffect(() => {
-  //     const messageRef = collection(database, "messages");
-  //     const q = query(messageRef, orderBy("createdAt"), limit(25));
-  //     const querySnapshot = getDocs(q).then((snapshot) => {
-  //       snapshot.forEach((doc) => {
-  //         array.push(doc.data() as messageArray);
-  //       });
-  //     });
-  //     console.log(array);
-  //   }, []);
+    setFormValue("");
+  };
 
-  // const [formValue, setFormValue] = useState<string>('');
-
-  //   const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
-  //     e.preventDefault();
-
-  //     const obj: userObj = {
-  //       uid: user!.uid,
-  //       photoUrl: user!.photoURL,
-  //     };
-
-  //     await addDoc(messageRef, {
-  //       text: "hejjhej",
-  //       createdAt: serverTimestamp(),
-  //       uid: obj.uid,
-  //     });
-  //   };
+  useEffect(() => {
+    const getStuff = async () => {
+      await getDocs(q).then((snapshot) => {
+        const array: messageArray[] = [];
+        snapshot.forEach((doc) => {
+          array.push(doc.data() as messageArray);
+        });
+        setMessArray([...array]);
+      });
+      console.log("complete");
+    };
+    getStuff();
+  }, []);
 
   return (
     <>
-      {array.forEach((msg) => {
-        <div>
-          <span key={msg.uid}>{msg.text}</span>;
-        </div>;
-      })}
+      <div>
+        {messArray.map((string, i) => {
+          return (
+            <div key={i}>
+              <p>{string.uid}</p>
+              <p>
+                {string.createdAt &&
+                  new Date(string.createdAt.seconds * 1000)
+                    .toLocaleString("sv-SE")
+                    .substring(0, 16)}
+              </p>
+              <p>{string.text}</p>
+            </div>
+          );
+        })}
+      </div>
+      <form onSubmit={sendMessage}>
+        <input
+          value={formValue}
+          onChange={(e) => setFormValue(e.target.value)}
+          placeholder="Write something.."
+        />
+        <button type="submit">Send</button>
+      </form>
     </>
   );
 };
