@@ -23,7 +23,14 @@ import { logout, useAuth } from "../src/contexts/authContext";
 import { updateDetails } from "../src/redux/auth";
 import { IUserDetails } from "../services/getUserDetails";
 import ChatRoom from "../src/components/ChatRoom";
-import { Toolbar, Typography, AppBar, CssBaseline } from "@mui/material";
+import {
+  Toolbar,
+  Typography,
+  AppBar,
+  CssBaseline,
+  List,
+  ListItemText,
+} from "@mui/material";
 
 interface IChildren {
   children: JSX.Element[];
@@ -135,8 +142,20 @@ export default function Home({ children }: IChildren): ReactNode {
         </Toolbar>
       </AppBar>
 
-      <main className={styles.main}>
-        <ChatRoom />
+      <main className="flex flex-row">
+        <div className="w-48">
+          <List>
+            <ListItemText className="text-white">
+              <p>Rooms</p>
+            </ListItemText>
+            <ListItemText className="text-white">
+              <p>DM</p>
+            </ListItemText>
+          </List>
+        </div>
+        <div>
+          <ChatRoom />
+        </div>
         {/* <div>
           <Button
             variant="contained"
