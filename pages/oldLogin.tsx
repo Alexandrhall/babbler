@@ -29,6 +29,7 @@ function Login() {
             id: "",
             role: "",
             email: "",
+            username: "",
           },
           msg: "Failed to login",
         })
