@@ -2,6 +2,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { database } from "../src/firebase";
 
 export interface IUserDetails {
+  username: string;
   id: string;
   role: string;
   email: string;
