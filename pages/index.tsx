@@ -23,9 +23,16 @@ import { logout, useAuth } from "../src/contexts/authContext";
 import { updateDetails } from "../src/redux/auth";
 import { IUserDetails } from "../services/getUserDetails";
 import ChatRoom from "../src/components/ChatRoom";
+import { Toolbar, Typography, AppBar, CssBaseline } from "@mui/material";
 
 interface IChildren {
   children: JSX.Element[];
+}
+
+interface messageArray {
+  createdAt: number;
+  uid: string;
+  text: string;
 }
 
 export default function Home({ children }: IChildren): ReactNode {
@@ -46,12 +53,6 @@ export default function Home({ children }: IChildren): ReactNode {
       console.error(err);
     }
   };
-
-  interface messageArray {
-    createdAt: number;
-    uid: string;
-    text: string;
-  }
 
   const messageRef = collection(database, "messages");
   const q = query(messageRef, orderBy("createdAt"), limit(25));
@@ -75,9 +76,68 @@ export default function Home({ children }: IChildren): ReactNode {
 
   return (
     <>
+      <AppBar position="relative">
+        {/* <CssBaseline /> */}
+        <Toolbar
+          sx={{
+            height: "60px",
+            backgroundColor: "#484848",
+            display: "flex",
+          }}
+        >
+          <Typography variant="h6" color="white" noWrap>
+            BabbleR
+          </Typography>
+          <Typography
+            sx={{
+              display: "flex",
+              position: "relative",
+              alignItems: "flex-end",
+              left: "80%",
+            }}
+          >
+            Home
+          </Typography>
+          <Typography
+            sx={{
+              display: "flex",
+              position: "relative",
+              alignItems: "flex-end",
+              left: "80%",
+              marginLeft: "10px",
+            }}
+          >
+            Profile
+          </Typography>
+          <Button
+            sx={{
+              left: "81%",
+            }}
+            variant="contained"
+            onClick={() => {
+              logout();
+              dispatch(
+                updateDetails({
+                  user: {
+                    id: "",
+                    role: "",
+                    email: "",
+                    username: "",
+                  },
+                  msg: "",
+                })
+              );
+              router.push("/login");
+            }}
+          >
+            logout
+          </Button>
+        </Toolbar>
+      </AppBar>
+
       <main className={styles.main}>
         <ChatRoom />
-        <div>
+        {/* <div>
           <Button
             variant="contained"
             onClick={async () => {
@@ -113,27 +173,9 @@ export default function Home({ children }: IChildren): ReactNode {
             }}
           >
             login
-          </Button>
-          <Button
-            variant="contained"
-            onClick={() => {
-              logout();
-              dispatch(
-                updateDetails({
-                  user: {
-                    id: "",
-                    role: "",
-                    email: "",
-                  },
-                  msg: "",
-                })
-              );
-              router.push("/login");
-            }}
-          >
-            logout
-          </Button>
-          {/* <div>
+          </Button>*/}
+
+        {/* <div>
             <input
               type="number"
               name="number"
@@ -154,8 +196,8 @@ export default function Home({ children }: IChildren): ReactNode {
               Öka med {number}
             </button>
           </div> */}
-          <Test />
-        </div>
+        {/* <Test /> */}
+        {/* </div> */}
       </main>
     </>
   );

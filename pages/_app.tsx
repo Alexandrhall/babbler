@@ -2,10 +2,12 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { Provider } from "react-redux";
 import { store } from "../src/redux/store";
-import { AuthProvider } from "../src/contexts/authContext";
+import { AuthProvider, useAuth } from "../src/contexts/authContext";
 import Head from "next/head";
 
 export default function App({ Component, pageProps }: AppProps) {
+  const user = useAuth();
+
   return (
     <Provider store={store}>
       <AuthProvider>

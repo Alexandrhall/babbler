@@ -19,6 +19,7 @@ export interface IUserDetails {
   id: string;
   role: string;
   email: string;
+  username: string;
 }
 
 export const AuthContext = createContext<User | null>(null);
@@ -49,6 +50,7 @@ export const AuthProvider = ({ children }: IChildren) => {
           id: "",
           role: "",
           email: "",
+          username: "",
         },
         msg: "Failed to login",
       })
@@ -77,6 +79,7 @@ export const AuthProvider = ({ children }: IChildren) => {
                   id: promise.id,
                   role: promise.role,
                   email: promise.email,
+                  username: promise.username,
                 } as IUserDetails,
                 msg: "",
               })

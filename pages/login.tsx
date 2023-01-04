@@ -41,6 +41,7 @@ export default function SignIn() {
             id: "",
             role: "",
             email: "",
+            username: "",
           },
           msg: "Failed to login",
         })
