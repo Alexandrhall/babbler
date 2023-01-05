@@ -12,7 +12,7 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar position="relative">
+      <AppBar position="relative" className="w-auto">
         {/* <CssBaseline /> */}
         <Toolbar
           sx={{
@@ -66,7 +66,6 @@ const Navbar = () => {
                   msg: "",
                 })
               );
-              router.push("/login");
             }}
           >
             logout

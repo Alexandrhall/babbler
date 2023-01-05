@@ -3,7 +3,6 @@ import {
   collection,
   DocumentData,
   DocumentReference,
-  FirestoreDataConverter,
   getDocs,
   limit,
   orderBy,
@@ -21,7 +20,7 @@ import React from "react";
 import { Button, Input, TextField } from "@mui/material";
 import { useAppSelector } from "../redux/hooks";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import { TextMessageFB, BigTableContainer } from "../../styles/styles";
+import * as S from "../../styles/styles";
 
 interface IProps {
   room: string;
@@ -39,73 +38,47 @@ interface messageArray {
   ref: DocumentReference<DocumentData>;
 }
 
-// type Post = {
-//   author: string;
-//   id: string;
-//   ref: DocumentReference<DocumentData>;
-//   title: string;
-// };
-
-type Post = {
-  createdAt: {
-    seconds: number;
-    nanoseconds: number;
-  };
-  id: string;
-  text: string;
-  username: string;
-};
-
-const postConverter: FirestoreDataConverter<Post> = {
-  toFirestore(post: WithFieldValue<Post>): DocumentData {
-    return { id: post.id, username: post.username };
-  },
-  fromFirestore(
-    snapshot: QueryDocumentSnapshot,
-    options: SnapshotOptions
-  ): Post {
-    const data = snapshot.data(options);
-    return {
-      createdAt: data.createdAt,
-      id: snapshot.id,
-      username: data.username,
-      text: data.text,
-    };
-  },
-};
-
 const chatRoom = () => {
   //   const user = useAuth();
   const auth = useAppSelector((state) => state.auth);
   const dummy = useRef<HTMLSpanElement>();
   const messageRef = collection(database, "messages");
   const q = query(messageRef, orderBy("createdAt"), limit(25));
-  const [messArray, setMessArray] = useState<messageArray[]>([]);
+  // const [messArray, setMessArray] = useState<messageArray[]>([]);
 
   const [formValue, setFormValue] = useState<string>("");
 
   const [messages] = useCollectionData(q);
 
-  const q2 = query(collection(database, "directMessages"));
-  const [dm] = useCollectionData(q2);
+  const dmRef = collection(database, "directMessages");
+
+  const q3 = query(dmRef, where("users", "array-contains", auth.user.id));
+
+  const q2 = query(dmRef);
+
+  const [dm] = useCollectionData(q3);
 
   const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    await addDoc(messageRef, {
-      text: formValue,
-      createdAt: serverTimestamp(),
-      uid: auth.user.id,
-      username: auth.user.username,
-    });
+    try {
+      await addDoc(messageRef, {
+        text: formValue,
+        createdAt: serverTimestamp(),
+        uid: auth.user.id,
+        username: auth.user.username,
+      });
 
-    setFormValue("");
+      setFormValue("");
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
     console.log(dm);
     console.log(messages);
-  }, [dm]);
+  }, [dm, messages]);
 
   return (
     <>
@@ -114,15 +87,17 @@ const chatRoom = () => {
           messages.map((msg, i) => {
             return (
               <div key={i}>
-                <p className="text-white">{msg.username}</p>
-                <p className="text-white">
-                  {msg.createdAt &&
-                    new Date(msg.createdAt.seconds * 1000)
-                      .toLocaleString("sv-SE")
-                      .substring(0, 16)}
-                </p>
                 {/* <p className="text-white">{msg.text}</p> */}
-                <TextMessageFB className="w-64">{msg.text}</TextMessageFB>
+                <S.TextMessageFB className="w-64 m-3">
+                  <span className="text-white">{msg.username}</span>
+                  <span className="text-white pl-16">
+                    {msg.createdAt &&
+                      new Date(msg.createdAt.seconds * 1000)
+                        .toLocaleString("sv-SE")
+                        .substring(0, 16)}
+                  </span>
+                  <p>{msg.text}</p>
+                </S.TextMessageFB>
               </div>
             );
           })}

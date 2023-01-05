@@ -12,139 +12,54 @@ import {
 import { database } from "../src/firebase";
 import Button from "@mui/material/Button";
 import { useAppDispatch, useAppSelector } from "../src/redux/hooks";
-import {
-  decrement,
-  increment,
-  incrementByAmount,
-} from "../src/redux/counterSlice";
-import Test from "../src/components/Test";
 import { useRouter } from "next/router";
-import { logout, useAuth } from "../src/contexts/authContext";
-import { updateDetails } from "../src/redux/auth";
-import { IUserDetails } from "../services/getUserDetails";
+import { useAuth } from "../src/contexts/authContext";
 import ChatRoom from "../src/components/ChatRoom";
-import {
-  Toolbar,
-  Typography,
-  AppBar,
-  CssBaseline,
-  List,
-  ListItemText,
-} from "@mui/material";
-import Navbar from "../src/components/navbar";
+import { List, ListItemText } from "@mui/material";
+import Navbar from "../src/components/Navbar";
 import Link from "next/link";
 
 interface IChildren {
   children: JSX.Element[];
 }
 
-interface messageArray {
-  createdAt: number;
-  uid: string;
-  text: string;
-}
-
-export default function Home({ children }: IChildren): ReactNode {
+export default function Home({ children }: IChildren) {
   // const count = useAppSelector((state) => state.counter.value);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [number, setNumber] = useState(0);
   const user = useAuth();
+  const auth = useAppSelector((state) => state.auth);
 
-  const handleClick = () => {
-    try {
-      addDoc(collection(database, "test"), {
-        testing: "testing",
-      }).then((data) => {
-        console.log(data.id);
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  // useEffect(() => {
+  //   user === null ? router.push("/login") : router.push("/");
+  // }, [user]);
 
   useEffect(() => {
-    user === null ? router.push("/login") : router.push("/");
-  }, [user]);
+    if (user === null && auth.user.id === "") {
+      router.push("/login");
+    }
+  }, [auth, user]);
 
   return (
     <>
       <Navbar />
       <main className="flex flex-row">
-        <div className="w-48" style={{ backgroundColor: "#333333" }}>
+        <div className="w-64" style={{ backgroundColor: "#333333" }}>
           <List>
             <ListItemText className="text-white">
-              <p>Rooms</p>
+              <h4 className="font-bold">Rooms</h4>
+              <p>rooms:id</p>
             </ListItemText>
             <ListItemText className="text-white">
-              <p>DM</p>
+              <h4 className="font-bold">DM</h4>
+              <p>user:id</p>
             </ListItemText>
           </List>
         </div>
         <div className="w-full">
           <ChatRoom />
         </div>
-        {/* <div>
-          <Button
-            variant="contained"
-            onClick={async () => {
-              await addDoc(collection(database, "messages"), {
-                text: "dinjäkel",
-                createdAt: serverTimestamp(),
-                uid: user!.uid,
-              });
-            }}
-          >
-            Klicka här
-          </Button>
-          <Button
-            variant="contained"
-            onClick={() => {
-              dispatch(increment());
-            }}
-          >
-            Öka med 1
-          </Button>
-          <Button
-            variant="contained"
-            onClick={() => {
-              dispatch(decrement());
-            }}
-          >
-            Minska med 1
-          </Button>
-          <Button
-            variant="contained"
-            onClick={() => {
-              router.push("/login");
-            }}
-          >
-            login
-          </Button>*/}
-
-        {/* <div>
-            <input
-              type="number"
-              name="number"
-              onChange={(e) => {
-                if (e.target.value === "") {
-                  setNumber(0);
-                } else {
-                  setNumber(parseInt(e.target.value));
-                }
-              }}
-              value={number}
-            />
-            <button
-              onClick={() => {
-                dispatch(incrementByAmount(number));
-              }}
-            >
-              Öka med {number}
-            </button>
-          </div> */}
-        {/* <Test /> */}
-        {/* </div> */}
       </main>
     </>
   );
