@@ -31,6 +31,8 @@ import {
   List,
   ListItemText,
 } from "@mui/material";
+import Navbar from "../src/components/navbar";
+import Link from "next/link";
 
 interface IChildren {
   children: JSX.Element[];
@@ -67,67 +69,9 @@ export default function Home({ children }: IChildren): ReactNode {
 
   return (
     <>
-      <AppBar position="relative">
-        {/* <CssBaseline /> */}
-        <Toolbar
-          sx={{
-            height: "60px",
-            backgroundColor: "#484848",
-            display: "flex",
-          }}
-        >
-          <Typography variant="h6" color="white" noWrap>
-            BabbleR
-          </Typography>
-          <Typography
-            sx={{
-              display: "flex",
-              position: "relative",
-              alignItems: "flex-end",
-              left: "80%",
-            }}
-          >
-            Home
-          </Typography>
-          <Typography
-            sx={{
-              display: "flex",
-              position: "relative",
-              alignItems: "flex-end",
-              left: "80%",
-              marginLeft: "10px",
-            }}
-          >
-            Profile
-          </Typography>
-          <Button
-            sx={{
-              left: "81%",
-            }}
-            variant="contained"
-            onClick={() => {
-              logout();
-              dispatch(
-                updateDetails({
-                  user: {
-                    id: "",
-                    role: "",
-                    email: "",
-                    username: "",
-                  },
-                  msg: "",
-                })
-              );
-              router.push("/login");
-            }}
-          >
-            logout
-          </Button>
-        </Toolbar>
-      </AppBar>
-
+      <Navbar />
       <main className="flex flex-row">
-        <div className="w-48 bg-gray-900">
+        <div className="w-48" style={{ backgroundColor: "#333333" }}>
           <List>
             <ListItemText className="text-white">
               <p>Rooms</p>
