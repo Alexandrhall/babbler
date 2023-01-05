@@ -3,9 +3,9 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import router from "next/router";
 import React, { FormEvent, useEffect, useRef, useState } from "react";
-import { login, useAuth } from "../src/contexts/authContext";
-import { updateDetails } from "../src/redux/auth";
-import { useAppDispatch, useAppSelector } from "../src/redux/hooks";
+import { login, useAuth } from "../contexts/authContext";
+import { updateDetails } from "../redux/auth";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
 function Login() {
   const emailRef = useRef<HTMLInputElement>(null);

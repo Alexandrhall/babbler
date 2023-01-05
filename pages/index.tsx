@@ -45,7 +45,7 @@ export default function Home({ children }: IChildren) {
     <>
       <Navbar />
       <main className="flex flex-row">
-        <div className="w-64" style={{ backgroundColor: "#333333" }}>
+        <div className="w-64" style={{ backgroundColor: "#3F4E4F" }}>
           <List>
             <ListItemText className="text-white">
               <h4 className="font-bold">Rooms</h4>

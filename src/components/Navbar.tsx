@@ -17,7 +17,8 @@ const Navbar = () => {
         <Toolbar
           sx={{
             height: "60px",
-            backgroundColor: "#484848",
+            // backgroundColor: "#484848",
+            backgroundColor: "#1B2430",
             display: "flex",
           }}
         >
