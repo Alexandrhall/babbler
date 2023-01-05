@@ -35,20 +35,28 @@ interface messageArray {
   text: string;
   username: string;
   ref: DocumentReference<DocumentData>;
-  author: string;
-  title: string;
 }
 
+// type Post = {
+//   author: string;
+//   id: string;
+//   ref: DocumentReference<DocumentData>;
+//   title: string;
+// };
+
 type Post = {
-  author: string;
+  createdAt: {
+    seconds: number;
+    nanoseconds: number;
+  };
   id: string;
-  ref: DocumentReference<DocumentData>;
-  title: string;
+  text: string;
+  username: string;
 };
 
 const postConverter: FirestoreDataConverter<Post> = {
   toFirestore(post: WithFieldValue<Post>): DocumentData {
-    return { author: post.author, title: post.title };
+    return { id: post.id, username: post.username };
   },
   fromFirestore(
     snapshot: QueryDocumentSnapshot,
@@ -56,10 +64,10 @@ const postConverter: FirestoreDataConverter<Post> = {
   ): Post {
     const data = snapshot.data(options);
     return {
-      author: data.author,
+      createdAt: data.createdAt,
       id: snapshot.id,
-      ref: snapshot.ref,
-      title: data.title,
+      username: data.username,
+      text: data.text,
     };
   },
 };
@@ -76,19 +84,8 @@ const chatRoom = () => {
 
   const [messages] = useCollectionData(q);
 
-  if (messages != undefined) {
-  }
-
-  //   const getStuff = async () => {
-  //     await getDocs(q).then((snapshot) => {
-  //       const array: messageArray[] = [];
-  //       snapshot.forEach((doc) => {
-  //         array.push(doc.data() as messageArray);
-  //       });
-  //       setMessArray([...array]);
-  //     });
-  //     console.log("complete");
-  //   };
+  const q2 = query(collection(database, "directMessages"));
+  const [dm] = useCollectionData(q2);
 
   const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -103,13 +100,18 @@ const chatRoom = () => {
     setFormValue("");
   };
 
+  useEffect(() => {
+    console.log(dm);
+    console.log(messages);
+  }, []);
+
   return (
     <>
       <div>
         {messages &&
           messages.map((msg, i) => {
             return (
-              <div key={msg.id}>
+              <div key={i}>
                 <p className="text-white">{msg.username}</p>
                 <p className="text-white">
                   {msg.createdAt &&

@@ -61,22 +61,6 @@ export default function Home({ children }: IChildren): ReactNode {
     }
   };
 
-  const messageRef = collection(database, "messages");
-  const q = query(messageRef, orderBy("createdAt"), limit(25));
-  const array: messageArray[] = [];
-  getDocs(q).then((snapshot) => {
-    snapshot.forEach((doc) => {
-      array.push(doc.data() as messageArray);
-    });
-  });
-
-  // useEffect(() => {
-  //   getDocs(collection(database, "users")).then((snapshot) => {
-  //     snapshot.forEach((doc) => {
-  //       console.log(doc.data());
-  //     });
-  //   });
-
   useEffect(() => {
     user === null ? router.push("/login") : router.push("/");
   }, [user]);
