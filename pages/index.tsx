@@ -127,7 +127,7 @@ export default function Home({ children }: IChildren): ReactNode {
       </AppBar>
 
       <main className="flex flex-row">
-        <div className="w-48">
+        <div className="w-48 bg-gray-900">
           <List>
             <ListItemText className="text-white">
               <p>Rooms</p>
@@ -137,7 +137,7 @@ export default function Home({ children }: IChildren): ReactNode {
             </ListItemText>
           </List>
         </div>
-        <div>
+        <div className="w-full">
           <ChatRoom />
         </div>
         {/* <div>

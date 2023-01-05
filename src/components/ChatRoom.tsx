@@ -11,6 +11,7 @@ import {
   QueryDocumentSnapshot,
   serverTimestamp,
   SnapshotOptions,
+  where,
   WithFieldValue,
 } from "firebase/firestore";
 import { FormEvent, useEffect, useRef, useState } from "react";
@@ -20,6 +21,7 @@ import React from "react";
 import { Button, Input, TextField } from "@mui/material";
 import { useAppSelector } from "../redux/hooks";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import { TextMessageFB, BigTableContainer } from "../../styles/styles";
 
 interface IProps {
   room: string;
@@ -103,11 +105,11 @@ const chatRoom = () => {
   useEffect(() => {
     console.log(dm);
     console.log(messages);
-  }, []);
+  }, [dm]);
 
   return (
     <>
-      <div>
+      <div className="w-6/12 m-auto">
         {messages &&
           messages.map((msg, i) => {
             return (
@@ -119,15 +121,17 @@ const chatRoom = () => {
                       .toLocaleString("sv-SE")
                       .substring(0, 16)}
                 </p>
-                <p className="text-white">{msg.text}</p>
+                {/* <p className="text-white">{msg.text}</p> */}
+                <TextMessageFB className="w-64">{msg.text}</TextMessageFB>
               </div>
             );
           })}
       </div>
-      <form onSubmit={sendMessage}>
-        <TextField
+      <form onSubmit={sendMessage} className="w-6/12 m-auto">
+        <Input
           sx={{
-            // height: "10px",
+            margin: "3px",
+            padding: "2px",
             backgroundColor: "wheat",
           }}
           //   margin="normal"
