@@ -69,7 +69,7 @@ export default function Home({ children }: IChildren) {
       <main className="flex flex-row">
         <div className="w-64" style={{ backgroundColor: "#3F4E4F" }}>
           <List>
-            <ListItemText className="text-white">
+            <ListItemText className="text-white p-3">
               <h4 className="font-bold">Rooms</h4>
               {room &&
                 room.map((room, i) => {
@@ -80,8 +80,8 @@ export default function Home({ children }: IChildren) {
                   );
                 })}
             </ListItemText>
-            <ListItemText className="text-white">
-              <h4 className="font-bold">DM</h4>
+            <ListItemText className="text-white p-3">
+              <h4 className="font-bold">Direct Messages</h4>
               {dm &&
                 dm.map((room, i) => {
                   return (
