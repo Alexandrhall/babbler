@@ -65,11 +65,6 @@ const chatRoom = () => {
     }
   };
 
-  // useEffect(() => {
-  //   console.log(dm);
-  //   // console.log(messages);
-  // }, [dm]);
-
   return (
     <>
       <div className="w-6/12 m-auto">

@@ -8,7 +8,12 @@ import {
 } from "firebase/firestore";
 
 type TRoom = {
-  message: [];
+  messages: [
+    {
+      message: string;
+      uid: string;
+    }
+  ];
   users: string[];
   id: string;
   roomName?: string;
@@ -28,7 +33,7 @@ export const roomConverter: FirestoreDataConverter<TRoom> = {
   fromFirestore(snapshot: QueryDocumentSnapshot): TRoom {
     const data = snapshot.data();
     return {
-      message: data.messages,
+      messages: data.messages,
       users: data.users,
       id: snapshot.id,
       roomName: data?.roomName,
