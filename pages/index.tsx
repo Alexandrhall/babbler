@@ -85,7 +85,7 @@ export default function Home({ children }: IChildren) {
               {dm &&
                 dm.map((room, i) => {
                   return (
-                    <Link href={`/rooms/${room.id}`}>
+                    <Link href={`/directmessage/${room.id}`}>
                       <p key={i}>
                         {usrr &&
                           usrr.map((usr) =>

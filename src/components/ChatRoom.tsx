@@ -65,10 +65,10 @@ const chatRoom = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(dm);
-    // console.log(messages);
-  }, [dm]);
+  // useEffect(() => {
+  //   console.log(dm);
+  //   // console.log(messages);
+  // }, [dm]);
 
   return (
     <>

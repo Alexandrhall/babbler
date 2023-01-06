@@ -6,7 +6,7 @@ const roomName = () => {
   const router = useRouter();
   const q = router.query.roomName;
 
-  console.log(router.query);
+  //   console.log(router.query);
 
   return (
     <>
