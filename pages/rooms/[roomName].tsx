@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
+import Navbar from "../../src/components/Navbar";
 
 const roomName = () => {
   const router = useRouter();
@@ -7,7 +8,12 @@ const roomName = () => {
 
   console.log(router.query);
 
-  return <div>roomName {q}</div>;
+  return (
+    <>
+      <Navbar />
+      <div>roomName {q}</div>
+    </>
+  );
 };
 
 export default roomName;

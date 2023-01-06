@@ -75,10 +75,10 @@ const chatRoom = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(dm);
-    console.log(messages);
-  }, [dm, messages]);
+  // useEffect(() => {
+  //   console.log(dm);
+  //   console.log(messages);
+  // }, [dm, messages]);
 
   return (
     <>
