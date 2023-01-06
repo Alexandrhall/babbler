@@ -7,24 +7,46 @@ import {
   WithFieldValue,
 } from "firebase/firestore";
 
-type Post2 = {
+type TRoom = {
   message: [];
-  users: [];
+  users: string[];
   id: string;
   roomName?: string;
 };
 
-export const roomConverter: FirestoreDataConverter<Post2> = {
-  toFirestore(post: WithFieldValue<Post2>): DocumentData {
+type TUser = {
+  id: string;
+  email: string;
+  role: string;
+  username: string;
+};
+
+export const roomConverter: FirestoreDataConverter<TRoom> = {
+  toFirestore(post: WithFieldValue<TRoom>): DocumentData {
     return { id: post.id };
   },
-  fromFirestore(snapshot: QueryDocumentSnapshot): Post2 {
+  fromFirestore(snapshot: QueryDocumentSnapshot): TRoom {
     const data = snapshot.data();
     return {
       message: data.messages,
       users: data.users,
       id: snapshot.id,
       roomName: data?.roomName,
+    };
+  },
+};
+
+export const userConverter: FirestoreDataConverter<TUser> = {
+  toFirestore(post: WithFieldValue<TUser>): DocumentData {
+    return { id: post.id };
+  },
+  fromFirestore(snapshot: QueryDocumentSnapshot): TUser {
+    const data = snapshot.data();
+    return {
+      email: data.email,
+      role: data.role,
+      id: snapshot.id,
+      username: data.username,
     };
   },
 };

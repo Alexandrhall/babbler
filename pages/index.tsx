@@ -9,6 +9,7 @@ import {
   limit,
   serverTimestamp,
   where,
+  getDoc,
 } from "firebase/firestore";
 import { database } from "../src/firebase";
 import Button from "@mui/material/Button";
@@ -22,8 +23,9 @@ import Link from "next/link";
 import {
   useCollection,
   useCollectionData,
+  useCollectionDataOnce,
 } from "react-firebase-hooks/firestore";
-import roomConverter from "../src/services/postConverter";
+import roomConverter, { userConverter } from "../src/services/postConverter";
 
 interface IChildren {
   children: JSX.Element[];
@@ -32,25 +34,34 @@ interface IChildren {
 export default function Home({ children }: IChildren) {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const [number, setNumber] = useState(0);
   const user = useAuth();
   const auth = useAppSelector((state) => state.auth);
 
-  const dmRef = collection(database, "rooms").withConverter(roomConverter);
+  const roomRef = collection(database, "rooms").withConverter(roomConverter);
 
-  const q3 = query(dmRef, where("users", "array-contains", auth.user.id));
+  const q3 = query(roomRef, where("users", "array-contains", auth.user.id));
 
-  const [dm] = useCollectionData(q3);
+  const dmRef = collection(database, "directMessages").withConverter(
+    roomConverter
+  );
+
+  const q5 = query(dmRef, where("users", "array-contains", auth.user.id));
+
+  const [room] = useCollectionData(q3);
+
+  const [dm] = useCollectionData(q5);
+
+  const usrRef = collection(database, "users").withConverter(userConverter);
+
+  const q7 = query(usrRef, where("username", "!=", auth.user.username));
+
+  const [usrr] = useCollectionData(q7);
 
   useEffect(() => {
     if (user === null && auth.user.id === "") {
       router.push("/login");
     }
   }, [auth, user]);
-
-  useEffect(() => {
-    console.log(dm);
-  }, []);
 
   return (
     <>
@@ -60,9 +71,8 @@ export default function Home({ children }: IChildren) {
           <List>
             <ListItemText className="text-white">
               <h4 className="font-bold">Rooms</h4>
-              {/* <p>rooms:id</p> */}
-              {dm &&
-                dm.map((room, i) => {
+              {room &&
+                room.map((room, i) => {
                   return (
                     <Link href={`/rooms/${room.id}`}>
                       <p key={i}>{room.roomName}</p>
@@ -72,7 +82,19 @@ export default function Home({ children }: IChildren) {
             </ListItemText>
             <ListItemText className="text-white">
               <h4 className="font-bold">DM</h4>
-              <p>user:id</p>
+              {dm &&
+                dm.map((room, i) => {
+                  return (
+                    <Link href={`/rooms/${room.id}`}>
+                      <p key={i}>
+                        {usrr &&
+                          usrr.map((usr) =>
+                            room.users.includes(usr.id) ? usr.username : null
+                          )}
+                      </p>
+                    </Link>
+                  );
+                })}
             </ListItemText>
           </List>
         </div>

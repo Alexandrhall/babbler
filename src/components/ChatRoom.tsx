@@ -26,17 +26,6 @@ interface IProps {
   users: {};
 }
 
-interface messageArray {
-  createdAt: {
-    seconds: number;
-    nanoseconds: number;
-  };
-  id: string;
-  text: string;
-  username: string;
-  ref: DocumentReference<DocumentData>;
-}
-
 const chatRoom = () => {
   //   const user = useAuth();
   const auth = useAppSelector((state) => state.auth);
@@ -102,23 +91,23 @@ const chatRoom = () => {
               </div>
             );
           })}
+        <form onSubmit={sendMessage} className="m-auto">
+          <Input
+            sx={{
+              margin: "3px",
+              padding: "2px",
+              backgroundColor: "wheat",
+            }}
+            //   margin="normal"
+            value={formValue}
+            onChange={(e) => setFormValue(e.target.value)}
+            placeholder="Write something.."
+          />
+          <Button type="submit" variant="contained">
+            Send
+          </Button>
+        </form>
       </div>
-      <form onSubmit={sendMessage} className="w-6/12 m-auto">
-        <Input
-          sx={{
-            margin: "3px",
-            padding: "2px",
-            backgroundColor: "wheat",
-          }}
-          //   margin="normal"
-          value={formValue}
-          onChange={(e) => setFormValue(e.target.value)}
-          placeholder="Write something.."
-        />
-        <Button type="submit" variant="contained">
-          Send
-        </Button>
-      </form>
     </>
   );
 };

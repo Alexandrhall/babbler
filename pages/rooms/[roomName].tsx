@@ -11,7 +11,7 @@ const roomName = () => {
   return (
     <>
       <Navbar />
-      <div>roomName {q}</div>
+      <div className="text-white">roomName {q}</div>
     </>
   );
 };
