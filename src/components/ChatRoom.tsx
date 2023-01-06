@@ -9,9 +9,7 @@ import {
   query,
   QueryDocumentSnapshot,
   serverTimestamp,
-  SnapshotOptions,
   where,
-  WithFieldValue,
 } from "firebase/firestore";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { useAuth } from "../contexts/authContext";
@@ -21,6 +19,7 @@ import { Button, Input, TextField } from "@mui/material";
 import { useAppSelector } from "../redux/hooks";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import * as S from "../../styles/styles";
+import roomConverter from "../services/postConverter";
 
 interface IProps {
   room: string;
@@ -50,7 +49,9 @@ const chatRoom = () => {
 
   const [messages] = useCollectionData(q);
 
-  const dmRef = collection(database, "directMessages");
+  const dmRef = collection(database, "directMessages").withConverter(
+    roomConverter
+  );
 
   const q3 = query(dmRef, where("users", "array-contains", auth.user.id));
 
@@ -75,10 +76,10 @@ const chatRoom = () => {
     }
   };
 
-  // useEffect(() => {
-  //   console.log(dm);
-  //   console.log(messages);
-  // }, [dm, messages]);
+  useEffect(() => {
+    console.log(dm);
+    // console.log(messages);
+  }, [dm]);
 
   return (
     <>

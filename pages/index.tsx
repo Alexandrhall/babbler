@@ -23,24 +23,20 @@ import {
   useCollection,
   useCollectionData,
 } from "react-firebase-hooks/firestore";
+import roomConverter from "../src/services/postConverter";
 
 interface IChildren {
   children: JSX.Element[];
 }
 
 export default function Home({ children }: IChildren) {
-  // const count = useAppSelector((state) => state.counter.value);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [number, setNumber] = useState(0);
   const user = useAuth();
   const auth = useAppSelector((state) => state.auth);
 
-  // useEffect(() => {
-  //   user === null ? router.push("/login") : router.push("/");
-  // }, [user]);
-
-  const dmRef = collection(database, "rooms");
+  const dmRef = collection(database, "rooms").withConverter(roomConverter);
 
   const q3 = query(dmRef, where("users", "array-contains", auth.user.id));
 
@@ -64,7 +60,7 @@ export default function Home({ children }: IChildren) {
           <List>
             <ListItemText className="text-white">
               <h4 className="font-bold">Rooms</h4>
-              <p>rooms:id</p>
+              {/* <p>rooms:id</p> */}
               {dm &&
                 dm.map((room, i) => {
                   return (

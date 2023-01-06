@@ -7,50 +7,26 @@ import {
   WithFieldValue,
 } from "firebase/firestore";
 
-// type Post = {
-//   author: string;
-//   id: string;
-//   ref: DocumentReference<DocumentData>;
-//   title: string;
-// };
-
-interface messageArray {
-  createdAt: {
-    seconds: number;
-    nanoseconds: number;
-  };
+type Post2 = {
+  message: [];
+  users: [];
   id: string;
-  text: string;
-  username: string;
-  ref: DocumentReference<DocumentData>;
-}
-
-type Post = {
-  createdAt: {
-    seconds: number;
-    nanoseconds: number;
-  };
-  id: string;
-  text: string;
-  username: string;
+  roomName?: string;
 };
 
-const postConverter: FirestoreDataConverter<Post> = {
-  toFirestore(post: WithFieldValue<Post>): DocumentData {
-    return { id: post.id, username: post.username };
+export const roomConverter: FirestoreDataConverter<Post2> = {
+  toFirestore(post: WithFieldValue<Post2>): DocumentData {
+    return { id: post.id };
   },
-  fromFirestore(
-    snapshot: QueryDocumentSnapshot,
-    options: SnapshotOptions
-  ): Post {
-    const data = snapshot.data(options);
+  fromFirestore(snapshot: QueryDocumentSnapshot): Post2 {
+    const data = snapshot.data();
     return {
-      createdAt: data.createdAt,
+      message: data.messages,
+      users: data.users,
       id: snapshot.id,
-      username: data.username,
-      text: data.text,
+      roomName: data?.roomName,
     };
   },
 };
 
-export default postConverter;
+export default roomConverter;
