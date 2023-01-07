@@ -1,18 +1,19 @@
+import { collection, query } from "firebase/firestore";
 import React from "react";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 import * as S from "../../styles/styles";
+import { database } from "../firebase";
 import { useAppSelector } from "../redux/hooks";
-import { TRoom } from "../services/postConverter";
+import { TRoom, userConverter } from "../services/postConverter";
 
 interface IProps {
   room: TRoom;
-  dmUsers?: {
-    user1: string;
-    user2: string;
-  };
 }
 
-const MsgRoom = ({ room, dmUsers }: IProps) => {
+const MsgRoom = ({ room }: IProps) => {
   const auth = useAppSelector((state) => state.auth);
+  const usrRef = collection(database, "users").withConverter(userConverter);
+  const [usrr] = useCollectionData(query(usrRef));
 
   return (
     <div className="w-6/12 m-auto">
@@ -22,11 +23,12 @@ const MsgRoom = ({ room, dmUsers }: IProps) => {
             <div key={i}>
               <S.TextMessageFB className="w-64 m-3">
                 <span className="text-white">
-                  {dmUsers
-                    ? msg.uid !== auth.user.id
-                      ? dmUsers!.user2
-                      : dmUsers!.user1
-                    : null}
+                  {usrr &&
+                    usrr.map((usr) => {
+                      if (msg.uid === usr.id) {
+                        return usr.username;
+                      }
+                    })}
                 </span>
                 <span className="text-white pl-16">
                   {msg.createdAt &&

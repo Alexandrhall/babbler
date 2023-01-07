@@ -15,66 +15,49 @@ import roomConverter, {
   userConverter,
 } from "../../src/services/postConverter";
 
-interface IDmUsers {
-  user1: string;
-  user2: string;
-}
-
 const dmRoomName = () => {
   const auth = useAppSelector((state) => state.auth);
   const router = useRouter();
   const param = router.query.dmRoomName;
   const [data, setData] = useState<TRoom>();
-  const [usrObject, setUsrObject] = useState<IDmUsers>();
-
   const dmRef = collection(database, "directMessages").withConverter(
     roomConverter
   );
-
   const q = query(dmRef);
-
   const [dm] = useCollectionData(q);
-
-  useEffect(() => {
-    dm?.forEach((snapshot, i, array) => {
-      if (snapshot.id.includes(param!.toString())) {
-        setData(snapshot);
-      }
-    });
-  }, [dm, param]);
-
   const usrRef = collection(database, "users").withConverter(userConverter);
-
-  const q7 = query(usrRef, where("username", "!=", auth.user.username));
-  const q8 = query(usrRef);
-
-  const [usrr] = useCollectionData(q8);
+  const [usrr] = useCollectionData(query(usrRef));
 
   useEffect(() => {
-    let otherid: string = "";
-
-    data &&
-      data.users.forEach((id) => {
-        if (id !== auth.user.id) otherid = id;
-      });
-
-    usrr &&
-      usrr.forEach((usr) => {
-        if (usr.id === otherid) {
-          setUsrObject({
-            user1: auth.user.username,
-            user2: usr.username,
-          });
+    dm &&
+      dm.forEach((snapshot, i, array) => {
+        if (snapshot.id.includes(param!.toString())) {
+          setData(snapshot);
         }
       });
-  }, [usrr, param, data]);
+  }, [dm, param]);
+
+  let otherid: string = "";
+
+  data &&
+    data.users.forEach((id) => {
+      if (id !== auth.user.id) otherid = id;
+    });
 
   return (
     <>
       <Navbar />
       <RoomList />
-      <div className="text-white">roomName {param}</div>
-      {data && <MsgRoom room={data} dmUsers={usrObject} />}
+      <div className="text-white">
+        roomName{" "}
+        {usrr &&
+          usrr.map((usr) => {
+            if (otherid === usr.id) {
+              return usr.username;
+            }
+          })}
+      </div>
+      {data && <MsgRoom room={data} />}
     </>
   );
 };
