@@ -7,6 +7,7 @@ import {
 } from "react-firebase-hooks/firestore";
 import MsgRoom from "../../src/components/MsgRoom";
 import Navbar from "../../src/components/Navbar";
+import RoomList from "../../src/components/RoomList";
 import { database } from "../../src/firebase";
 import roomConverter, { TRoom } from "../../src/services/postConverter";
 
@@ -27,7 +28,7 @@ const roomName = () => {
         setData(snapshot);
       }
     });
-  }, [room]);
+  }, [room, param]);
 
   useEffect(() => {
     console.log(data);
@@ -36,6 +37,7 @@ const roomName = () => {
   return (
     <>
       <Navbar />
+      <RoomList />
       <div className="text-white">roomName {data?.roomName}</div>
       {data && <MsgRoom room={data} />}
     </>

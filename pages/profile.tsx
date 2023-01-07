@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../src/components/Navbar";
+import RoomList from "../src/components/RoomList";
 import { useAppSelector } from "../src/redux/hooks";
 
 const profile = () => {
@@ -7,6 +8,7 @@ const profile = () => {
   return (
     <>
       <Navbar />
+      <RoomList />
       <div className="text-white">
         <p>{auth.user.email}</p>
         <p>{auth.user.username}</p>
