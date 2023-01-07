@@ -67,6 +67,7 @@ const Navbar = () => {
                   msg: "",
                 })
               );
+              router.push("/login");
             }}
           >
             logout
