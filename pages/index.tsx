@@ -41,21 +41,22 @@ export default function Home({ children }: IChildren) {
 
   const q3 = query(roomRef, where("users", "array-contains", auth.user.id));
 
+  const [room] = useCollectionData(q3);
+
   const dmRef = collection(database, "directMessages").withConverter(
     roomConverter
   );
 
   const q5 = query(dmRef, where("users", "array-contains", auth.user.id));
 
-  const [room] = useCollectionData(q3);
-
   const [dm] = useCollectionData(q5);
 
   const usrRef = collection(database, "users").withConverter(userConverter);
 
   const q7 = query(usrRef, where("username", "!=", auth.user.username));
+  const q8 = query(usrRef);
 
-  const [usrr] = useCollectionData(q7);
+  const [usrr] = useCollectionData(q8);
 
   useEffect(() => {
     if (user === null && auth.user.id === "") {
@@ -85,14 +86,17 @@ export default function Home({ children }: IChildren) {
               {dm &&
                 dm.map((room, i) => {
                   return (
-                    <Link href={`/directmessage/${room.id}`}>
-                      <p key={i}>
+                    <div key={i}>
+                      <Link href={`/directmessage/${room.id}`}>
                         {usrr &&
-                          usrr.map((usr) =>
-                            room.users.includes(usr.id) ? usr.username : null
+                          usrr.map((usr, i) =>
+                            room.users.includes(usr.id) &&
+                            usr.id !== auth.user.id ? (
+                              <p key={i}>{usr.username}</p>
+                            ) : null
                           )}
-                      </p>
-                    </Link>
+                      </Link>
+                    </div>
                   );
                 })}
             </ListItemText>

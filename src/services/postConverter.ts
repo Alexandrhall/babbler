@@ -7,10 +7,14 @@ import {
   WithFieldValue,
 } from "firebase/firestore";
 
-type TRoom = {
+export type TRoom = {
   messages: [
     {
-      message: string;
+      createdAt: {
+        seconds: number;
+        nanoseconds: number;
+      };
+      text: string;
       uid: string;
     }
   ];
@@ -19,7 +23,7 @@ type TRoom = {
   roomName?: string;
 };
 
-type TUser = {
+export type TUser = {
   id: string;
   email: string;
   role: string;
