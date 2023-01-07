@@ -30,9 +30,9 @@ const roomName = () => {
     });
   }, [room, param]);
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  //   useEffect(() => {
+  //     console.log(data);
+  //   }, [data]);
 
   return (
     <>
