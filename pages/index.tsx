@@ -20,6 +20,7 @@ export default function Home({ children }: IChildren) {
     if (user === null && auth.user.id === "") {
       router.replace("/login");
     }
+    /* eslint-disable */
   }, [auth, user]);
 
   return (

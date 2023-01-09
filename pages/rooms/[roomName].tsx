@@ -29,9 +29,11 @@ const RoomName = () => {
   return (
     <>
       <Navbar />
-      <RoomList />
-      <div className="text-white">roomName {data?.roomName}</div>
-      {data && <MsgRoom room={data} />}
+      <main className="flex flex-row">
+        <RoomList />
+        <div className="text-white">RoomName {data?.roomName}</div>
+        {data && <MsgRoom room={data} />}
+      </main>
     </>
   );
 };

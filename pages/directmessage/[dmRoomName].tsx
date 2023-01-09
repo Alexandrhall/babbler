@@ -34,27 +34,22 @@ const DmRoomName = () => {
       });
   }, [dm, param]);
 
-  let otherid: string = "";
-
-  data &&
-    data.users.forEach((id) => {
-      if (id !== auth.user.id) otherid = id;
-    });
-
   return (
     <>
       <Navbar />
-      <RoomList />
-      <div className="text-white">
-        roomName{" "}
-        {usrr &&
-          usrr.map((usr) => {
-            if (otherid === usr.id) {
-              return usr.username;
-            }
-          })}
-      </div>
-      {data && <MsgRoom room={data} />}
+      <main className="flex flex-row">
+        <RoomList />
+        <div className="text-white">
+          RoomName{" "}
+          {usrr &&
+            usrr.map((usr) => {
+              if (data?.users.includes(usr.id) && usr.id !== auth.user.id) {
+                return usr.username;
+              }
+            })}
+        </div>
+        {data && <MsgRoom room={data} />}
+      </main>
     </>
   );
 };

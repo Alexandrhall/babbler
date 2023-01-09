@@ -1,34 +1,15 @@
 import { List, ListItemText } from "@mui/material";
-import { collection, query, where } from "firebase/firestore";
 import Link from "next/link";
 import React from "react";
-import { useCollectionData } from "react-firebase-hooks/firestore";
-import { database } from "../firebase";
 import { useAppSelector } from "../redux/hooks";
-import roomConverter, { userConverter } from "../services/postConverter";
+import { useGetRoom } from "../services/useGetRoom";
+import { useGetUsers } from "../services/useGetUsers";
 
 const RoomList = () => {
   const auth = useAppSelector((state) => state.auth);
-  const roomRef = collection(database, "rooms").withConverter(roomConverter);
-
-  const q3 = query(roomRef, where("users", "array-contains", auth.user.id));
-
-  const [room] = useCollectionData(q3);
-
-  const dmRef = collection(database, "directMessages").withConverter(
-    roomConverter
-  );
-
-  const q5 = query(dmRef, where("users", "array-contains", auth.user.id));
-
-  const [dm] = useCollectionData(q5);
-
-  const usrRef = collection(database, "users").withConverter(userConverter);
-
-  const q7 = query(usrRef, where("username", "!=", auth.user.username));
-  const q8 = query(usrRef);
-
-  const [usrr] = useCollectionData(q8);
+  const [dm] = useGetRoom("directMessages");
+  const [room] = useGetRoom("rooms");
+  const [usrr] = useGetUsers();
 
   return (
     <div className="w-64" style={{ backgroundColor: "#3F4E4F" }}>

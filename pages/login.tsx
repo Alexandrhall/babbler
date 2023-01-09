@@ -19,7 +19,7 @@ import router from "next/router";
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function Login() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);

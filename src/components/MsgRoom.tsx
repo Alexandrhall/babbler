@@ -1,16 +1,6 @@
 import { Button, Input } from "@mui/material";
-import {
-  addDoc,
-  arrayUnion,
-  collection,
-  query,
-  serverTimestamp,
-  setDoc,
-  Timestamp,
-  updateDoc,
-} from "firebase/firestore";
+import { arrayUnion, Timestamp, updateDoc } from "firebase/firestore";
 import React, { FormEvent, useState } from "react";
-import { useCollectionData } from "react-firebase-hooks/firestore";
 import * as S from "../../styles/styles";
 import { useAppSelector } from "../redux/hooks";
 import { TRoom } from "../services/postConverter";
