@@ -10,20 +10,20 @@ import Navbar from "../../src/components/Navbar";
 import RoomList from "../../src/components/RoomList";
 import { database } from "../../src/firebase";
 import { useAppSelector } from "../../src/redux/hooks";
-import { getRoom } from "../../src/services/getRoom";
-import { getUsers } from "../../src/services/getUsers";
 import roomConverter, {
   TRoom,
   userConverter,
 } from "../../src/services/postConverter";
+import { useGetRoom } from "../../src/services/useGetRoom";
+import { useGetUsers } from "../../src/services/useGetUsers";
 
 const DmRoomName = () => {
   const auth = useAppSelector((state) => state.auth);
   const router = useRouter();
   const param = router.query.DmRoomName;
   const [data, setData] = useState<TRoom>();
-  const [dm] = getRoom("directMessages");
-  const [usrr] = getUsers();
+  const [dm] = useGetRoom("directMessages");
+  const [usrr] = useGetUsers();
 
   useEffect(() => {
     dm &&

@@ -13,8 +13,8 @@ import React, { FormEvent, useState } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import * as S from "../../styles/styles";
 import { useAppSelector } from "../redux/hooks";
-import { getUsers } from "../services/getUsers";
 import { TRoom } from "../services/postConverter";
+import { useGetUsers } from "../services/useGetUsers";
 
 interface IProps {
   room: TRoom;
@@ -22,7 +22,7 @@ interface IProps {
 
 const MsgRoom = ({ room }: IProps) => {
   const auth = useAppSelector((state) => state.auth);
-  const [usrr] = getUsers();
+  const [usrr] = useGetUsers();
   const [formValue, setFormValue] = useState<string>("");
 
   const sendMessage = async (e: FormEvent<HTMLFormElement>) => {

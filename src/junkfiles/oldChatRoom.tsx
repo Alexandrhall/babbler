@@ -13,7 +13,7 @@ import { Button, Input } from "@mui/material";
 import { useAppSelector } from "../redux/hooks";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import * as S from "../../styles/styles";
-import { getUsers } from "../services/getUsers";
+import { useGetUsers } from "../services/useGetUsers";
 
 interface IProps {
   room: string;
@@ -27,7 +27,7 @@ const ChatRoom = () => {
   const messageRef = collection(database, "messages");
   const q = query(messageRef, orderBy("createdAt"), limit(25));
   const [messages] = useCollectionData(q);
-  const [usrr] = getUsers();
+  const [usrr] = useGetUsers();
   const [formValue, setFormValue] = useState<string>("");
 
   const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
