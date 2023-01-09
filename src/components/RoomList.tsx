@@ -1,4 +1,4 @@
-import { List, ListItemText } from "@mui/material";
+import { Button, List, ListItemText } from "@mui/material";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useAppSelector } from "../redux/hooks";
@@ -15,8 +15,16 @@ const RoomList = () => {
   return (
     <div className="w-64" style={{ backgroundColor: "#3F4E4F" }}>
       <List>
+        <Button
+          sx={{
+            marginLeft: "10px",
+          }}
+          variant="contained"
+        >
+          Create Room
+        </Button>
         <input
-          className="ml-3"
+          className="ml-3 mt-3"
           type="text"
           maxLength={48}
           value={searchText}
