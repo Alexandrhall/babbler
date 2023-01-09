@@ -9,25 +9,9 @@ import { Link as Mlink } from "@mui/material";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
-  const [searchText, setSearchText] = useState<string>("Search...");
 
   return (
     <>
-      <input
-        className="ms-3"
-        type="text"
-        maxLength={48}
-        value={searchText}
-        onChange={(e) => {
-          setSearchText(e.target.value);
-        }}
-        onClick={() => {
-          setSearchText("");
-        }}
-        onBlur={() => {
-          if (searchText === "") setSearchText("Search...");
-        }}
-      />
       <AppBar position="relative" className="w-auto">
         {/* <CssBaseline /> */}
         <Toolbar

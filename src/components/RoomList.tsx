@@ -1,6 +1,6 @@
 import { List, ListItemText } from "@mui/material";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useAppSelector } from "../redux/hooks";
 import { useGetRoom } from "../services/useGetRoom";
 import { useGetUsers } from "../services/useGetUsers";
@@ -10,10 +10,26 @@ const RoomList = () => {
   const [dm] = useGetRoom("directMessages");
   const [room] = useGetRoom("rooms");
   const [usrr] = useGetUsers();
+  const [searchText, setSearchText] = useState<string>("Search...");
 
   return (
     <div className="w-64" style={{ backgroundColor: "#3F4E4F" }}>
       <List>
+        <input
+          className="ml-3"
+          type="text"
+          maxLength={48}
+          value={searchText}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+          }}
+          onClick={() => {
+            setSearchText("");
+          }}
+          onBlur={() => {
+            if (searchText === "") setSearchText("Search...");
+          }}
+        />
         <ListItemText className="text-white p-3">
           <h4 className="font-bold">Rooms</h4>
           {room &&
