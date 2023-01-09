@@ -20,33 +20,22 @@ import { useAppSelector } from "../redux/hooks";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import * as S from "../../styles/styles";
 import roomConverter from "../services/postConverter";
+import { getUsers } from "../services/getUsers";
 
 interface IProps {
   room: string;
   users: {};
 }
 
-const chatRoom = () => {
+const ChatRoom = () => {
   //   const user = useAuth();
   const auth = useAppSelector((state) => state.auth);
   const dummy = useRef<HTMLSpanElement>();
   const messageRef = collection(database, "messages");
   const q = query(messageRef, orderBy("createdAt"), limit(25));
-  // const [messArray, setMessArray] = useState<messageArray[]>([]);
-
-  const [formValue, setFormValue] = useState<string>("");
-
   const [messages] = useCollectionData(q);
-
-  const dmRef = collection(database, "directMessages").withConverter(
-    roomConverter
-  );
-
-  const q3 = query(dmRef, where("users", "array-contains", auth.user.id));
-
-  const q2 = query(dmRef);
-
-  const [dm] = useCollectionData(q3);
+  const [usrr] = getUsers();
+  const [formValue, setFormValue] = useState<string>("");
 
   const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -72,10 +61,14 @@ const chatRoom = () => {
           messages.map((msg, i) => {
             return (
               <div key={i}>
-                {/* <p className="text-white">{msg.text}</p> */}
                 <S.TextMessageFB className="w-64 m-3">
-                  <span className="text-white">{msg.username}</span>
-                  <span className="text-white pl-16">
+                  <span className="text-white">
+                    {usrr &&
+                      usrr.map((usr) => {
+                        if (usr.id === msg.uid) return usr.username;
+                      })}
+                  </span>
+                  <span className="text-white pl-16 float-right">
                     {msg.createdAt &&
                       new Date(msg.createdAt.seconds * 1000)
                         .toLocaleString("sv-SE")
@@ -107,4 +100,4 @@ const chatRoom = () => {
   );
 };
 
-export default chatRoom;
+export default ChatRoom;

@@ -52,7 +52,7 @@ export default function SignIn() {
 
   useEffect(() => {
     if (user !== null && auth.user.id !== "") {
-      router.push("/");
+      router.replace("/");
     }
   }, [auth, user]);
 

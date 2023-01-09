@@ -21,6 +21,7 @@ export type TRoom = {
   users: string[];
   id: string;
   roomName?: string;
+  ref: DocumentReference<DocumentData>;
 };
 
 export type TUser = {
@@ -41,6 +42,7 @@ export const roomConverter: FirestoreDataConverter<TRoom> = {
       users: data.users,
       id: snapshot.id,
       roomName: data?.roomName,
+      ref: snapshot.ref,
     };
   },
 };

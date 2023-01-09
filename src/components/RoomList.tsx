@@ -38,8 +38,8 @@ const RoomList = () => {
           {room &&
             room.map((room, i) => {
               return (
-                <Link href={`/rooms/${room.id}`}>
-                  <p key={i}>{room.roomName}</p>
+                <Link href={`/rooms/${room.id}`} key={i}>
+                  <p>{room.roomName}</p>
                 </Link>
               );
             })}

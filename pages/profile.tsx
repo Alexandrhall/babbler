@@ -3,7 +3,7 @@ import Navbar from "../src/components/Navbar";
 import RoomList from "../src/components/RoomList";
 import { useAppSelector } from "../src/redux/hooks";
 
-const profile = () => {
+const Profile = () => {
   const auth = useAppSelector((state) => state.auth);
   return (
     <>
@@ -18,4 +18,4 @@ const profile = () => {
   );
 };
 
-export default profile;
+export default Profile;

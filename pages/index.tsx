@@ -18,7 +18,7 @@ export default function Home({ children }: IChildren) {
 
   useEffect(() => {
     if (user === null && auth.user.id === "") {
-      router.push("/login");
+      router.replace("/login");
     }
   }, [auth, user]);
 

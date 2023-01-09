@@ -4,9 +4,6 @@ import { Provider } from "react-redux";
 import { store } from "../src/redux/store";
 import { AuthProvider, useAuth } from "../src/contexts/authContext";
 import Head from "next/head";
-import { useEffect } from "react";
-import router from "next/router";
-import SignIn from "./login";
 
 export default function App({ Component, pageProps }: AppProps) {
   const user = useAuth();

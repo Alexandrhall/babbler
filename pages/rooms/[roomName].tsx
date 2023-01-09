@@ -9,18 +9,14 @@ import MsgRoom from "../../src/components/MsgRoom";
 import Navbar from "../../src/components/Navbar";
 import RoomList from "../../src/components/RoomList";
 import { database } from "../../src/firebase";
+import { getRoom } from "../../src/services/getRoom";
 import roomConverter, { TRoom } from "../../src/services/postConverter";
 
-const roomName = () => {
+const RoomName = () => {
   const router = useRouter();
-  const param = router.query.roomName;
+  const param = router.query.RoomName;
   const [data, setData] = useState<TRoom>();
-
-  const roomRef = collection(database, "rooms").withConverter(roomConverter);
-
-  const q = query(roomRef);
-
-  const [room] = useCollectionData(q);
+  const [room] = getRoom("rooms");
 
   useEffect(() => {
     room?.forEach((snapshot, i, array) => {
@@ -29,10 +25,6 @@ const roomName = () => {
       }
     });
   }, [room, param]);
-
-  //   useEffect(() => {
-  //     console.log(data);
-  //   }, [data]);
 
   return (
     <>
@@ -44,4 +36,4 @@ const roomName = () => {
   );
 };
 
-export default roomName;
+export default RoomName;
