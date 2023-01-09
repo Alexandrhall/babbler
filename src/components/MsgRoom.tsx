@@ -12,10 +12,9 @@ import {
 import React, { FormEvent, useState } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import * as S from "../../styles/styles";
-import { database } from "../firebase";
 import { useAppSelector } from "../redux/hooks";
 import { getUsers } from "../services/getUsers";
-import { TRoom, userConverter } from "../services/postConverter";
+import { TRoom } from "../services/postConverter";
 
 interface IProps {
   room: TRoom;

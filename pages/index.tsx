@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../src/redux/hooks";
 import { useRouter } from "next/router";
 import { useAuth } from "../src/contexts/authContext";
-import ChatRoom from "../src/components/ChatRoom";
 import Navbar from "../src/components/Navbar";
 import RoomList from "../src/components/RoomList";
+import ChatRoom from "../src/components/ChatRoom";
 
 interface IChildren {
   children: JSX.Element[];

@@ -19,7 +19,7 @@ const RoomName = () => {
   const [room] = getRoom("rooms");
 
   useEffect(() => {
-    room?.forEach((snapshot, i, array) => {
+    room?.forEach((snapshot) => {
       if (snapshot.id.includes(param!.toString())) {
         setData(snapshot);
       }
