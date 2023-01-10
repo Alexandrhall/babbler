@@ -2,7 +2,7 @@ import React from "react";
 import { useAppSelector } from "../redux/hooks";
 
 const Test = () => {
-  const count = useAppSelector((state) => state.counter.value);
+  // const count = useAppSelector((state) => state.counter.value);
 
   //   const getStuff = async () => {
   //     await getDocs(q).then((snapshot) => {
@@ -31,7 +31,8 @@ const Test = () => {
   //     });
   //   });
 
-  return <h1 className="text-white">{count}</h1>;
+  // return <h1 className="text-white">{count}</h1>;
+  return <></>;
 };
 
 export default Test;

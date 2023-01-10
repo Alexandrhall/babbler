@@ -1,5 +1,5 @@
 import { doc, getDoc } from "firebase/firestore";
-import { database } from "../src/firebase";
+import { database } from "../firebase";
 
 export interface IUserDetails {
   username: string;

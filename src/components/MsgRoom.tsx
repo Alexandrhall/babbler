@@ -17,24 +17,25 @@ const MsgRoom = ({ room }: IProps) => {
 
   const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (formValue !== "") {
+      try {
+        await updateDoc(room.ref, {
+          messages: arrayUnion(
+            ...[
+              {
+                text: formValue,
+                createdAt: Timestamp.now(),
+                uid: auth.user.id,
+              },
+            ]
+          ),
+          users: room.users,
+        });
 
-    try {
-      await updateDoc(room.ref, {
-        messages: arrayUnion(
-          ...[
-            {
-              text: formValue,
-              createdAt: Timestamp.now(),
-              uid: auth.user.id,
-            },
-          ]
-        ),
-        users: room.users,
-      });
-
-      setFormValue("");
-    } catch (err) {
-      console.error(err);
+        setFormValue("");
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
 

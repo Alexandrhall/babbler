@@ -4,6 +4,15 @@ import { Provider } from "react-redux";
 import { store } from "../src/redux/store";
 import { AuthProvider, useAuth } from "../src/contexts/authContext";
 import Head from "next/head";
+import { createTheme, ThemeProvider } from "@mui/material";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#171717",
+    },
+  },
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   const user = useAuth();
@@ -11,12 +20,17 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <AuthProvider>
-        <Head>
-          <title>BabbleR</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <Component {...pageProps} />
+        <ThemeProvider theme={theme}>
+          <Head>
+            <title>BabbleR</title>
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1"
+            />
+            <link rel="icon" href="/favicon.ico" />
+          </Head>
+          <Component {...pageProps} />
+        </ThemeProvider>
       </AuthProvider>
     </Provider>
   );

@@ -9,12 +9,14 @@ const Profile = () => {
   return (
     <>
       <Navbar />
-      <RoomList />
-      <div className="text-white">
-        <p>{auth.user.email}</p>
-        <p>{auth.user.username}</p>
-        <p>{auth.user.role}</p>
-      </div>
+      <main className="flex flex-row">
+        <RoomList />
+        <div className="text-white">
+          <p>{auth.user.email}</p>
+          <p>{auth.user.username}</p>
+          <p>{auth.user.role}</p>
+        </div>
+      </main>
     </>
   );
 };

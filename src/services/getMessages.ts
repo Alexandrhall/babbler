@@ -9,8 +9,8 @@ import {
 } from "firebase/firestore";
 import { FormEvent, useEffect, useRef } from "react";
 import React from "react";
-import { useAuth } from "../src/contexts/authContext";
-import { database } from "../src/firebase";
+import { useAuth } from "../contexts/authContext";
+import { database } from "../firebase";
 
 interface userObj {
   uid: string;

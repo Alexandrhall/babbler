@@ -13,7 +13,7 @@ const RoomList = () => {
   const [searchText, setSearchText] = useState<string>("Search...");
 
   return (
-    <div className="w-64" style={{ backgroundColor: "#3F4E4F" }}>
+    <div className="w-64 h-screen" style={{ backgroundColor: "#3F4E4F" }}>
       <List>
         <Button
           sx={{

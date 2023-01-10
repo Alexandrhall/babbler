@@ -9,7 +9,7 @@ import { signInWithEmailAndPassword, User } from "firebase/auth";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { auth, database } from "../firebase";
 import { updateDetails } from "../redux/auth";
-import getUserDetails from "../../services/getUserDetails";
+import getUserDetails from "../services/getUserDetails";
 
 interface IChildren {
   children: JSX.Element | JSX.Element[];
