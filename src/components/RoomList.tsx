@@ -11,10 +11,11 @@ import SearchUserBar from "./SearchUserBar";
 const RoomList = () => {
   const auth = useAppSelector((state) => state.auth);
   const [dm] = useGetRoom("directMessages");
-  const [room] = useGetRoom("rooms");
+  const [rooms] = useGetRoom("rooms");
   const [usrr] = useGetUsers();
   const [searchText, setSearchText] = useState<string>("Search...");
   const [personalDm, setPersonalDm] = useState<TRoom[]>();
+  const [personalRooms, setPersonalRooms] = useState<TRoom[]>();
 
   useEffect(() => {
     const res =
@@ -27,17 +28,20 @@ const RoomList = () => {
     }
   }, [dm]);
 
+  useEffect(() => {
+    const res =
+      rooms &&
+      rooms.filter((room) => {
+        if (room.users.includes(auth.user.id)) return room;
+      });
+    if (res) {
+      setPersonalRooms(res);
+    }
+  }, [rooms]);
+
   return (
     <div className="w-64 h-screen" style={{ backgroundColor: "#3F4E4F" }}>
       <List>
-        {/* <Button
-          sx={{
-            marginLeft: "10px",
-          }}
-          variant="contained"
-        >
-          Create Room
-        </Button> */}
         <CreateRoom />
         <SearchUserBar />
         <input
@@ -58,8 +62,8 @@ const RoomList = () => {
 
         <ListItemText className="text-white p-3">
           <h4 className="font-bold">Rooms</h4>
-          {room &&
-            room.map((room, i) => {
+          {personalRooms &&
+            personalRooms.map((room, i) => {
               return (
                 <Link href={`/rooms/${room.id}`} key={i}>
                   <p>{room.roomName}</p>

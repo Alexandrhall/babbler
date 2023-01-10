@@ -36,6 +36,12 @@ const DmRoomName = () => {
       });
   }, [dm, param]);
 
+  useEffect(() => {
+    if (data && !data.users.includes(auth.user.id)) {
+      router.replace("/");
+    }
+  }, [data]);
+
   return (
     <>
       <Navbar />
