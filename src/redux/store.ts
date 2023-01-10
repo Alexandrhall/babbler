@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === "development") {
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    counter: counterSlice,
+    // counter: counterSlice,
   },
   middleware: middlewares,
 });

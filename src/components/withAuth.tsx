@@ -1,10 +1,9 @@
-import React from "react";
+import React, { ElementType } from "react";
 import { useAuth } from "../contexts/authContext";
 import { useAppSelector } from "../redux/hooks";
 import router from "next/router";
-import { GetServerSideProps } from "next/types";
 
-const withAuth = (Component: any) => {
+const withAuth = (Component: ElementType) => {
   const AuthComponent = () => {
     const user = useAuth();
     const auth = useAppSelector((state) => state.auth);
