@@ -1,7 +1,8 @@
 import { Button, List, ListItemText } from "@mui/material";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppSelector } from "../redux/hooks";
+import { TRoom } from "../services/postConverter";
 import { useGetRoom } from "../services/useGetRoom";
 import { useGetUsers } from "../services/useGetUsers";
 import CreateRoom from "./CreateRoom";
@@ -12,6 +13,15 @@ const RoomList = () => {
   const [room] = useGetRoom("rooms");
   const [usrr] = useGetUsers();
   const [searchText, setSearchText] = useState<string>("Search...");
+  const [personalDm, setPersonalDm] = useState<TRoom[]>();
+
+  useEffect(() => {
+    const res =
+      dm &&
+      dm.map((room) => {
+        if (room.users.includes(auth.user.id)) return room;
+      });
+  }, [dm]);
 
   return (
     <div className="w-64 h-screen" style={{ backgroundColor: "#3F4E4F" }}>
