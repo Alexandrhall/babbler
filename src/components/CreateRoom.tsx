@@ -48,7 +48,7 @@ export default function FormDialog() {
       >
         Create Room
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
         <DialogTitle>Create room</DialogTitle>
         <DialogContent>
           <DialogContentText>

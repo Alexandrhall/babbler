@@ -6,6 +6,7 @@ import { TRoom } from "../services/postConverter";
 import { useGetRoom } from "../services/useGetRoom";
 import { useGetUsers } from "../services/useGetUsers";
 import CreateRoom from "./CreateRoom";
+import SearchUserBar from "./SearchUserBar";
 
 const RoomList = () => {
   const auth = useAppSelector((state) => state.auth);
@@ -38,8 +39,9 @@ const RoomList = () => {
           Create Room
         </Button> */}
         <CreateRoom />
+        <SearchUserBar />
         <input
-          className="ml-3 mt-3 p-1 rounded"
+          className="ml-3 mt-3 p-1 rounded relative"
           type="text"
           maxLength={48}
           value={searchText}
@@ -53,6 +55,7 @@ const RoomList = () => {
             if (searchText === "") setSearchText("Search...");
           }}
         />
+
         <ListItemText className="text-white p-3">
           <h4 className="font-bold">Rooms</h4>
           {room &&
