@@ -18,9 +18,12 @@ const RoomList = () => {
   useEffect(() => {
     const res =
       dm &&
-      dm.map((room) => {
+      dm.filter((room) => {
         if (room.users.includes(auth.user.id)) return room;
       });
+    if (res) {
+      setPersonalDm(res);
+    }
   }, [dm]);
 
   return (
@@ -63,8 +66,8 @@ const RoomList = () => {
         </ListItemText>
         <ListItemText className="text-white p-3">
           <h4 className="font-bold">Direct Messages</h4>
-          {dm &&
-            dm.map((room, i) => {
+          {personalDm &&
+            personalDm.map((room, i) => {
               return (
                 <div key={i}>
                   <Link href={`/directmessage/${room.id}`}>
