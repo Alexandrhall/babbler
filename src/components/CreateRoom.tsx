@@ -6,15 +6,34 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { useState } from "react";
+import { collection, addDoc } from "firebase/firestore";
+import { database } from "../firebase";
+import { useAppSelector } from "../redux/hooks";
 
 export default function FormDialog() {
-  const [open, setOpen] = React.useState(false);
+  const auth = useAppSelector((state) => state.auth);
+  const [open, setOpen] = useState<boolean>(false);
+  const [formValue, setFormValue] = useState<string>("");
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = async () => {
+    if (formValue !== "") {
+      try {
+        await addDoc(collection(database, "rooms"), {
+          messages: [],
+          roomName: formValue,
+          users: [auth.user.id],
+        });
+
+        setFormValue("");
+      } catch (err) {
+        console.error(err);
+      }
+    }
     setOpen(false);
   };
 
@@ -43,6 +62,8 @@ export default function FormDialog() {
             type="text"
             fullWidth
             variant="standard"
+            value={formValue}
+            onChange={(e) => setFormValue(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
