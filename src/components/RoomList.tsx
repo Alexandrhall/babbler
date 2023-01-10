@@ -24,7 +24,7 @@ const RoomList = () => {
           Create Room
         </Button>
         <input
-          className="ml-3 mt-3"
+          className="ml-3 mt-3 p-1 rounded"
           type="text"
           maxLength={48}
           value={searchText}

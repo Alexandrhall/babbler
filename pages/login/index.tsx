@@ -12,12 +12,18 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { FormEvent, useEffect, useRef, useState } from "react";
-import { login, useAuth } from "../src/contexts/authContext";
-import { useAppDispatch, useAppSelector } from "../src/redux/hooks";
-import { updateDetails } from "../src/redux/auth";
+import { login, useAuth } from "../../src/contexts/authContext";
+import { useAppDispatch, useAppSelector } from "../../src/redux/hooks";
+import { updateDetails } from "../../src/redux/auth";
 import router from "next/router";
 
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#171717",
+    },
+  },
+});
 
 export default function Login() {
   const emailRef = useRef<HTMLInputElement>(null);

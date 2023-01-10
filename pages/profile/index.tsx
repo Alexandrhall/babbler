@@ -1,7 +1,8 @@
 import React from "react";
-import Navbar from "../src/components/Navbar";
-import RoomList from "../src/components/RoomList";
-import { useAppSelector } from "../src/redux/hooks";
+import Navbar from "../../src/components/Navbar";
+import RoomList from "../../src/components/RoomList";
+import withAuth from "../../src/components/withAuth";
+import { useAppSelector } from "../../src/redux/hooks";
 
 const Profile = () => {
   const auth = useAppSelector((state) => state.auth);
@@ -18,4 +19,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default withAuth(Profile);

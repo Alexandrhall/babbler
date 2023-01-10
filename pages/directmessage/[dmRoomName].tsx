@@ -8,6 +8,7 @@ import {
 import MsgRoom from "../../src/components/MsgRoom";
 import Navbar from "../../src/components/Navbar";
 import RoomList from "../../src/components/RoomList";
+import withAuth from "../../src/components/withAuth";
 import { database } from "../../src/firebase";
 import { useAppSelector } from "../../src/redux/hooks";
 import roomConverter, {
@@ -54,4 +55,4 @@ const DmRoomName = () => {
   );
 };
 
-export default DmRoomName;
+export default withAuth(DmRoomName);

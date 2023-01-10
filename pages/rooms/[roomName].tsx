@@ -8,6 +8,7 @@ import {
 import MsgRoom from "../../src/components/MsgRoom";
 import Navbar from "../../src/components/Navbar";
 import RoomList from "../../src/components/RoomList";
+import withAuth from "../../src/components/withAuth";
 import { database } from "../../src/firebase";
 import roomConverter, { TRoom } from "../../src/services/postConverter";
 import { useGetRoom } from "../../src/services/useGetRoom";
@@ -38,4 +39,4 @@ const RoomName = () => {
   );
 };
 
-export default RoomName;
+export default withAuth(RoomName);
