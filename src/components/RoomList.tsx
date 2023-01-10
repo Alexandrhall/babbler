@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useAppSelector } from "../redux/hooks";
 import { useGetRoom } from "../services/useGetRoom";
 import { useGetUsers } from "../services/useGetUsers";
+import CreateRoom from "./CreateRoom";
 
 const RoomList = () => {
   const auth = useAppSelector((state) => state.auth);
@@ -15,14 +16,15 @@ const RoomList = () => {
   return (
     <div className="w-64 h-screen" style={{ backgroundColor: "#3F4E4F" }}>
       <List>
-        <Button
+        {/* <Button
           sx={{
             marginLeft: "10px",
           }}
           variant="contained"
         >
           Create Room
-        </Button>
+        </Button> */}
+        <CreateRoom />
         <input
           className="ml-3 mt-3 p-1 rounded"
           type="text"
