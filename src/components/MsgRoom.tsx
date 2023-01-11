@@ -1,10 +1,12 @@
 import { Button, Input } from "@mui/material";
 import { arrayUnion, Timestamp, updateDoc } from "firebase/firestore";
-import React, { FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import * as S from "../../styles/styles";
 import { useAppSelector } from "../redux/hooks";
 import { TRoom } from "../services/postConverter";
 import { useGetUsers } from "../services/useGetUsers";
+import { storage } from "../firebase";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 interface IProps {
   room: TRoom;
@@ -14,6 +16,7 @@ const MsgRoom = ({ room }: IProps) => {
   const auth = useAppSelector((state) => state.auth);
   const [usrr] = useGetUsers();
   const [formValue, setFormValue] = useState<string>("");
+  const [selectedFile, setSelectedFile] = useState<File>();
 
   const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -37,6 +40,23 @@ const MsgRoom = ({ room }: IProps) => {
         console.error(err);
       }
     }
+  };
+
+  const handleFile = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) setSelectedFile(e.target.files[0]);
+  };
+
+  const handleUpload = async (e: any) => {
+    const storageRef = ref(storage, `images/${selectedFile!.name}`);
+
+    uploadBytes(storageRef, selectedFile!).then((snapshot) => {
+      console.log(snapshot);
+      console.log("Uploaded a blob or file!");
+    });
+
+    getDownloadURL(storageRef).then((url) => {
+      console.log(url);
+    });
   };
 
   return (
@@ -81,6 +101,10 @@ const MsgRoom = ({ room }: IProps) => {
           Send
         </Button>
       </form>
+      <div>
+        <input type="file" name="file" onChange={handleFile} />
+        <button onClick={handleUpload}>Upload</button>
+      </div>
     </div>
   );
 };

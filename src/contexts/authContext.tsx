@@ -5,7 +5,11 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { signInWithEmailAndPassword, User } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  User,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { auth, database } from "../firebase";
 import { updateDetails } from "../redux/auth";
@@ -34,6 +38,10 @@ export function login(email: string, password: string) {
 
 export function logout() {
   return auth.signOut();
+}
+
+export function createUser(email: string, password: string) {
+  return createUserWithEmailAndPassword(auth, email, password);
 }
 
 export const AuthProvider = ({ children }: IChildren) => {

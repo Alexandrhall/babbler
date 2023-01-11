@@ -3,9 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -16,6 +13,7 @@ import { login, useAuth } from "../../src/contexts/authContext";
 import { useAppDispatch, useAppSelector } from "../../src/redux/hooks";
 import { updateDetails } from "../../src/redux/auth";
 import router from "next/router";
+import Link from "next/link";
 
 const theme = createTheme({
   palette: {
@@ -121,9 +119,7 @@ export default function Login() {
                 </Link>
               </Grid> */}
               <Grid item>
-                <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
+                <Link href="/signup">{"Don't have an account? Sign Up"}</Link>
               </Grid>
             </Grid>
           </Box>
