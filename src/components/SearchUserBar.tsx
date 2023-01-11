@@ -25,7 +25,7 @@ export default function SearchUserBar() {
     value: TUser | null
   ) => {
     if (value?.id !== undefined && value?.id !== "") {
-      let create = false;
+      // let create = false;
       const res =
         dm &&
         dm.filter((room) => {
@@ -37,7 +37,6 @@ export default function SearchUserBar() {
           }
         });
       if (res) {
-        console.log(res);
         res.forEach((room) => {
           if (
             room.users.includes(value.id) &&
@@ -47,14 +46,14 @@ export default function SearchUserBar() {
           }
         });
       }
-      if (res && res.length === 0) create = true;
-      if (create) {
+      // if (res && res.length === 0) create = true;
+      if (res && res.length === 0) {
         try {
-          await addDoc(collection(database, "directMessages"), {
+          const addRef = await addDoc(collection(database, "directMessages"), {
             messages: [],
             users: [auth.user.id, value.id],
           });
-          create = false;
+          router.push(`/directmessage/${addRef.id}`);
         } catch (err) {
           console.error(err);
         }
