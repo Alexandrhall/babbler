@@ -14,7 +14,7 @@ export default function SearchUserBar() {
   const [dm] = useGetRoom("directMessages");
   const auth = useAppSelector((state) => state.auth);
   let users: TUser[] = [];
-  const [usrId, setUsrId] = React.useState("");
+  // const [usrId, setUsrId] = React.useState("");
 
   if (usrr) {
     users = [...usrr];
@@ -26,19 +26,28 @@ export default function SearchUserBar() {
   ) => {
     if (value?.id !== undefined && value?.id !== "") {
       let create = false;
-      //   const res =
-      dm &&
+      const res =
+        dm &&
         dm.filter((room) => {
           if (
             room.users.includes(value.id) &&
             room.users.includes(auth.user.id)
           ) {
-            router.push(`/directmessage/${room.id}`);
-          } else {
-            console.log("run");
-            create = true;
+            return room;
           }
         });
+      if (res) {
+        console.log(res);
+        res.forEach((room) => {
+          if (
+            room.users.includes(value.id) &&
+            room.users.includes(auth.user.id)
+          ) {
+            router.push(`/directmessage/${room.id}`);
+          }
+        });
+      }
+      if (res && res.length === 0) create = true;
       if (create) {
         try {
           await addDoc(collection(database, "directMessages"), {

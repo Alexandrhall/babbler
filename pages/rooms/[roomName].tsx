@@ -7,7 +7,7 @@ import RoomList from "../../src/components/RoomList";
 import withAuth from "../../src/components/withAuth";
 import roomConverter, { TRoom } from "../../src/services/postConverter";
 import { useGetRoom } from "../../src/services/useGetRoom";
-import { doc, deleteDoc } from "firebase/firestore";
+import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { useAppSelector } from "../../src/redux/hooks";
 
 const RoomName = () => {
@@ -34,6 +34,23 @@ const RoomName = () => {
     }
   };
 
+  const leaveRoom = async () => {
+    try {
+      const tempUsr =
+        data &&
+        data.users.filter((usr) => {
+          if (usr !== auth.user.id) return usr;
+        });
+
+      await updateDoc(data!.ref, {
+        users: tempUsr,
+      });
+      router.replace("/");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
     if (data && !data.users.includes(auth.user.id)) {
       router.replace("/");
@@ -48,13 +65,22 @@ const RoomName = () => {
         <div className="text-white">
           RoomName {data?.roomName}
           {data && data.roomName ? (
-            <Button
-              variant="contained"
-              sx={{ backgroundColor: "red" }}
-              onClick={deleteRoom}
-            >
-              Delete room
-            </Button>
+            <>
+              <Button
+                variant="contained"
+                sx={{ backgroundColor: "red" }}
+                onClick={deleteRoom}
+              >
+                Delete room
+              </Button>
+              <Button
+                variant="contained"
+                sx={{ backgroundColor: "red" }}
+                onClick={leaveRoom}
+              >
+                Leave room
+              </Button>
+            </>
           ) : null}
         </div>
         {data && <MsgRoom room={data} />}
