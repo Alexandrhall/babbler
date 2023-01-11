@@ -51,6 +51,8 @@ const RoomName = () => {
     }
   };
 
+  const addUser = async () => {};
+
   useEffect(() => {
     if (data && !data.users.includes(auth.user.id)) {
       router.replace("/");
