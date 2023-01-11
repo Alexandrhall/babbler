@@ -14,7 +14,6 @@ export default function SearchUserBar() {
   const [dm] = useGetRoom("directMessages");
   const auth = useAppSelector((state) => state.auth);
   let users: TUser[] = [];
-  // const [usrId, setUsrId] = React.useState("");
 
   if (usrr) {
     users = [...usrr];
@@ -25,7 +24,6 @@ export default function SearchUserBar() {
     value: TUser | null
   ) => {
     if (value?.id !== undefined && value?.id !== "") {
-      // let create = false;
       const res =
         dm &&
         dm.filter((room) => {
@@ -46,7 +44,6 @@ export default function SearchUserBar() {
           }
         });
       }
-      // if (res && res.length === 0) create = true;
       if (res && res.length === 0) {
         try {
           const addRef = await addDoc(collection(database, "directMessages"), {
