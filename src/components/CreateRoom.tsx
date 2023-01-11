@@ -20,7 +20,7 @@ export default function FormDialog() {
     setOpen(true);
   };
 
-  const handleClose = async () => {
+  const handleCreate = async () => {
     if (formValue !== "") {
       try {
         await addDoc(collection(database, "rooms"), {
@@ -34,6 +34,10 @@ export default function FormDialog() {
         console.error(err);
       }
     }
+    setOpen(false);
+  };
+
+  const handleClose = () => {
     setOpen(false);
   };
 
@@ -68,7 +72,7 @@ export default function FormDialog() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Create</Button>
+          <Button onClick={handleCreate}>Create</Button>
         </DialogActions>
       </Dialog>
     </div>
