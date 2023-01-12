@@ -8,15 +8,11 @@ const Profile = () => {
   const auth = useAppSelector((state) => state.auth);
   return (
     <>
-      {/* <Navbar />
-      <main className="flex flex-row">
-        <RoomList /> */}
       <div className="text-white">
         <p>{auth.user.email}</p>
         <p>{auth.user.username}</p>
         <p>{auth.user.role}</p>
       </div>
-      {/* </main> */}
     </>
   );
 };

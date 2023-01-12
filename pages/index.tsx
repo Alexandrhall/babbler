@@ -6,14 +6,10 @@ import withAuth from "../src/components/withAuth";
 function Home() {
   return (
     <>
-      {/* <Navbar />
-      <main className="flex flex-row">
-        <RoomList /> */}
       <div className="text-white">RoomName Dashboard</div>
       <div className="w-full">
         <ChatRoom />
       </div>
-      {/* </main> */}
     </>
   );
 }

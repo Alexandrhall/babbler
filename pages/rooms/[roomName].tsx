@@ -62,9 +62,6 @@ const RoomName = () => {
 
   return (
     <>
-      {/* <Navbar />
-      <main className="flex flex-row">
-        <RoomList /> */}
       <div className="text-white">
         RoomName {data?.roomName}
         {data && data.roomName ? (
@@ -88,7 +85,6 @@ const RoomName = () => {
         ) : null}
       </div>
       {data && <MsgRoom room={data} />}
-      {/* </main> */}
     </>
   );
 };

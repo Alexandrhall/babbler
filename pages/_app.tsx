@@ -19,7 +19,6 @@ const theme = createTheme({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
-  const user = useAuth();
   const router = useRouter();
   const showHeader =
     router.route === "/login" || router.route === "/signup" ? false : true;
@@ -47,7 +46,6 @@ export default function App({ Component, pageProps }: AppProps) {
           ) : (
             <Component {...pageProps} />
           )}
-          {/* <Component {...pageProps} /> */}
         </ThemeProvider>
       </AuthProvider>
     </Provider>

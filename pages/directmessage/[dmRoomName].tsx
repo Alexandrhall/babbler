@@ -44,9 +44,6 @@ const DmRoomName = () => {
 
   return (
     <>
-      {/* <Navbar />
-      <main className="flex flex-row">
-        <RoomList /> */}
       <div className="text-white">
         RoomName{" "}
         {usrr &&
@@ -57,7 +54,6 @@ const DmRoomName = () => {
           })}
       </div>
       {data && <MsgRoom room={data} />}
-      {/* </main> */}
     </>
   );
 };
