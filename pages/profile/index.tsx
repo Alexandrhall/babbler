@@ -3,6 +3,7 @@ import {
   DocumentData,
   DocumentReference,
   setDoc,
+  Timestamp,
   updateDoc,
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
@@ -25,13 +26,19 @@ const Profile = () => {
   };
 
   const handleUpload = async () => {
+    const time = Timestamp.now();
     // if (e.target.files) setSelectedFile(e.target.files[0]);
     console.log(selectedFile);
     if (selectedFile) {
       try {
+        // const storageRef = ref(
+        //   storage,
+        //   `images/${selectedFile.name.replace(" ", "-")}`
+        // );
+
         const storageRef = ref(
           storage,
-          `images/${selectedFile.name.replace(" ", "-")}`
+          `images/profilepic-${time.seconds}.jpg`
         );
 
         await uploadBytes(storageRef, selectedFile).then((snapshot) => {
