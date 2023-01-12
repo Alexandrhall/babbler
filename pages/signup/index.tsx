@@ -43,6 +43,8 @@ export default function SignUp() {
             email: emailRef.current!.value,
             role: "regular",
             username: usernameRef.current!.value,
+            photoUrl:
+              "https://firebasestorage.googleapis.com/v0/b/babbler-af9c3.appspot.com/o/images%2Fdefault-avatar.jpg?alt=media&token=bcebfc0d-2e0c-403a-8cfb-b388dd25f952",
           });
         })
         .finally(() => {

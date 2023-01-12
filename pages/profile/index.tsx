@@ -31,11 +31,6 @@ const Profile = () => {
     console.log(selectedFile);
     if (selectedFile) {
       try {
-        // const storageRef = ref(
-        //   storage,
-        //   `images/${selectedFile.name.replace(" ", "-")}`
-        // );
-
         const storageRef = ref(
           storage,
           `images/profilepic-${time.seconds}.jpg`
