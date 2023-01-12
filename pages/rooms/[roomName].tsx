@@ -9,6 +9,7 @@ import roomConverter, { TRoom } from "../../src/services/postConverter";
 import { useGetRoom } from "../../src/services/useGetRoom";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { useAppSelector } from "../../src/redux/hooks";
+import AddUserRoom from "../../src/components/AddUserRoom";
 
 const RoomName = () => {
   const auth = useAppSelector((state) => state.auth);
@@ -82,6 +83,7 @@ const RoomName = () => {
               >
                 Leave room
               </Button>
+              <AddUserRoom />
             </>
           ) : null}
         </div>
