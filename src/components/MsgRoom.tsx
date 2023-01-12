@@ -1,6 +1,6 @@
 import { Button, Input } from "@mui/material";
 import { arrayUnion, Timestamp, updateDoc } from "firebase/firestore";
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import * as S from "../../styles/styles";
 import { useAppSelector } from "../redux/hooks";
 import { TRoom } from "../services/postConverter";
@@ -63,6 +63,12 @@ const MsgRoom = ({ room }: IProps) => {
     <div className="w-6/12 m-auto">
       {room.messages &&
         room.messages.map((msg, i) => {
+          const dateTime = new Date(msg.createdAt.seconds * 1000)
+            .toLocaleString("sv-SE")
+            .substring(0, 16)
+            .slice(5)
+            .replace("-", "/");
+
           return (
             <div key={i}>
               <S.TextMessageFB className="w-64 m-3">
@@ -75,10 +81,7 @@ const MsgRoom = ({ room }: IProps) => {
                     })}
                 </span>
                 <span className="text-white pl-16 float-right">
-                  {msg.createdAt &&
-                    new Date(msg.createdAt.seconds * 1000)
-                      .toLocaleString("sv-SE")
-                      .substring(0, 16)}
+                  {dateTime && dateTime}
                 </span>
                 <p>{msg.text}</p>
               </S.TextMessageFB>

@@ -61,6 +61,7 @@ export default function SearchUserBar() {
   return (
     <Autocomplete
       disablePortal
+      size="small"
       id="combo-box-demo"
       options={users.filter((usr) => {
         if (usr.id !== auth.user.id) return usr;
@@ -68,7 +69,11 @@ export default function SearchUserBar() {
       getOptionLabel={(usr) => usr.username}
       isOptionEqualToValue={(option, value) => option.id === value.id}
       onChange={handleChange}
-      sx={{ width: 300 }}
+      sx={{
+        width: "210px",
+        marginTop: "10px",
+        backgroundColor: "white",
+      }}
       renderInput={(params) => <TextField {...params} label="Users" />}
     />
   );

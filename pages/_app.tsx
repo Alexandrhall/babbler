@@ -2,11 +2,10 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { Provider } from "react-redux";
 import { store } from "../src/redux/store";
-import { AuthProvider, useAuth } from "../src/contexts/authContext";
+import { AuthProvider } from "../src/contexts/authContext";
 import Head from "next/head";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 import Navbar from "../src/components/Navbar";
 import RoomList from "../src/components/RoomList";
 

@@ -44,7 +44,7 @@ const RoomList = () => {
       <List>
         <CreateRoom />
         <SearchUserBar />
-        <input
+        {/* <input
           className="ml-3 mt-3 p-1 rounded relative"
           type="text"
           maxLength={48}
@@ -58,7 +58,7 @@ const RoomList = () => {
           onBlur={() => {
             if (searchText === "") setSearchText("Search...");
           }}
-        />
+        /> */}
 
         <ListItemText className="text-white p-3">
           <h4 className="font-bold">Rooms</h4>

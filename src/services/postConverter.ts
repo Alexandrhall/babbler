@@ -29,6 +29,8 @@ export type TUser = {
   email: string;
   role: string;
   username: string;
+  photoUrl: string;
+  ref: DocumentReference<DocumentData>;
 };
 
 export const roomConverter: FirestoreDataConverter<TRoom> = {
@@ -58,6 +60,8 @@ export const userConverter: FirestoreDataConverter<TUser> = {
       role: data.role,
       id: snapshot.id,
       username: data.username,
+      photoUrl: data.photoUrl,
+      ref: snapshot.ref,
     };
   },
 };

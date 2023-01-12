@@ -14,16 +14,10 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { auth, database } from "../firebase";
 import { updateDetails } from "../redux/auth";
 import getUserDetails from "../services/getUserDetails";
+import { IUserDetails } from "../models/IUserDetails";
 
 interface IChildren {
   children: JSX.Element | JSX.Element[];
-}
-
-export interface IUserDetails {
-  id: string;
-  role: string;
-  email: string;
-  username: string;
 }
 
 export const AuthContext = createContext<User | null>(null);
