@@ -5,6 +5,10 @@ import { store } from "../src/redux/store";
 import { AuthProvider, useAuth } from "../src/contexts/authContext";
 import Head from "next/head";
 import { createTheme, ThemeProvider } from "@mui/material";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import Navbar from "../src/components/Navbar";
+import RoomList from "../src/components/RoomList";
 
 const theme = createTheme({
   palette: {
@@ -16,6 +20,9 @@ const theme = createTheme({
 
 export default function App({ Component, pageProps }: AppProps) {
   const user = useAuth();
+  const router = useRouter();
+  const showHeader =
+    router.route === "/login" || router.route === "/signup" ? false : true;
 
   return (
     <Provider store={store}>
@@ -29,7 +36,18 @@ export default function App({ Component, pageProps }: AppProps) {
             />
             <link rel="icon" href="/favicon.ico" />
           </Head>
-          <Component {...pageProps} />
+          {showHeader ? (
+            <>
+              <Navbar />
+              <main className="flex flex-row">
+                <RoomList />
+                <Component {...pageProps} />
+              </main>
+            </>
+          ) : (
+            <Component {...pageProps} />
+          )}
+          {/* <Component {...pageProps} /> */}
         </ThemeProvider>
       </AuthProvider>
     </Provider>

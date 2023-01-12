@@ -62,33 +62,33 @@ const RoomName = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar />
       <main className="flex flex-row">
-        <RoomList />
-        <div className="text-white">
-          RoomName {data?.roomName}
-          {data && data.roomName ? (
-            <>
-              <Button
-                variant="contained"
-                sx={{ backgroundColor: "red" }}
-                onClick={deleteRoom}
-              >
-                Delete room
-              </Button>
-              <Button
-                variant="contained"
-                sx={{ backgroundColor: "red" }}
-                onClick={leaveRoom}
-              >
-                Leave room
-              </Button>
-              <AddUserRoom room={data} />
-            </>
-          ) : null}
-        </div>
-        {data && <MsgRoom room={data} />}
-      </main>
+        <RoomList /> */}
+      <div className="text-white">
+        RoomName {data?.roomName}
+        {data && data.roomName ? (
+          <>
+            <Button
+              variant="contained"
+              sx={{ backgroundColor: "red" }}
+              onClick={deleteRoom}
+            >
+              Delete room
+            </Button>
+            <Button
+              variant="contained"
+              sx={{ backgroundColor: "red" }}
+              onClick={leaveRoom}
+            >
+              Leave room
+            </Button>
+            <AddUserRoom room={data} />
+          </>
+        ) : null}
+      </div>
+      {data && <MsgRoom room={data} />}
+      {/* </main> */}
     </>
   );
 };

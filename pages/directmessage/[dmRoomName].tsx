@@ -44,20 +44,20 @@ const DmRoomName = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar />
       <main className="flex flex-row">
-        <RoomList />
-        <div className="text-white">
-          RoomName{" "}
-          {usrr &&
-            usrr.map((usr) => {
-              if (data?.users.includes(usr.id) && usr.id !== auth.user.id) {
-                return usr.username;
-              }
-            })}
-        </div>
-        {data && <MsgRoom room={data} />}
-      </main>
+        <RoomList /> */}
+      <div className="text-white">
+        RoomName{" "}
+        {usrr &&
+          usrr.map((usr) => {
+            if (data?.users.includes(usr.id) && usr.id !== auth.user.id) {
+              return usr.username;
+            }
+          })}
+      </div>
+      {data && <MsgRoom room={data} />}
+      {/* </main> */}
     </>
   );
 };
