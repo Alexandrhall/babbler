@@ -83,7 +83,7 @@ const RoomName = () => {
               >
                 Leave room
               </Button>
-              <AddUserRoom />
+              <AddUserRoom room={data} />
             </>
           ) : null}
         </div>
