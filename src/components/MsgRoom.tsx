@@ -80,6 +80,18 @@ const MsgRoom = ({ room }: IProps) => {
                       }
                     })}
                 </span>
+                {usrr &&
+                  usrr.map((usr) => {
+                    if (msg.uid === usr.id) {
+                      return (
+                        <img
+                          src={usr.photoUrl}
+                          alt={usr.username}
+                          style={{ height: "40px", borderRadius: "50%" }}
+                        />
+                      );
+                    }
+                  })}
                 <span className="text-white pl-16 float-right">
                   {dateTime && dateTime}
                 </span>
