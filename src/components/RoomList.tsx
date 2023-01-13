@@ -90,7 +90,7 @@ const RoomList = () => {
               let num = 0;
               room.messages.forEach((msg) => {
                 if (msg.recieved) {
-                  const len = msg.recieved.filter((rec) => {
+                  msg.recieved.filter((rec) => {
                     if (rec.uid === auth.user.id && rec.open === false) num++;
                   });
                 }
