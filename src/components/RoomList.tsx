@@ -67,11 +67,9 @@ const RoomList = () => {
               let num = 0;
               room.messages.forEach((msg) => {
                 if (msg.recieved) {
-                  const len = msg.recieved.filter((rec) => {
-                    if (rec.uid === auth.user.id && rec.open === false)
-                      return rec;
+                  msg.recieved.filter((rec) => {
+                    if (rec.uid === auth.user.id && rec.open === false) num++;
                   });
-                  num = len.length;
                 }
               });
 
@@ -90,13 +88,11 @@ const RoomList = () => {
           {personalDm &&
             personalDm.map((room, i) => {
               let num = 0;
-              const tempNum = room.messages.filter((msg) => {
+              room.messages.forEach((msg) => {
                 if (msg.recieved) {
                   const len = msg.recieved.filter((rec) => {
-                    if (rec.uid === auth.user.id && rec.open === false)
-                      return rec;
+                    if (rec.uid === auth.user.id && rec.open === false) num++;
                   });
-                  if ((len.length = 1)) num++;
                 }
               });
 
