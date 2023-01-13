@@ -51,6 +51,10 @@ const RoomName = () => {
   //   }
   // }, [data]);
 
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
   const leaveRoom = async () => {
     try {
       const tempUsr =

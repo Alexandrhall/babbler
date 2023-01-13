@@ -90,13 +90,13 @@ const RoomList = () => {
           {personalDm &&
             personalDm.map((room, i) => {
               let num = 0;
-              room.messages.forEach((msg) => {
+              const tempNum = room.messages.filter((msg) => {
                 if (msg.recieved) {
                   const len = msg.recieved.filter((rec) => {
                     if (rec.uid === auth.user.id && rec.open === false)
                       return rec;
                   });
-                  num = len.length;
+                  if ((len.length = 1)) num++;
                 }
               });
 
