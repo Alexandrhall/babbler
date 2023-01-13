@@ -7,7 +7,7 @@ import RoomList from "../../src/components/RoomList";
 import withAuth from "../../src/components/withAuth";
 import roomConverter, { TRoom } from "../../src/services/postConverter";
 import { useGetRoom } from "../../src/services/useGetRoom";
-import { doc, deleteDoc, updateDoc } from "firebase/firestore";
+import { doc, deleteDoc, updateDoc, setDoc } from "firebase/firestore";
 import { useAppSelector } from "../../src/redux/hooks";
 import AddUserRoom from "../../src/components/AddUserRoom";
 
@@ -34,6 +34,22 @@ const RoomName = () => {
       console.error(err);
     }
   };
+
+  useEffect(() => {
+    if (data) {
+      const newData = data.messages.map((msg) => {
+        if (msg.recieved) {
+          const tempMsgRecieve = [...msg.recieved];
+          tempMsgRecieve.map((rec) => {
+            if (rec.uid === auth.user.id && rec.open === false) {
+              return (rec.open = true);
+            }
+          });
+          console.log(tempMsgRecieve);
+        }
+      });
+    }
+  }, [data]);
 
   const leaveRoom = async () => {
     try {

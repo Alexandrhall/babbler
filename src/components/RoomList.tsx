@@ -64,9 +64,23 @@ const RoomList = () => {
           <h4 className="font-bold">Rooms</h4>
           {personalRooms &&
             personalRooms.map((room, i) => {
+              let num = 0;
+              room.messages.forEach((msg) => {
+                if (msg.recieved) {
+                  const len = msg.recieved.filter((rec) => {
+                    if (rec.uid === auth.user.id && rec.open === false)
+                      return rec;
+                  });
+                  num = len.length;
+                }
+              });
+
               return (
                 <Link href={`/rooms/${room.id}`} key={i}>
-                  <p>{room.roomName}</p>
+                  <p>
+                    {room.roomName}
+                    {num === 0 ? null : num}
+                  </p>
                 </Link>
               );
             })}
@@ -75,6 +89,17 @@ const RoomList = () => {
           <h4 className="font-bold">Direct Messages</h4>
           {personalDm &&
             personalDm.map((room, i) => {
+              let num = 0;
+              room.messages.forEach((msg) => {
+                if (msg.recieved) {
+                  const len = msg.recieved.filter((rec) => {
+                    if (rec.uid === auth.user.id && rec.open === false)
+                      return rec;
+                  });
+                  num = len.length;
+                }
+              });
+
               return (
                 <div key={i}>
                   <Link href={`/directmessage/${room.id}`}>
@@ -82,7 +107,10 @@ const RoomList = () => {
                       usrr.map((usr, i) =>
                         room.users.includes(usr.id) &&
                         usr.id !== auth.user.id ? (
-                          <p key={i}>{usr.username}</p>
+                          <p key={i}>
+                            {usr.username}
+                            {num === 0 ? null : num}
+                          </p>
                         ) : null
                       )}
                   </Link>

@@ -115,7 +115,9 @@ const Profile = () => {
             <div>
               <label className="font-bold">Username: </label>
               <span style={{ alignSelf: "center" }}>{auth.user.username}</span>
-              <Button variant="outlined">Change</Button>
+              <Button variant="outlined" sx={{ marginLeft: "5px" }}>
+                Change
+              </Button>
             </div>
             <div>
               <label className="font-bold">Role: </label>

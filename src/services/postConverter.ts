@@ -16,6 +16,12 @@ export type TRoom = {
       };
       text: string;
       uid: string;
+      recieved?: [
+        {
+          uid: string;
+          open: boolean;
+        }
+      ];
     }
   ];
   users: string[];

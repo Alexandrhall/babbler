@@ -1,5 +1,5 @@
 import { Button, Input } from "@mui/material";
-import { arrayUnion, Timestamp, updateDoc } from "firebase/firestore";
+import { arrayUnion, setDoc, Timestamp, updateDoc } from "firebase/firestore";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import * as S from "../../styles/styles";
 import { useAppSelector } from "../redux/hooks";
@@ -21,6 +21,15 @@ const MsgRoom = ({ room }: IProps) => {
   const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (formValue !== "") {
+      const tempUser = room.users.map((usr) => {
+        if (usr !== auth.user.id) {
+          return { uid: usr, open: false };
+        }
+      });
+      const filteredUsers = tempUser.filter((usr) => {
+        if (usr !== undefined) return usr;
+      });
+
       try {
         await updateDoc(room.ref, {
           messages: arrayUnion(
@@ -29,6 +38,7 @@ const MsgRoom = ({ room }: IProps) => {
                 text: formValue,
                 createdAt: Timestamp.now(),
                 uid: auth.user.id,
+                recieved: filteredUsers,
               },
             ]
           ),
@@ -81,13 +91,14 @@ const MsgRoom = ({ room }: IProps) => {
                     })}
                 </span>
                 {usrr &&
-                  usrr.map((usr) => {
+                  usrr.map((usr, i) => {
                     if (msg.uid === usr.id) {
                       return (
                         <img
                           src={usr.photoUrl}
                           alt={usr.username}
-                          style={{ height: "40px", borderRadius: "50%" }}
+                          style={{ height: "25px", borderRadius: "50%" }}
+                          key={i}
                         />
                       );
                     }
@@ -111,8 +122,13 @@ const MsgRoom = ({ room }: IProps) => {
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
           placeholder="Write something.."
+          inputProps={{ maxLength: 48 }}
         />
-        <Button type="submit" variant="contained">
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{ backgroundColor: "blue" }}
+        >
           Send
         </Button>
       </form>
