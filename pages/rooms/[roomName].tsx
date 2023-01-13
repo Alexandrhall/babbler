@@ -35,21 +35,21 @@ const RoomName = () => {
     }
   };
 
-  useEffect(() => {
-    if (data) {
-      const newData = data.messages.map((msg) => {
-        if (msg.recieved) {
-          const tempMsgRecieve = [...msg.recieved];
-          tempMsgRecieve.map((rec) => {
-            if (rec.uid === auth.user.id && rec.open === false) {
-              return (rec.open = true);
-            }
-          });
-          console.log(tempMsgRecieve);
-        }
-      });
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     const newData = data.messages.map((msg) => {
+  //       console.log(msg);
+  //       if (msg.recieved) {
+  //         const newRec = msg.recieved.map((rec) => {
+  //           if (rec.uid === auth.user.id && rec.open === false) {
+  //             rec.open = true;
+  //           }
+  //           return rec;
+  //         });
+  //       }
+  //     });
+  //   }
+  // }, [data]);
 
   const leaveRoom = async () => {
     try {
