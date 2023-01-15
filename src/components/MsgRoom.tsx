@@ -59,13 +59,40 @@ const MsgRoom = ({ room }: IProps) => {
   const handleUpload = async (e: any) => {
     const storageRef = ref(storage, `images/${selectedFile!.name}`);
 
-    uploadBytes(storageRef, selectedFile!).then((snapshot) => {
+    await uploadBytes(storageRef, selectedFile!).then((snapshot) => {
       console.log(snapshot);
       console.log("Uploaded a blob or file!");
     });
 
-    getDownloadURL(storageRef).then((url) => {
+    await getDownloadURL(storageRef).then(async (url) => {
       console.log(url);
+
+      const tempUser = room.users.map((usr) => {
+        if (usr !== auth.user.id) {
+          return { uid: usr, open: false };
+        }
+      });
+      const filteredUsers = tempUser.filter((usr) => {
+        if (usr !== undefined) return usr;
+      });
+
+      try {
+        await updateDoc(room.ref, {
+          messages: arrayUnion(
+            ...[
+              {
+                text: url,
+                createdAt: Timestamp.now(),
+                uid: auth.user.id,
+                recieved: filteredUsers,
+              },
+            ]
+          ),
+          users: room.users,
+        });
+      } catch (err) {
+        console.error(err);
+      }
     });
   };
 
