@@ -7,7 +7,13 @@ import RoomList from "../../src/components/RoomList";
 import withAuth from "../../src/components/withAuth";
 import roomConverter, { TRoom } from "../../src/services/postConverter";
 import { useGetRoom } from "../../src/services/useGetRoom";
-import { doc, deleteDoc, updateDoc, setDoc } from "firebase/firestore";
+import {
+  doc,
+  deleteDoc,
+  updateDoc,
+  setDoc,
+  arrayUnion,
+} from "firebase/firestore";
 import { useAppSelector } from "../../src/redux/hooks";
 import AddUserRoom from "../../src/components/AddUserRoom";
 
@@ -35,24 +41,32 @@ const RoomName = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (data) {
-  //     const newData = data.messages.map((msg) => {
-  //       console.log(msg);
-  //       if (msg.recieved) {
-  //         const newRec = msg.recieved.map((rec) => {
-  //           if (rec.uid === auth.user.id && rec.open === false) {
-  //             rec.open = true;
-  //           }
-  //           return rec;
-  //         });
-  //       }
-  //     });
-  //   }
-  // }, [data]);
-
   useEffect(() => {
-    console.log(data);
+    if (data) {
+      const newData = data?.messages.map((msg) => {
+        msg.recieved?.map((rec) => {
+          if (rec.uid === auth.user.id && rec.open === false) {
+            rec.open = true;
+          }
+        });
+        return msg;
+      });
+      console.log(newData);
+      const setNewRecieved = async () => {
+        try {
+          await setDoc(
+            data.ref,
+            {
+              messages: newData,
+            },
+            { merge: true }
+          );
+        } catch (err) {
+          console.error(err);
+        }
+      };
+      setNewRecieved();
+    }
   }, [data]);
 
   const leaveRoom = async () => {

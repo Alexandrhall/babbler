@@ -1,5 +1,13 @@
 import { Button } from "@mui/material";
-import { collection, query, queryEqual, where } from "firebase/firestore";
+import {
+  arrayUnion,
+  collection,
+  query,
+  queryEqual,
+  setDoc,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import {
@@ -39,6 +47,34 @@ const DmRoomName = () => {
   useEffect(() => {
     if (data && !data.users.includes(auth.user.id)) {
       router.replace("/");
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (data) {
+      const newData = data?.messages.map((msg) => {
+        msg.recieved?.map((rec) => {
+          if (rec.uid === auth.user.id && rec.open === false) {
+            rec.open = true;
+          }
+        });
+        return msg;
+      });
+      console.log(newData);
+      const setNewRecieved = async () => {
+        try {
+          await setDoc(
+            data.ref,
+            {
+              messages: newData,
+            },
+            { merge: true }
+          );
+        } catch (err) {
+          console.error(err);
+        }
+      };
+      setNewRecieved();
     }
   }, [data]);
 
