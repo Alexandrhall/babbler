@@ -85,7 +85,7 @@ const RoomName = () => {
   }, [data]);
 
   return (
-    <>
+    <div className="flex flex-col w-screen">
       <div className="text-white">
         RoomName {data?.roomName}
         {data && data.roomName ? (
@@ -109,7 +109,7 @@ const RoomName = () => {
         ) : null}
       </div>
       {data && <MsgRoom room={data} />}
-    </>
+    </div>
   );
 };
 

@@ -97,7 +97,7 @@ const MsgRoom = ({ room }: IProps) => {
   };
 
   return (
-    <div className="w-6/12 m-auto">
+    <div className="w-6/12 m-auto mt-auto" style={{ height: "60vh" }}>
       {room.messages &&
         room.messages.map((msg, i) => {
           const dateTime = new Date(msg.createdAt.seconds * 1000)
@@ -202,7 +202,7 @@ const MsgRoom = ({ room }: IProps) => {
             </>
           );
         })}
-      <form onSubmit={sendMessage} className="m-auto">
+      <form onSubmit={sendMessage} className="m-auto pt-8">
         <Input
           sx={{
             margin: "3px",
