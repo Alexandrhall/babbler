@@ -1,6 +1,12 @@
 import { Button, Input } from "@mui/material";
 import { arrayUnion, setDoc, Timestamp, updateDoc } from "firebase/firestore";
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import React, {
+  ChangeEvent,
+  FormEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import * as S from "../../styles/styles";
 import { useAppSelector } from "../redux/hooks";
 import { TRoom } from "../services/postConverter";
@@ -17,6 +23,7 @@ const MsgRoom = ({ room }: IProps) => {
   const [usrr] = useGetUsers();
   const [formValue, setFormValue] = useState<string>("");
   const [selectedFile, setSelectedFile] = useState<File>();
+  const dummy = useRef<HTMLSpanElement>(null);
 
   const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -95,6 +102,10 @@ const MsgRoom = ({ room }: IProps) => {
       }
     });
   };
+
+  useEffect(() => {
+    dummy.current?.scrollIntoView();
+  }, [room]);
 
   return (
     <div
@@ -200,6 +211,7 @@ const MsgRoom = ({ room }: IProps) => {
                       <p>{msg.text}</p>
                     )}
                   </S.TextMessageFB>
+                  <span ref={dummy}></span>
                 </div>
               )}
             </>
