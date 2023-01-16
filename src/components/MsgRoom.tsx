@@ -97,7 +97,10 @@ const MsgRoom = ({ room }: IProps) => {
   };
 
   return (
-    <div className="w-8/12 m-auto mt-auto" style={{ height: "60vh" }}>
+    <div
+      className="w-8/12 m-auto mt-auto"
+      style={{ height: "60vh", overflow: "auto" }}
+    >
       {room.messages &&
         room.messages.map((msg, i) => {
           const dateTime = new Date(msg.createdAt.seconds * 1000)

@@ -40,7 +40,10 @@ const RoomList = () => {
   }, [rooms]);
 
   return (
-    <div className="w-64 h-screen" style={{ backgroundColor: "#3F4E4F" }}>
+    <div
+      className="w-64"
+      style={{ backgroundColor: "#3F4E4F", height: "92vh" }}
+    >
       <List>
         <CreateRoom />
         {/* <SearchUserBar /> */}

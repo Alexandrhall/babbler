@@ -60,14 +60,20 @@ const AddUserRoom = ({ room }: IProps) => {
       <Button
         sx={{
           marginLeft: "10px",
-          backgroundColor: "green",
+          color: "green",
         }}
-        variant="contained"
+        variant="text"
         onClick={handleClickOpen}
       >
         Invite
       </Button>
-      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        maxWidth="sm"
+        fullWidth
+        sx={{ maxHeight: "100%" }}
+      >
         <DialogTitle>Invite</DialogTitle>
         <DialogContent>
           <DialogContentText>Invite people.</DialogContentText>

@@ -60,18 +60,24 @@ const DmRoomName = () => {
   }, [data]);
 
   return (
-    <>
-      <div className="text-white">
-        RoomName{" "}
+    <div className="flex flex-col w-screen">
+      <div className="text-white flex flex-row">
         {usrr &&
           usrr.map((usr) => {
             if (data?.users.includes(usr.id) && usr.id !== auth.user.id) {
-              return usr.username;
+              return (
+                <h1
+                  className="text-4xl w-full h-full"
+                  style={{ textAlign: "center" }}
+                >
+                  {usr.username}
+                </h1>
+              );
             }
           })}
       </div>
       {data && <MsgRoom room={data} />}
-    </>
+    </div>
   );
 };
 
