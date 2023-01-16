@@ -113,7 +113,7 @@ const SendMessage = ({ room }: IProps) => {
           onChange={handleFile}
           style={{ display: "none" }}
         />
-        <label htmlFor="file">
+        <label htmlFor="file" className="hover:text-blue-300">
           <UploadIcon />
         </label>
         {selectedFile ? (
