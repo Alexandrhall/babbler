@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 
 export const TextMessageFB = styled.div`
-  color: black;
-  background-color: #395b64;
+  color: white;
+  background-color: #323348;
   border-radius: 5px;
   padding: 2px;
   width: fit-content;

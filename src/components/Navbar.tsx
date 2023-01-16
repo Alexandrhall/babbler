@@ -32,9 +32,11 @@ const Navbar = () => {
     <>
       <AppBar position="relative" className="w-auto">
         <Toolbar
+          // 1F1F1F
+          // 171717
           sx={{
             height: "60px",
-            backgroundColor: "#1B2430",
+            backgroundColor: "#141414",
             display: "flex",
           }}
         >

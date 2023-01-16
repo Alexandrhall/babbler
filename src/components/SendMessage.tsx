@@ -97,7 +97,14 @@ const SendMessage = ({ room }: IProps) => {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        position: "fixed",
+        bottom: "10px",
+        width: "65%",
+        marginLeft: "45px",
+      }}
+    >
       <div className="ml-1 text-white pt-8">
         <input
           type="file"

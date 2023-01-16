@@ -20,9 +20,11 @@ const MsgRoom = ({ room }: IProps) => {
       style={{
         height: "80vh",
         overflow: "auto",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
-      <div>
+      <div className="mb-16">
         <ReturnMessage room={room} />
       </div>
       <SendMessage room={room} />

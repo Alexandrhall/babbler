@@ -54,21 +54,21 @@ const returnMessage = ({ room }: IProps) => {
               usrr.map((usr) => {
                 if (msg.uid === usr.id) {
                   return (
-                    <span className="text-white pl-2" key={uuidv4()}>
+                    <span className="text-gray-400 pl-1" key={uuidv4()}>
                       {usr.username}
                     </span>
                   );
                 }
               })}
 
-            <span className="text-white pl-16 float-right" key={uuidv4()}>
+            <span className="text-gray-400 pl-16 float-right" key={uuidv4()}>
               {dateTime && dateTime}
             </span>
             {msg.text.startsWith("https") ? (
               <a
                 href={msg.text}
                 target="_blank"
-                className="text-blue-800 block"
+                className="text-blue-500 hover:text-blue-300 block"
                 rel="noreferrer"
                 key={uuidv4()}
               >

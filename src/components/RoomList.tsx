@@ -40,9 +40,10 @@ const RoomList = () => {
   }, [rooms]);
 
   return (
+    // 3F4E4F
     <div
       className="w-64"
-      style={{ backgroundColor: "#3F4E4F", height: "92vh" }}
+      style={{ backgroundColor: "#2E2E2F", height: "92vh" }}
     >
       <List>
         <CreateRoom />
