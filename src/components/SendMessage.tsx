@@ -102,7 +102,7 @@ const SendMessage = ({ room }: IProps) => {
         position: "fixed",
         bottom: "10px",
         width: "65%",
-        marginLeft: "45px",
+        marginLeft: "1em",
       }}
     >
       <div className="ml-1 text-white pt-8">

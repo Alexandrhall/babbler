@@ -71,7 +71,8 @@ export default function SearchUserBar() {
       onChange={handleChange}
       sx={{
         width: "400px",
-        backgroundColor: "#2E2E2F",
+        // backgroundColor: "#2E2E2F",
+        backgroundColor: "whitesmoke",
         borderRadius: "10px",
       }}
       style={{ color: "white" }}
