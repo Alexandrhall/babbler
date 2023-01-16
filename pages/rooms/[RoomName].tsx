@@ -93,7 +93,11 @@ const RoomName = () => {
         {data && data.roomName ? (
           <>
             <AddUserRoom room={data} />
-            <Button variant="text" sx={{ color: "red" }} onClick={leaveRoom}>
+            <Button
+              variant="text"
+              sx={{ color: "red", ":hover": { color: "lightblue" } }}
+              onClick={leaveRoom}
+            >
               Leave room
             </Button>
             <Button variant="text" sx={{ color: "red" }} onClick={deleteRoom}>

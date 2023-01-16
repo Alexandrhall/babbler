@@ -6,10 +6,12 @@ import withAuth from "../src/components/withAuth";
 function Home() {
   return (
     <>
-      <div className="text-white">RoomName Dashboard</div>
       <div className="w-full">
-        <ChatRoom />
+        <h1 className="text-white text-4xl" style={{ alignContent: "center" }}>
+          Dashboard
+        </h1>
       </div>
+      {/* <div className="w-full"><ChatRoom /></div> */}
     </>
   );
 }

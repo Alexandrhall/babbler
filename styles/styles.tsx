@@ -5,6 +5,9 @@ export const TextMessageFB = styled.div`
   background-color: #395b64;
   border-radius: 5px;
   padding: 2px;
+  width: fit-content;
+  max-width: 700px;
+  overflow-wrap: anywhere;
 `;
 
 export const BigTableContainer = styled.div`

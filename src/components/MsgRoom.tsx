@@ -13,6 +13,7 @@ import { TRoom } from "../services/postConverter";
 import { useGetUsers } from "../services/useGetUsers";
 import { storage } from "../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import UploadIcon from "@mui/icons-material/Upload";
 
 interface IProps {
   room: TRoom;
@@ -109,8 +110,11 @@ const MsgRoom = ({ room }: IProps) => {
 
   return (
     <div
-      className="w-8/12 m-auto mt-auto"
-      style={{ height: "60vh", overflow: "auto" }}
+      className="w-9/12 m-auto"
+      style={{
+        height: "80vh",
+        overflow: "auto",
+      }}
     >
       {room.messages &&
         room.messages.map((msg, i) => {
@@ -142,7 +146,7 @@ const MsgRoom = ({ room }: IProps) => {
                         );
                       }
                     })}
-                  <S.TextMessageFB className="w-64 m-3">
+                  <S.TextMessageFB className="w-full m-3">
                     <span className="text-white pl-2">
                       {usrr &&
                         usrr.map((usr) => {
@@ -163,7 +167,7 @@ const MsgRoom = ({ room }: IProps) => {
                         Link to file
                       </a>
                     ) : (
-                      <p>{msg.text}</p>
+                      <p className="p-1">{msg.text}</p>
                     )}
                   </S.TextMessageFB>
                 </div>
@@ -208,45 +212,70 @@ const MsgRoom = ({ room }: IProps) => {
                         Link to file
                       </a>
                     ) : (
-                      <p>{msg.text}</p>
+                      <p className="p-1">{msg.text}</p>
                     )}
                   </S.TextMessageFB>
-                  <span ref={dummy}></span>
+                  {/* <span ref={dummy}></span> */}
                 </div>
               )}
             </>
           );
         })}
-      <form onSubmit={sendMessage} className="m-auto pt-8">
-        <Input
-          sx={{
-            margin: "3px",
-            padding: "2px",
-            backgroundColor: "wheat",
-          }}
-          value={formValue}
-          onChange={(e) => setFormValue(e.target.value)}
-          placeholder="Write something.."
-          inputProps={{ maxLength: 48 }}
-        />
-        <Button
-          type="submit"
-          variant="contained"
-          sx={{ backgroundColor: "blue" }}
-        >
-          Send
-        </Button>
-      </form>
-      <div className="text-white">
-        <input
-          type="file"
-          name="file"
-          id="file"
-          onChange={handleFile}
-          style={{ display: "none" }}
-        />
-        <label htmlFor="file">Choose a file</label>
-        <button onClick={handleUpload}>Upload</button>
+      <div>
+        <div className="ml-1 text-white pt-8">
+          <input
+            type="file"
+            name="file"
+            id="file"
+            onChange={handleFile}
+            style={{ display: "none" }}
+          />
+          <label htmlFor="file">
+            <UploadIcon />
+          </label>
+          {selectedFile ? (
+            <button
+              onClick={handleUpload}
+              className="text-green-800 hover:text-green-400"
+            >
+              Send
+            </button>
+          ) : (
+            <button className="text-red-800 hover:text-red-400">Send</button>
+          )}
+          {/* <button onClick={handleUpload}>Send</button> */}
+        </div>
+        <form onSubmit={sendMessage} className="m-auto w-full">
+          <Input
+            ref={dummy}
+            sx={{
+              margin: "3px",
+              padding: "2px",
+              backgroundColor: "white",
+              width: "90%",
+              height: "40px",
+            }}
+            value={formValue}
+            onChange={(e) => setFormValue(e.target.value)}
+            placeholder="Write something.."
+            inputProps={{ maxLength: 96 }}
+          />
+          <Button
+            type="submit"
+            variant="text"
+            sx={{
+              backgroundColor: "lightblue",
+              height: "40px",
+              marginBottom: "5px",
+              ":hover": {
+                backgroundColor: "darkblue",
+                color: "lightblue",
+              },
+            }}
+          >
+            Send
+          </Button>
+        </form>
       </div>
     </div>
   );
