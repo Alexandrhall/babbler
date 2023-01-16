@@ -97,7 +97,7 @@ const MsgRoom = ({ room }: IProps) => {
   };
 
   return (
-    <div className="w-6/12 m-auto mt-auto" style={{ height: "60vh" }}>
+    <div className="w-8/12 m-auto mt-auto" style={{ height: "60vh" }}>
       {room.messages &&
         room.messages.map((msg, i) => {
           const dateTime = new Date(msg.createdAt.seconds * 1000)
@@ -222,8 +222,15 @@ const MsgRoom = ({ room }: IProps) => {
           Send
         </Button>
       </form>
-      <div>
-        <input type="file" name="file" onChange={handleFile} />
+      <div className="text-white">
+        <input
+          type="file"
+          name="file"
+          id="file"
+          onChange={handleFile}
+          style={{ display: "none" }}
+        />
+        <label htmlFor="file">Choose a file</label>
         <button onClick={handleUpload}>Upload</button>
       </div>
     </div>

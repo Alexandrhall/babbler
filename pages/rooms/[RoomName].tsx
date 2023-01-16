@@ -87,9 +87,19 @@ const RoomName = () => {
   return (
     <div className="flex flex-col w-screen">
       <div className="text-white">
-        RoomName {data?.roomName}
+        <h1 className="text-4xl" style={{ textAlign: "center" }}>
+          {data?.roomName}
+        </h1>
         {data && data.roomName ? (
           <>
+            <AddUserRoom room={data} />
+            <Button
+              variant="contained"
+              sx={{ backgroundColor: "red", height: "50px" }}
+              onClick={leaveRoom}
+            >
+              Leave room
+            </Button>
             <Button
               variant="contained"
               sx={{ backgroundColor: "red" }}
@@ -97,14 +107,6 @@ const RoomName = () => {
             >
               Delete room
             </Button>
-            <Button
-              variant="contained"
-              sx={{ backgroundColor: "red" }}
-              onClick={leaveRoom}
-            >
-              Leave room
-            </Button>
-            <AddUserRoom room={data} />
           </>
         ) : null}
       </div>

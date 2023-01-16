@@ -56,7 +56,7 @@ const AddUserRoom = ({ room }: IProps) => {
   };
 
   return (
-    <div>
+    <>
       <Button
         sx={{
           marginLeft: "10px",
@@ -91,7 +91,7 @@ const AddUserRoom = ({ room }: IProps) => {
           <Button onClick={handleAdd}>Create</Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 };
 

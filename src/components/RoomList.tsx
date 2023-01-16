@@ -43,7 +43,7 @@ const RoomList = () => {
     <div className="w-64 h-screen" style={{ backgroundColor: "#3F4E4F" }}>
       <List>
         <CreateRoom />
-        <SearchUserBar />
+        {/* <SearchUserBar /> */}
         <ListItemText className="text-white p-3">
           <h4 className="font-bold">Rooms</h4>
           {personalRooms &&

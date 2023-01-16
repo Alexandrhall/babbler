@@ -70,10 +70,11 @@ export default function SearchUserBar() {
       isOptionEqualToValue={(option, value) => option.id === value.id}
       onChange={handleChange}
       sx={{
-        width: "210px",
-        marginTop: "10px",
-        backgroundColor: "white",
+        width: "400px",
+        backgroundColor: "#3F4E4F",
+        borderRadius: "10px",
       }}
+      style={{ color: "white" }}
       renderInput={(params) => <TextField {...params} label="Users" />}
     />
   );
