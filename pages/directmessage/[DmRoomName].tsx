@@ -63,10 +63,11 @@ const DmRoomName = () => {
     <div className="flex flex-col w-screen">
       <div className="text-white flex flex-row">
         {usrr &&
-          usrr.map((usr) => {
+          usrr.map((usr, i) => {
             if (data?.users.includes(usr.id) && usr.id !== auth.user.id) {
               return (
                 <h1
+                  key={i}
                   className="text-4xl w-full h-full"
                   style={{ textAlign: "center" }}
                 >
