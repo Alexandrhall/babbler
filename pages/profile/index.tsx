@@ -69,10 +69,6 @@ const Profile = () => {
       });
   }, [usrr]);
 
-  useEffect(() => {
-    console.log(usrPhoto);
-  }, [usrPhoto]);
-
   return (
     <>
       <div

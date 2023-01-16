@@ -13,12 +13,9 @@ const Navbar = () => {
   return (
     <>
       <AppBar position="relative" className="w-auto">
-        {/* <CssBaseline /> */}
-
         <Toolbar
           sx={{
             height: "60px",
-            // backgroundColor: "#484848",
             backgroundColor: "#1B2430",
             display: "flex",
           }}
@@ -31,7 +28,8 @@ const Navbar = () => {
               display: "flex",
               position: "relative",
               alignItems: "flex-end",
-              left: "80%",
+              // left: "80%",
+              float: "right",
             }}
           >
             <Link href="/">Home</Link>
@@ -42,7 +40,7 @@ const Navbar = () => {
               display: "flex",
               position: "relative",
               alignItems: "flex-end",
-              left: "80%",
+              // left: "80%",
               marginLeft: "10px",
             }}
           >
@@ -50,7 +48,7 @@ const Navbar = () => {
           </Typography>
           <Button
             sx={{
-              left: "81%",
+              // left: "81%",
               height: "30px",
               width: "80px",
             }}

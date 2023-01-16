@@ -107,41 +107,99 @@ const MsgRoom = ({ room }: IProps) => {
             .replace("-", "/");
 
           return (
-            <div key={i}>
-              <S.TextMessageFB className="w-64 m-3">
-                <span className="text-white">
+            <>
+              {msg.uid === auth.user.id ? (
+                <div key={i} className="flex flex-row-reverse">
                   {usrr &&
-                    usrr.map((usr) => {
+                    usrr.map((usr, i) => {
                       if (msg.uid === usr.id) {
-                        return usr.username;
+                        return (
+                          <img
+                            src={usr.photoUrl}
+                            alt={usr.username}
+                            style={{
+                              height: "35px",
+                              borderRadius: "50%",
+                              display: "inline",
+                              marginTop: "20px",
+                            }}
+                            key={i}
+                          />
+                        );
                       }
                     })}
-                </span>
-                {usrr &&
-                  usrr.map((usr, i) => {
-                    if (msg.uid === usr.id) {
-                      return (
-                        <img
-                          src={usr.photoUrl}
-                          alt={usr.username}
-                          style={{ height: "25px", borderRadius: "50%" }}
-                          key={i}
-                        />
-                      );
-                    }
-                  })}
-                <span className="text-white pl-16 float-right">
-                  {dateTime && dateTime}
-                </span>
-                {msg.text.startsWith("https") ? (
-                  <a href={msg.text} target="_blank" className="text-blue-800">
-                    Link to file
-                  </a>
-                ) : (
-                  <p>{msg.text}</p>
-                )}
-              </S.TextMessageFB>
-            </div>
+                  <S.TextMessageFB className="w-64 m-3">
+                    <span className="text-white pl-2">
+                      {usrr &&
+                        usrr.map((usr) => {
+                          if (msg.uid === usr.id) {
+                            return usr.username;
+                          }
+                        })}
+                    </span>
+                    <span className="text-white pl-16 float-right">
+                      {dateTime && dateTime}
+                    </span>
+                    {msg.text.startsWith("https") ? (
+                      <a
+                        href={msg.text}
+                        target="_blank"
+                        className="text-blue-800 block"
+                      >
+                        Link to file
+                      </a>
+                    ) : (
+                      <p>{msg.text}</p>
+                    )}
+                  </S.TextMessageFB>
+                </div>
+              ) : (
+                <div key={i} className="flex flex-row">
+                  {usrr &&
+                    usrr.map((usr, i) => {
+                      if (msg.uid === usr.id) {
+                        return (
+                          <img
+                            src={usr.photoUrl}
+                            alt={usr.username}
+                            style={{
+                              height: "35px",
+                              borderRadius: "50%",
+                              display: "inline",
+                              marginTop: "20px",
+                            }}
+                            key={i}
+                          />
+                        );
+                      }
+                    })}
+                  <S.TextMessageFB className="w-64 m-3">
+                    <span className="text-white pl-2">
+                      {usrr &&
+                        usrr.map((usr) => {
+                          if (msg.uid === usr.id) {
+                            return usr.username;
+                          }
+                        })}
+                    </span>
+                    <span className="text-white pl-16 float-right">
+                      {dateTime && dateTime}
+                    </span>
+                    {msg.text.startsWith("https") ? (
+                      <a
+                        href={msg.text}
+                        target="_blank"
+                        className="text-blue-800 block"
+                      >
+                        Link to file
+                      </a>
+                    ) : (
+                      <p>{msg.text}</p>
+                    )}
+                  </S.TextMessageFB>
+                </div>
+              )}
+            </>
           );
         })}
       <form onSubmit={sendMessage} className="m-auto">
@@ -151,7 +209,6 @@ const MsgRoom = ({ room }: IProps) => {
             padding: "2px",
             backgroundColor: "wheat",
           }}
-          //   margin="normal"
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
           placeholder="Write something.."
