@@ -85,23 +85,43 @@ const RoomName = () => {
   }, [data]);
 
   return (
-    <div className="flex flex-col w-screen">
+    <div className="flex flex-col w-screen pt-2">
       <div className="text-white flex flex-row">
-        <h1 className="text-4xl w-full h-full" style={{ textAlign: "center" }}>
+        <h1 className="text-4xl w-full" style={{ textAlign: "center" }}>
           {data?.roomName}
         </h1>
         {data && data.roomName ? (
           <>
             <AddUserRoom room={data} />
             <Button
-              variant="text"
-              sx={{ color: "red", ":hover": { color: "lightblue" } }}
+              variant="contained"
+              sx={{
+                backgroundColor: "#323348",
+                color: "lightblue",
+                height: "40px",
+                ":hover": {
+                  backgroundColor: "lightblue",
+                  color: "darkblue",
+                },
+              }}
               onClick={leaveRoom}
             >
-              Leave room
+              Leave
             </Button>
-            <Button variant="text" sx={{ color: "red" }} onClick={deleteRoom}>
-              Delete room
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: "#323348",
+                color: "lightblue",
+                height: "40px",
+                ":hover": {
+                  backgroundColor: "lightblue",
+                  color: "darkblue",
+                },
+              }}
+              onClick={deleteRoom}
+            >
+              Delete
             </Button>
           </>
         ) : null}

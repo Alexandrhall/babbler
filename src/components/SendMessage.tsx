@@ -136,6 +136,7 @@ const SendMessage = ({ room }: IProps) => {
             backgroundColor: "white",
             width: "90%",
             height: "40px",
+            borderRadius: "10px",
           }}
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
@@ -146,12 +147,13 @@ const SendMessage = ({ room }: IProps) => {
           type="submit"
           variant="text"
           sx={{
-            backgroundColor: "lightblue",
+            backgroundColor: "#323348",
+            color: "lightblue",
             height: "40px",
             marginBottom: "5px",
             ":hover": {
-              backgroundColor: "darkblue",
-              color: "lightblue",
+              backgroundColor: "lightblue",
+              color: "darkblue",
             },
           }}
         >

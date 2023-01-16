@@ -45,7 +45,14 @@ export default function FormDialog() {
     <div>
       <Button
         sx={{
+          backgroundColor: "#323348",
+          color: "lightblue",
+          height: "40px",
           marginLeft: "10px",
+          ":hover": {
+            backgroundColor: "lightblue",
+            color: "darkblue",
+          },
         }}
         variant="contained"
         onClick={handleClickOpen}

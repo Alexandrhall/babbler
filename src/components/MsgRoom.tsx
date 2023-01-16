@@ -24,7 +24,7 @@ const MsgRoom = ({ room }: IProps) => {
         flexDirection: "column",
       }}
     >
-      <div className="mb-16">
+      <div className="mb-24">
         <ReturnMessage room={room} />
       </div>
       <SendMessage room={room} />

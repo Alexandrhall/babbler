@@ -59,10 +59,16 @@ const AddUserRoom = ({ room }: IProps) => {
     <>
       <Button
         sx={{
+          backgroundColor: "#323348",
+          color: "lightblue",
+          height: "40px",
           marginLeft: "10px",
-          color: "green",
+          ":hover": {
+            backgroundColor: "lightblue",
+            color: "darkblue",
+          },
         }}
-        variant="text"
+        variant="contained"
         onClick={handleClickOpen}
       >
         Invite
