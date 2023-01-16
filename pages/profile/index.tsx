@@ -27,8 +27,6 @@ const Profile = () => {
 
   const handleUpload = async () => {
     const time = Timestamp.now();
-    // if (e.target.files) setSelectedFile(e.target.files[0]);
-    console.log(selectedFile);
     if (selectedFile) {
       try {
         const storageRef = ref(
@@ -37,7 +35,7 @@ const Profile = () => {
         );
 
         await uploadBytes(storageRef, selectedFile).then((snapshot) => {
-          console.log(snapshot);
+          // console.log(snapshot);
           console.log("Uploaded a file!");
         });
 

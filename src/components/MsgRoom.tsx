@@ -133,7 +133,13 @@ const MsgRoom = ({ room }: IProps) => {
                 <span className="text-white pl-16 float-right">
                   {dateTime && dateTime}
                 </span>
-                <p>{msg.text}</p>
+                {msg.text.startsWith("https") ? (
+                  <a href={msg.text} target="_blank" className="text-blue-800">
+                    Link to file
+                  </a>
+                ) : (
+                  <p>{msg.text}</p>
+                )}
               </S.TextMessageFB>
             </div>
           );

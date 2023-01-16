@@ -1,29 +1,10 @@
-import { Button } from "@mui/material";
-import {
-  arrayUnion,
-  collection,
-  query,
-  queryEqual,
-  setDoc,
-  updateDoc,
-  where,
-} from "firebase/firestore";
+import { setDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import {
-  useCollection,
-  useCollectionData,
-} from "react-firebase-hooks/firestore";
 import MsgRoom from "../../src/components/MsgRoom";
-import Navbar from "../../src/components/Navbar";
-import RoomList from "../../src/components/RoomList";
 import withAuth from "../../src/components/withAuth";
-import { database } from "../../src/firebase";
 import { useAppSelector } from "../../src/redux/hooks";
-import roomConverter, {
-  TRoom,
-  userConverter,
-} from "../../src/services/postConverter";
+import { TRoom } from "../../src/services/postConverter";
 import { useGetRoom } from "../../src/services/useGetRoom";
 import { useGetUsers } from "../../src/services/useGetUsers";
 

@@ -2,18 +2,10 @@ import { Button } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import MsgRoom from "../../src/components/MsgRoom";
-import Navbar from "../../src/components/Navbar";
-import RoomList from "../../src/components/RoomList";
 import withAuth from "../../src/components/withAuth";
-import roomConverter, { TRoom } from "../../src/services/postConverter";
+import { TRoom } from "../../src/services/postConverter";
 import { useGetRoom } from "../../src/services/useGetRoom";
-import {
-  doc,
-  deleteDoc,
-  updateDoc,
-  setDoc,
-  arrayUnion,
-} from "firebase/firestore";
+import { deleteDoc, updateDoc, setDoc } from "firebase/firestore";
 import { useAppSelector } from "../../src/redux/hooks";
 import AddUserRoom from "../../src/components/AddUserRoom";
 
@@ -85,8 +77,6 @@ const RoomName = () => {
       console.error(err);
     }
   };
-
-  const addUser = async () => {};
 
   useEffect(() => {
     if (data && !data.users.includes(auth.user.id)) {

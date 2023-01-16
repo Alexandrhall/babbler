@@ -44,22 +44,6 @@ const RoomList = () => {
       <List>
         <CreateRoom />
         <SearchUserBar />
-        {/* <input
-          className="ml-3 mt-3 p-1 rounded relative"
-          type="text"
-          maxLength={48}
-          value={searchText}
-          onChange={(e) => {
-            setSearchText(e.target.value);
-          }}
-          onClick={() => {
-            setSearchText("");
-          }}
-          onBlur={() => {
-            if (searchText === "") setSearchText("Search...");
-          }}
-        /> */}
-
         <ListItemText className="text-white p-3">
           <h4 className="font-bold">Rooms</h4>
           {personalRooms &&
