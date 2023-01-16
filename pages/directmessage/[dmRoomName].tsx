@@ -60,7 +60,7 @@ const DmRoomName = () => {
         });
         return msg;
       });
-      console.log(newData);
+      // console.log(newData);
       const setNewRecieved = async () => {
         try {
           await setDoc(
