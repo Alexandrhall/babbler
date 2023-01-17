@@ -101,7 +101,8 @@ const SendMessage = ({ room }: IProps) => {
       style={{
         position: "fixed",
         bottom: "10px",
-        width: "65%",
+        right: "14%",
+        width: "35%",
         marginLeft: "1em",
       }}
     >
@@ -119,31 +120,19 @@ const SendMessage = ({ room }: IProps) => {
         {selectedFile ? (
           <button
             onClick={handleUpload}
-            className="text-green-800 hover:text-green-400"
+            className="text-green-800 hover:text-green-400 pl-1"
           >
-            Send
+            Send file
           </button>
         ) : (
-          <button className="text-red-800 hover:text-red-400">Send</button>
+          <button className="text-red-800 hover:text-red-400 pl-1">
+            Send file
+          </button>
         )}
         {/* <button onClick={handleUpload}>Send</button> */}
       </div>
       <form onSubmit={sendMessage} className="m-auto w-full">
-        <Input
-          sx={{
-            margin: "3px",
-            padding: "2px",
-            backgroundColor: "white",
-            width: "90%",
-            height: "40px",
-            borderRadius: "10px",
-          }}
-          value={formValue}
-          onChange={(e) => setFormValue(e.target.value)}
-          placeholder="Write something.."
-          inputProps={{ maxLength: 96 }}
-        />
-        <Button
+        {/* <Button
           type="submit"
           variant="text"
           sx={{
@@ -158,7 +147,30 @@ const SendMessage = ({ room }: IProps) => {
           }}
         >
           Send
-        </Button>
+        </Button> */}
+
+        <Input
+          sx={{
+            margin: "3px",
+            padding: "2px",
+            backgroundColor: "white",
+            width: "90%",
+            height: "60px",
+            borderRadius: "10px",
+          }}
+          value={formValue}
+          onChange={(e) => setFormValue(e.target.value)}
+          placeholder="Write something.."
+          inputProps={{
+            maxLength: 96,
+          }}
+        />
+        <button
+          type="submit"
+          className="text-blue-400 hover:text-blue-200 pl-2"
+        >
+          Send
+        </button>
       </form>
     </div>
   );
