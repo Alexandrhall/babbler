@@ -18,6 +18,7 @@ import { useGetUsers } from "../services/useGetUsers";
 import { useEffect, useState } from "react";
 import { TRoom } from "../services/postConverter";
 import Link from "next/link";
+import { ListItemButton } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -132,6 +133,7 @@ export default function PersistentDrawerLeft() {
         <Divider />
         <List>
           <CreateRoom />
+
           <ListItemText className="text-white p-3">
             <h4 className="font-bold">Rooms</h4>
             {personalRooms &&
@@ -147,14 +149,17 @@ export default function PersistentDrawerLeft() {
 
                 return (
                   <Link href={`/rooms/${room.id}`} key={i}>
-                    <p>
-                      {room.roomName}
-                      {num === 0 ? null : num}
-                    </p>
+                    <ListItemButton>
+                      <p>
+                        {room.roomName}
+                        {num === 0 ? null : num}
+                      </p>
+                    </ListItemButton>
                   </Link>
                 );
               })}
           </ListItemText>
+
           <ListItemText className="text-white p-3">
             <h4 className="font-bold">Direct Messages</h4>
             {personalDm &&
@@ -169,20 +174,29 @@ export default function PersistentDrawerLeft() {
                 });
 
                 return (
-                  <div key={i}>
-                    <Link href={`/directmessage/${room.id}`}>
+                  <Link href={`/directmessage/${room.id}`}>
+                    <ListItemButton key={i}>
                       {usrr &&
                         usrr.map((usr, i) =>
                           room.users.includes(usr.id) &&
                           usr.id !== auth.user.id ? (
-                            <p key={i}>
-                              {usr.username}
-                              {num === 0 ? null : num}
-                            </p>
+                            <>
+                              <span key={i}>{usr.username} </span>
+                              <span
+                                className="ml-3 text-xl"
+                                style={{
+                                  backgroundColor: "gray",
+                                  borderRadius: "30%",
+                                }}
+                              >
+                                {" "}
+                                {num === 0 ? null : num}
+                              </span>
+                            </>
                           ) : null
                         )}
-                    </Link>
-                  </div>
+                    </ListItemButton>
+                  </Link>
                 );
               })}
           </ListItemText>
