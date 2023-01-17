@@ -92,7 +92,6 @@ export default function PersistentDrawerLeft() {
   return (
     <Box sx={{ display: "flex" }}>
       <IconButton
-        color="inherit"
         aria-label="open drawer"
         onClick={handleDrawerOpen}
         edge="start"
@@ -114,6 +113,7 @@ export default function PersistentDrawerLeft() {
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             boxSizing: "border-box",
+            backgroundColor: "inherit",
           },
         }}
         variant="persistent"
