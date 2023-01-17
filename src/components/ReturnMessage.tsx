@@ -3,7 +3,7 @@ import { useAppSelector } from "../redux/hooks";
 import { TRoom } from "../services/postConverter";
 import { useGetUsers } from "../services/useGetUsers";
 import * as S from "../../styles/styles";
-import { v4 as uuidv4, v1 } from "uuid";
+import { v4 as uuidv4 } from "uuid";
 
 interface IProps {
   room: TRoom;

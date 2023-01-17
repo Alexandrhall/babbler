@@ -9,8 +9,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import CreateRoom from "./CreateRoom";
 import { useAppSelector } from "../redux/hooks";
 import { useGetRoom } from "../services/useGetRoom";
@@ -19,6 +17,7 @@ import { useEffect, useState } from "react";
 import { TRoom } from "../services/postConverter";
 import Link from "next/link";
 import { ListItemButton } from "@mui/material";
+import { v4 as uuidv4 } from "uuid";
 
 const drawerWidth = 240;
 
@@ -91,7 +90,7 @@ export default function PersistentDrawerLeft() {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex" }} key={uuidv4()}>
       <IconButton
         aria-label="open drawer"
         onClick={handleDrawerOpen}
@@ -108,6 +107,7 @@ export default function PersistentDrawerLeft() {
         <MenuIcon />
       </IconButton>
       <Drawer
+        key={uuidv4()}
         sx={{
           width: drawerWidth,
           flexShrink: 0,
@@ -121,7 +121,7 @@ export default function PersistentDrawerLeft() {
         anchor="left"
         open={open}
       >
-        <DrawerHeader>
+        <DrawerHeader key={uuidv4()}>
           <IconButton onClick={handleDrawerClose} sx={{ color: "white" }}>
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
@@ -137,7 +137,7 @@ export default function PersistentDrawerLeft() {
           <ListItemText className="text-white p-3">
             <h4 className="font-bold">Rooms</h4>
             {personalRooms &&
-              personalRooms.map((room, i) => {
+              personalRooms.map((room) => {
                 let num = 0;
                 room.messages.forEach((msg) => {
                   if (msg.recieved) {
@@ -148,12 +148,21 @@ export default function PersistentDrawerLeft() {
                 });
 
                 return (
-                  <Link href={`/rooms/${room.id}`} key={i}>
+                  <Link href={`/rooms/${room.id}`} key={uuidv4()}>
                     <ListItemButton>
-                      <p>
-                        {room.roomName}
-                        {num === 0 ? null : num}
-                      </p>
+                      <div key={uuidv4()}>
+                        <span>{room.roomName} </span>
+                        <span
+                          className="ml-3 text-xl"
+                          style={{
+                            backgroundColor: "gray",
+                            borderRadius: "30%",
+                          }}
+                        >
+                          {" "}
+                          {num === 0 ? null : num}
+                        </span>
+                      </div>
                     </ListItemButton>
                   </Link>
                 );
@@ -163,7 +172,7 @@ export default function PersistentDrawerLeft() {
           <ListItemText className="text-white p-3">
             <h4 className="font-bold">Direct Messages</h4>
             {personalDm &&
-              personalDm.map((room, i) => {
+              personalDm.map((room) => {
                 let num = 0;
                 room.messages.forEach((msg) => {
                   if (msg.recieved) {
@@ -174,14 +183,14 @@ export default function PersistentDrawerLeft() {
                 });
 
                 return (
-                  <Link href={`/directmessage/${room.id}`}>
-                    <ListItemButton key={i}>
+                  <Link href={`/directmessage/${room.id}`} key={uuidv4()}>
+                    <ListItemButton>
                       {usrr &&
-                        usrr.map((usr, i) =>
+                        usrr.map((usr) =>
                           room.users.includes(usr.id) &&
                           usr.id !== auth.user.id ? (
-                            <>
-                              <span key={i}>{usr.username} </span>
+                            <div key={uuidv4()}>
+                              <span>{usr.username} </span>
                               <span
                                 className="ml-3 text-xl"
                                 style={{
@@ -192,7 +201,7 @@ export default function PersistentDrawerLeft() {
                                 {" "}
                                 {num === 0 ? null : num}
                               </span>
-                            </>
+                            </div>
                           ) : null
                         )}
                     </ListItemButton>
