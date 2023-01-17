@@ -30,6 +30,7 @@ export default function Login() {
   const dispatch = useAppDispatch();
   const auth = useAppSelector((state) => state.auth);
   const user = useAuth();
+  const [error, setError] = useState<boolean>(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,6 +39,7 @@ export default function Login() {
       setIsLoading(true);
       await login(emailRef.current!.value, passwordRef.current!.value);
     } catch {
+      setError(true);
       dispatch(
         updateDetails({
           user: {
@@ -92,6 +94,8 @@ export default function Login() {
               autoComplete="email"
               autoFocus
               inputRef={emailRef}
+              error={error ? true : false}
+              helperText={auth.msg ? auth.msg : null}
             />
             <TextField
               margin="normal"
@@ -103,6 +107,7 @@ export default function Login() {
               id="password"
               autoComplete="current-password"
               inputRef={passwordRef}
+              error={error ? true : false}
             />
             <Button
               type="submit"
