@@ -73,20 +73,21 @@ const Profile = () => {
     <>
       <div
         className="text-white w-screen flex flex-col"
-        style={{ justifyContent: "center", alignItems: "center" }}
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          height: "80vh",
+        }}
       >
         <Card sx={{ width: "35vw", display: "flex", justifyContent: "center" }}>
           <CardContent>
             <div>
               <label className="font-bold">Profile Picture: </label>
               <img
-                src={
-                  usrPhoto === ""
-                    ? "https://firebasestorage.googleapis.com/v0/b/babbler-af9c3.appspot.com/o/images%2Fdefault-avatar.jpg?alt=media&token=bcebfc0d-2e0c-403a-8cfb-b388dd25f952"
-                    : usrPhoto
-                }
+                className="m-auto"
+                src={usrPhoto}
                 alt="test"
-                style={{ height: "100px", borderRadius: "50%" }}
+                style={{ height: "200px", borderRadius: "50%" }}
               ></img>
               <input
                 type="file"

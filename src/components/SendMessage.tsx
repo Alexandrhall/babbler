@@ -102,7 +102,7 @@ const SendMessage = ({ room }: IProps) => {
         position: "fixed",
         bottom: "10px",
         right: "14%",
-        width: "35%",
+        width: "40%",
         marginLeft: "1em",
       }}
     >
@@ -131,7 +131,7 @@ const SendMessage = ({ room }: IProps) => {
         )}
         {/* <button onClick={handleUpload}>Send</button> */}
       </div>
-      <form onSubmit={sendMessage} className="m-auto w-full">
+      <form onSubmit={sendMessage} className="m-auto w-full flex flex-row">
         {/* <Button
           type="submit"
           variant="text"
@@ -155,7 +155,7 @@ const SendMessage = ({ room }: IProps) => {
             padding: "2px",
             backgroundColor: "white",
             width: "90%",
-            height: "60px",
+            height: "50px",
             borderRadius: "10px",
           }}
           value={formValue}
