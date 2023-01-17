@@ -91,7 +91,7 @@ const RoomName = () => {
           {data?.roomName}
         </h1>
         {data && data.roomName ? (
-          <div className="flex flex-row content-between">
+          <div className="flex md:flex-row flex-col">
             <AddUserRoom room={data} />
             <Button
               variant="contained"

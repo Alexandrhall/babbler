@@ -12,11 +12,9 @@ import React, { useState } from "react";
 import { logout } from "../contexts/authContext";
 import { updateDetails } from "../redux/auth";
 import { useAppDispatch } from "../redux/hooks";
-import { Link as Mlink } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import SearchUserBar from "./SearchUserBar";
-import Drawer from "./Drawer";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();

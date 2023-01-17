@@ -59,24 +59,26 @@ export default function SearchUserBar() {
   };
 
   return (
-    <Autocomplete
-      disablePortal
-      size="small"
-      id="combo-box-demo"
-      options={users.filter((usr) => {
-        if (usr.id !== auth.user.id) return usr;
-      })}
-      getOptionLabel={(usr) => usr.username}
-      isOptionEqualToValue={(option, value) => option.id === value.id}
-      onChange={handleChange}
-      sx={{
-        width: "400px",
-        // backgroundColor: "#2E2E2F",
-        backgroundColor: "whitesmoke",
-        borderRadius: "10px",
-      }}
-      style={{ color: "white" }}
-      renderInput={(params) => <TextField {...params} label="Users" />}
-    />
+    <div className="lg:w-64 w-24">
+      <Autocomplete
+        disablePortal
+        size="small"
+        id="combo-box-demo"
+        options={users.filter((usr) => {
+          if (usr.id !== auth.user.id) return usr;
+        })}
+        getOptionLabel={(usr) => usr.username}
+        isOptionEqualToValue={(option, value) => option.id === value.id}
+        onChange={handleChange}
+        sx={{
+          // width: "400px",
+          // backgroundColor: "#2E2E2F",
+          backgroundColor: "whitesmoke",
+          borderRadius: "10px",
+        }}
+        style={{ color: "white" }}
+        renderInput={(params) => <TextField {...params} label="Users" />}
+      />
+    </div>
   );
 }
