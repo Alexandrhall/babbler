@@ -63,6 +63,7 @@ const AddUserRoom = ({ room }: IProps) => {
           color: "lightblue",
           height: "40px",
           marginLeft: "10px",
+          margin: "0px 5px 0px 5px",
           ":hover": {
             backgroundColor: "lightblue",
             color: "darkblue",

@@ -9,7 +9,7 @@ interface IProps {
   room: TRoom;
 }
 
-const returnMessage = ({ room }: IProps) => {
+const ReturnMessage = ({ room }: IProps) => {
   const auth = useAppSelector((state) => state.auth);
   const [usrr] = useGetUsers();
   let classRender = "";
@@ -40,6 +40,7 @@ const returnMessage = ({ room }: IProps) => {
                     alt={usr.username}
                     style={{
                       height: "35px",
+                      width: "35px",
                       borderRadius: "50%",
                       display: "inline",
                       marginTop: "20px",
@@ -68,7 +69,7 @@ const returnMessage = ({ room }: IProps) => {
               <a
                 href={msg.text}
                 target="_blank"
-                className="text-blue-500 hover:text-blue-300 block"
+                className="text-blue-500 hover:text-blue-300 block p-1"
                 rel="noreferrer"
                 key={uuidv4()}
               >
@@ -86,4 +87,4 @@ const returnMessage = ({ room }: IProps) => {
   return <>{render}</>;
 };
 
-export default returnMessage;
+export default ReturnMessage;

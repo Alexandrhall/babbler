@@ -59,7 +59,7 @@ const RoomName = () => {
       };
       setNewRecieved();
     }
-  }, [data]);
+  }, [data, auth.user.id]);
 
   const leaveRoom = async () => {
     try {
@@ -82,16 +82,16 @@ const RoomName = () => {
     if (data && !data.users.includes(auth.user.id)) {
       router.replace("/");
     }
-  }, [data]);
+  }, [data, auth.user.id, router]);
 
   return (
     <div className="flex flex-col w-screen pt-2">
-      <div className="text-white flex flex-row">
+      <div className="text-white flex flex-row mb-3">
         <h1 className="text-4xl w-full" style={{ textAlign: "center" }}>
           {data?.roomName}
         </h1>
         {data && data.roomName ? (
-          <>
+          <div className="flex flex-row content-between">
             <AddUserRoom room={data} />
             <Button
               variant="contained"
@@ -99,6 +99,7 @@ const RoomName = () => {
                 backgroundColor: "#323348",
                 color: "lightblue",
                 height: "40px",
+                margin: "0px 5px 0px 5px",
                 ":hover": {
                   backgroundColor: "lightblue",
                   color: "darkblue",
@@ -114,6 +115,7 @@ const RoomName = () => {
                 backgroundColor: "#323348",
                 color: "lightblue",
                 height: "40px",
+                margin: "0px 10px 0px 5px",
                 ":hover": {
                   backgroundColor: "lightblue",
                   color: "darkblue",
@@ -123,7 +125,7 @@ const RoomName = () => {
             >
               Delete
             </Button>
-          </>
+          </div>
         ) : null}
       </div>
       {data && <MsgRoom room={data} />}

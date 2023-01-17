@@ -26,7 +26,7 @@ const RoomList = () => {
     if (res) {
       setPersonalDm(res);
     }
-  }, [dm]);
+  }, [dm, auth.user.id]);
 
   useEffect(() => {
     const res =
@@ -37,7 +37,7 @@ const RoomList = () => {
     if (res) {
       setPersonalRooms(res);
     }
-  }, [rooms]);
+  }, [rooms, auth.user.id]);
 
   return (
     // 3F4E4F

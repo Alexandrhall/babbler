@@ -68,7 +68,7 @@ export default function PersistentDrawerLeft() {
     if (res) {
       setPersonalDm(res);
     }
-  }, [dm]);
+  }, [dm, auth.user.id]);
 
   useEffect(() => {
     const res =
@@ -79,7 +79,7 @@ export default function PersistentDrawerLeft() {
     if (res) {
       setPersonalRooms(res);
     }
-  }, [rooms]);
+  }, [rooms, auth.user.id]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -150,19 +150,20 @@ export default function PersistentDrawerLeft() {
                 return (
                   <Link href={`/rooms/${room.id}`} key={uuidv4()}>
                     <ListItemButton>
-                      <div key={uuidv4()}>
+                      <React.Fragment key={uuidv4()}>
                         <span>{room.roomName} </span>
                         <span
-                          className="ml-3 text-xl"
+                          className="ml-3 pl-1 text-xl"
                           style={{
                             backgroundColor: "gray",
-                            borderRadius: "30%",
+                            borderRadius: "40%",
+                            width: "20px",
                           }}
                         >
                           {" "}
                           {num === 0 ? null : num}
                         </span>
-                      </div>
+                      </React.Fragment>
                     </ListItemButton>
                   </Link>
                 );
@@ -189,7 +190,7 @@ export default function PersistentDrawerLeft() {
                         usrr.map((usr) =>
                           room.users.includes(usr.id) &&
                           usr.id !== auth.user.id ? (
-                            <div key={uuidv4()}>
+                            <React.Fragment key={uuidv4()}>
                               <span>{usr.username} </span>
                               <span
                                 className="ml-3 text-xl"
@@ -201,7 +202,7 @@ export default function PersistentDrawerLeft() {
                                 {" "}
                                 {num === 0 ? null : num}
                               </span>
-                            </div>
+                            </React.Fragment>
                           ) : null
                         )}
                     </ListItemButton>

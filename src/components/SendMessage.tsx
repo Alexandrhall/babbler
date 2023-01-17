@@ -60,13 +60,10 @@ const SendMessage = ({ room }: IProps) => {
     const storageRef = ref(storage, `images/${selectedFile!.name}`);
 
     await uploadBytes(storageRef, selectedFile!).then((snapshot) => {
-      console.log(snapshot);
-      console.log("Uploaded a blob or file!");
+      console.log("Uploaded a file!");
     });
 
     await getDownloadURL(storageRef).then(async (url) => {
-      console.log(url);
-
       const tempUser = room.users.map((usr) => {
         if (usr !== auth.user.id) {
           return { uid: usr, open: false };
