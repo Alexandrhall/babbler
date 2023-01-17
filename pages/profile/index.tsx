@@ -117,18 +117,6 @@ const Profile = () => {
               <label className="font-bold">Role: </label>
               <span style={{ alignSelf: "center" }}>{auth.user.role}</span>
             </div>
-            {/* <TextField
-              id="outlined-basic"
-              label={auth.user.username}
-              variant="outlined"
-              size="small"
-              sx={{
-                backgroundColor: "white",
-                width: "300px",
-                display: "flex",
-                alignSelf: "center",
-              }}
-            /> */}
           </CardContent>
         </Card>
       </div>

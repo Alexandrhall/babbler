@@ -6,6 +6,7 @@ import { TRoom } from "../services/postConverter";
 import { useGetRoom } from "../services/useGetRoom";
 import { useGetUsers } from "../services/useGetUsers";
 import CreateRoom from "./CreateRoom";
+import Drawer from "./Drawer";
 import SearchUserBar from "./SearchUserBar";
 
 const RoomList = () => {
@@ -13,7 +14,6 @@ const RoomList = () => {
   const [dm] = useGetRoom("directMessages");
   const [rooms] = useGetRoom("rooms");
   const [usrr] = useGetUsers();
-  const [searchText, setSearchText] = useState<string>("Search...");
   const [personalDm, setPersonalDm] = useState<TRoom[]>();
   const [personalRooms, setPersonalRooms] = useState<TRoom[]>();
 

@@ -8,6 +8,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import { useRouter } from "next/router";
 import Navbar from "../src/components/Navbar";
 import RoomList from "../src/components/RoomList";
+import Drawer from "../src/components/Drawer";
 
 const theme = createTheme({
   palette: {
@@ -38,7 +39,8 @@ export default function App({ Component, pageProps }: AppProps) {
             <>
               <Navbar />
               <main className="flex flex-row">
-                <RoomList />
+                {/* <RoomList /> */}
+                <Drawer />
                 <Component {...pageProps} />
               </main>
             </>

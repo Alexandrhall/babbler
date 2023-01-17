@@ -78,7 +78,7 @@ const AddUserRoom = ({ room }: IProps) => {
         onClose={handleClose}
         maxWidth="sm"
         fullWidth
-        sx={{ maxHeight: "100%" }}
+        sx={{ height: "400px" }}
       >
         <DialogTitle>Invite</DialogTitle>
         <DialogContent>

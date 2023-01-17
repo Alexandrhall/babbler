@@ -16,6 +16,7 @@ import { Link as Mlink } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import SearchUserBar from "./SearchUserBar";
+import Drawer from "./Drawer";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
@@ -40,7 +41,8 @@ const Navbar = () => {
             display: "flex",
           }}
         >
-          <Typography variant="h6" color="white">
+          {/* <Drawer /> */}
+          <Typography variant="h6" color="white" sx={{ marginLeft: "20px" }}>
             <Link href="/">BabbleR</Link>
           </Typography>
           <div className="w-full flex" style={{ justifyContent: "center" }}>
