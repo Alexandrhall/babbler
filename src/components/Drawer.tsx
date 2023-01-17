@@ -16,25 +16,16 @@ import { useGetUsers } from "../services/useGetUsers";
 import { useEffect, useState } from "react";
 import { TRoom } from "../services/postConverter";
 import Link from "next/link";
-import { ListItemButton } from "@mui/material";
+import { ListItemButton, useMediaQuery } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 
 // const drawerWidth = 240;
 const drawerWidth = {
-  width: 140,
-  m: 0,
+  width: 120,
   "@media (min-width: 780px)": {
-    width: 240,
-    m: 240,
+    width: 210,
   },
 };
-
-// const marginSmall = {
-//   width: 0,
-//   "@media (min-width: 780px)": {
-//     width: 240,
-//   },
-// };
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open?: boolean;
@@ -107,7 +98,7 @@ export default function PersistentDrawerLeft() {
   return (
     <div>
       <Box sx={{ display: "flex" }} key={uuidv4()}>
-        <IconButton
+        {/* <IconButton
           aria-label="open drawer"
           onClick={handleDrawerOpen}
           edge="start"
@@ -116,38 +107,37 @@ export default function PersistentDrawerLeft() {
             ...(open && { display: "none" }),
             position: "absolute",
             color: "white",
-            top: "70px",
+            top: "12px",
             left: "10px",
           }}
         >
           <MenuIcon />
-        </IconButton>
+        </IconButton> */}
         <Drawer
           key={uuidv4()}
           sx={{
-            sm: {
-              margin: 0,
-            },
             width: drawerWidth,
             flexShrink: 0,
             "& .MuiDrawer-paper": {
               width: drawerWidth,
               boxSizing: "border-box",
-              backgroundColor: "inherit",
+              backgroundColor: "#1F1F1F",
+              // marginTop: "60px",
+              zIndex: 0,
             },
           }}
-          variant="persistent"
+          variant="permanent"
           anchor="left"
           open={open}
         >
           <DrawerHeader key={uuidv4()}>
-            <IconButton onClick={handleDrawerClose} sx={{ color: "white" }}>
+            {/* <IconButton onClick={handleDrawerClose} sx={{ color: "white" }}>
               {theme.direction === "ltr" ? (
                 <ChevronLeftIcon />
               ) : (
                 <ChevronRightIcon />
               )}
-            </IconButton>
+            </IconButton> */}
           </DrawerHeader>
           <Divider />
           <List>
@@ -233,7 +223,9 @@ export default function PersistentDrawerLeft() {
             </ListItemText>
           </List>
         </Drawer>
-        <Main open={open}>{/* <DrawerHeader /> */}</Main>
+        {/* <Main open={open}> */}
+        {/* <DrawerHeader /> */}
+        {/* </Main> */}
       </Box>
     </div>
   );

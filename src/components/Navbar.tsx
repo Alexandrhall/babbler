@@ -37,6 +37,7 @@ const Navbar = () => {
             height: "60px",
             backgroundColor: "#141414",
             display: "flex",
+            zIndex: 1,
           }}
         >
           {/* <Drawer /> */}

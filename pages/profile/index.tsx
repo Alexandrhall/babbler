@@ -102,6 +102,7 @@ const Profile = () => {
           justifyContent: "center",
           alignItems: "center",
           height: "80vh",
+          width: "70vw",
         }}
       >
         {/* <Card sx={{ width: "35vw", display: "flex", justifyContent: "center" }}> */}

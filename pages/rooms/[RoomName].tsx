@@ -86,12 +86,15 @@ const RoomName = () => {
 
   return (
     <div className="flex flex-col w-screen pt-2">
-      <div className="text-white flex flex-row mb-3">
-        <h1 className="text-4xl w-full" style={{ textAlign: "center" }}>
+      <div className="text-white flex flex-col mb-3">
+        <h1 className="text-4xl w-full mb-3" style={{ textAlign: "center" }}>
           {data?.roomName}
         </h1>
         {data && data.roomName ? (
-          <div className="flex md:flex-row flex-col">
+          <div
+            className="flex flex-row w-100"
+            style={{ justifyContent: "flex-end" }}
+          >
             <AddUserRoom room={data} />
             <Button
               variant="contained"

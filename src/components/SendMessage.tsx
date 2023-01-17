@@ -97,7 +97,7 @@ const SendMessage = ({ room }: IProps) => {
     <div
       style={{
         position: "fixed",
-        bottom: "10px",
+        bottom: "15px",
         right: "14%",
         width: "40%",
         marginLeft: "1em",

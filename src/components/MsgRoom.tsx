@@ -19,7 +19,7 @@ const MsgRoom = ({ room }: IProps) => {
     <div
       className="w-9/12 m-auto"
       style={{
-        height: "80vh",
+        height: "75vh",
         overflow: "auto",
         display: "flex",
         flexDirection: "column",
