@@ -161,7 +161,7 @@ export default function PersistentDrawerLeft() {
                     <Link href={`/rooms/${room.id}`} key={uuidv4()}>
                       <ListItemButton>
                         <React.Fragment key={uuidv4()}>
-                          <span>{room.roomName} </span>
+                          <span id={room.roomName}>{room.roomName} </span>
                           <span className="ml-1 pl-1">
                             {" "}
                             {num === 0 ? null : num}
@@ -195,7 +195,7 @@ export default function PersistentDrawerLeft() {
                             room.users.includes(usr.id) &&
                             usr.id !== auth.user.id ? (
                               <React.Fragment key={uuidv4()}>
-                                <span>{usr.username} </span>
+                                <span id={usr.username}>{usr.username} </span>
                                 <span className="ml-1 pl-1">
                                   {" "}
                                   {num === 0 ? null : num}

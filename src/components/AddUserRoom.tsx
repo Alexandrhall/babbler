@@ -81,7 +81,7 @@ const AddUserRoom = ({ room }: IProps) => {
           {/* här ska du sätta in searchbar */}
           <Autocomplete
             disablePortal
-            id="combo-box-demo"
+            id="combo-box-invite"
             options={users.filter((usr) => {
               if (usr.id !== auth.user.id && !room.users.includes(usr.id))
                 return usr;

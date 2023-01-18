@@ -157,11 +157,13 @@ const SendMessage = ({ room }: IProps) => {
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
           placeholder="Write something.."
+          id="msgSend"
           inputProps={{
             maxLength: 96,
           }}
         />
         <button
+          id="msgBtn"
           type="submit"
           className="text-blue-400 hover:text-blue-200 pl-2"
         >

@@ -114,6 +114,7 @@ const RoomName = () => {
             </Button>
             <Button
               variant="contained"
+              id="deleteRoomBtn"
               sx={{
                 backgroundColor: "#323348",
                 color: "lightblue",

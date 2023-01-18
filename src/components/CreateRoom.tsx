@@ -44,6 +44,7 @@ export default function FormDialog() {
   return (
     <div>
       <Button
+        id="addRoom"
         sx={{
           backgroundColor: "#323348",
           color: "lightblue",
@@ -76,11 +77,18 @@ export default function FormDialog() {
             variant="standard"
             value={formValue}
             onChange={(e) => setFormValue(e.target.value)}
+            onKeyUp={(e) => {
+              if (e.keyCode === 13) {
+                handleCreate();
+              }
+            }}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleCreate}>Create</Button>
+          <Button onClick={handleCreate} id="createBtn" autoFocus>
+            Create
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

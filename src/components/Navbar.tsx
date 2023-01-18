@@ -68,7 +68,9 @@ const Navbar = () => {
             }}
           >
             <MenuItem onClick={handleClose}>
-              <Link href="/">Profile</Link>
+              <Link href="/" id="profLink">
+                Profile
+              </Link>
             </MenuItem>
             <MenuItem
               onClick={() => {

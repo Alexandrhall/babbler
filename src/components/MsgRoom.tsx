@@ -18,6 +18,7 @@ const MsgRoom = ({ room }: IProps) => {
   return (
     <div
       className="w-9/12 m-auto"
+      id="msgRoom"
       style={{
         height: "75vh",
         overflow: "auto",
