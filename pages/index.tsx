@@ -37,7 +37,7 @@ const Home = () => {
           storage,
           `images/profilepic-${time.seconds}.jpg`
         );
-
+        // eslint-disable-next-line
         await uploadBytes(storageRef, selectedFile).then((snapshot) => {
           // console.log(snapshot);
           console.log("Uploaded a file!");
@@ -93,7 +93,7 @@ const Home = () => {
           setUsrPhoto(usr.photoUrl);
         }
       });
-  }, [usrr]);
+  }, [usrr, auth.user.id]);
 
   return (
     <>

@@ -29,7 +29,7 @@ const DmRoomName = () => {
     if (data && !data.users.includes(auth.user.id)) {
       router.replace("/");
     }
-  }, [data]);
+  }, [data, auth.user.id, router]);
 
   useEffect(() => {
     if (data) {
@@ -57,7 +57,7 @@ const DmRoomName = () => {
       };
       setNewRecieved();
     }
-  }, [data]);
+  }, [data, auth.user.id]);
 
   return (
     <div className="flex flex-col w-screen">
