@@ -5,15 +5,17 @@ export interface authState {
     id: string;
     role: string;
     email: string;
+    username: string;
   };
   msg: string;
 }
 
-const initialState: authState = {
+export const initialState: authState = {
   user: {
     id: "",
     role: "",
     email: "",
+    username: "",
   },
   msg: "",
 };
@@ -27,6 +29,7 @@ const authSlice = createSlice({
       state.user.id = payload.user.id;
       state.user.role = payload.user.role;
       state.user.email = payload.user.email;
+      state.user.username = payload.user.username;
       state.msg = payload.msg;
     },
     updateMsg(state, action: PayloadAction<authState>) {

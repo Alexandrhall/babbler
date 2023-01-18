@@ -1,8 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
+import { getAnalytics, isSupported } from "firebase/analytics";
 import { getAuth, Auth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getStorage, ref } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,8 +19,25 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASURMENT_ID,
 };
 
+export const getCurrentUser = () => {
+  /**
+   * When we return this promise the promise will resolve to the correct user value if there is one,
+   * else it will return null
+   * Reject will catch any errors inside the API listener
+   */
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
+};
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const database = getFirestore(app);
-// const analytics = getAnalytics(app);
+export const analytics = isSupported().then((yes) =>
+  yes ? getAnalytics(app) : null
+);
 export const auth: Auth = getAuth(app);
+export const storage = getStorage(app);
