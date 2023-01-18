@@ -23,7 +23,7 @@ import { v4 as uuidv4 } from "uuid";
 const drawerWidth = {
   width: 120,
   "@media (min-width: 780px)": {
-    width: 210,
+    width: 220,
   },
 };
 
@@ -162,14 +162,7 @@ export default function PersistentDrawerLeft() {
                       <ListItemButton>
                         <React.Fragment key={uuidv4()}>
                           <span>{room.roomName} </span>
-                          <span
-                            className="ml-3 pl-1 text-xl"
-                            style={{
-                              backgroundColor: "gray",
-                              borderRadius: "40%",
-                              width: "20px",
-                            }}
-                          >
+                          <span className="ml-1 pl-1">
                             {" "}
                             {num === 0 ? null : num}
                           </span>
@@ -203,13 +196,7 @@ export default function PersistentDrawerLeft() {
                             usr.id !== auth.user.id ? (
                               <React.Fragment key={uuidv4()}>
                                 <span>{usr.username} </span>
-                                <span
-                                  className="ml-3 text-xl"
-                                  style={{
-                                    backgroundColor: "gray",
-                                    borderRadius: "30%",
-                                  }}
-                                >
+                                <span className="ml-1 pl-1">
                                   {" "}
                                   {num === 0 ? null : num}
                                 </span>

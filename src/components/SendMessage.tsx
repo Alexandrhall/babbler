@@ -126,7 +126,6 @@ const SendMessage = ({ room }: IProps) => {
             Send file
           </button>
         )}
-        {/* <button onClick={handleUpload}>Send</button> */}
       </div>
       <form onSubmit={sendMessage} className="m-auto w-full flex flex-row">
         {/* <Button

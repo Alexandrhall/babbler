@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from "../src/redux/hooks";
 import { useGetUsers } from "../src/services/useGetUsers";
 import UploadIcon from "@mui/icons-material/Upload";
 import { updateDetails } from "../src/redux/auth";
+import { TextField } from "@mui/material";
 
 const Home = () => {
   const auth = useAppSelector((state) => state.auth);
@@ -105,8 +106,6 @@ const Home = () => {
           width: "70vw",
         }}
       >
-        {/* <Card sx={{ width: "35vw", display: "flex", justifyContent: "center" }}> */}
-        {/* <CardContent> */}
         <div className="flex flex-col">
           <img
             className="m-auto"
@@ -115,61 +114,63 @@ const Home = () => {
             id="profileImage"
             style={{ height: "200px", width: "200px", borderRadius: "50%" }}
           ></img>
-          <label className="font-bold m-auto" htmlFor="profileImage">
-            Profile Picture
-          </label>
-          <div className="text-white pt-2 flex flex-row content-between">
-            <input
-              type="file"
-              name="file"
-              id="file"
-              onChange={handleFile}
-              style={{ display: "none" }}
-            />
-            <label htmlFor="file" className="hover:text-blue-300">
-              <UploadIcon />
-            </label>
-            {selectedFile ? (
-              <button
-                onClick={handleUpload}
-                className="text-green-800 hover:text-green-400 pl-1 mr-2"
-              >
-                Change Picture
-              </button>
-            ) : (
-              <button className="text-red-800 hover:text-red-400 pl-1 mr-2">
-                Change Picture
-              </button>
-            )}
-            <button onClick={removePicture} className="hover:text-red-400">
-              Remove
-            </button>
-          </div>
-        </div>
-        <div>
-          <label className="font-bold">Email: </label>
-          <span style={{ alignSelf: "center" }}>{auth.user.email}</span>
-        </div>
-        <div>
-          <label className="font-bold">Username: </label>
+          <button onClick={removePicture} className="hover:text-red-400">
+            Remove
+          </button>
+          <span style={{ alignSelf: "center" }} className="text-3xl m-3">
+            {auth.user.email}
+          </span>
           {changeName ? (
-            <input
-              maxLength={18}
-              className="text-black"
+            <TextField
+              inputProps={{
+                maxLength: 18,
+              }}
+              variant="outlined"
+              className="text-black bg-white"
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
-            ></input>
+            />
           ) : (
-            <span style={{ alignSelf: "center" }}>{auth.user.username}</span>
+            <span style={{ alignSelf: "center" }} className="text-3xl mt-2">
+              {auth.user.username}
+            </span>
           )}
+        </div>
+        <div className="flex flex-col my-3 p-5">
+          <div>
+            <div className="text-white pt-2 flex flex-row content-between mb-5">
+              <input
+                type="file"
+                name="file"
+                id="file"
+                onChange={handleFile}
+                style={{ display: "none" }}
+              />
+              <label htmlFor="file" className="hover:text-blue-300">
+                <UploadIcon />
+              </label>
+              {selectedFile ? (
+                <button
+                  onClick={handleUpload}
+                  className="text-green-800 hover:text-green-400 pl-1 mr-2"
+                >
+                  Change Picture
+                </button>
+              ) : (
+                <button className="text-red-800 hover:text-red-400 pl-1 mr-2">
+                  Change Picture
+                </button>
+              )}
+            </div>
 
-          <button
-            onClick={changeUsername}
-            style={{ marginLeft: "5px" }}
-            className="text-orange-300 hover:text-orange-700"
-          >
-            Change
-          </button>
+            <button
+              onClick={changeUsername}
+              style={{ marginLeft: "5px" }}
+              className="text-orange-300 hover:text-orange-700"
+            >
+              Change Username
+            </button>
+          </div>
         </div>
       </div>
     </>
