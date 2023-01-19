@@ -21,8 +21,12 @@ describe("babbler testing", () => {
 
     cy.get("button").click();
 
-    cy.get("#combo-box-demo").type("Pelle");
-    cy.get("#Pelle").type("{downArrow}{enter}");
+    cy.get("#combo-box-demo")
+      .type("Pelle")
+      .then(() => {
+        cy.get("#combo-box-demo").type("{downArrow}{enter}");
+      });
+    // cy.get("#Pelle").type("{downArrow}{enter}");
   });
   it("Should click on a user in the left side menu", () => {
     cy.visit("/");
