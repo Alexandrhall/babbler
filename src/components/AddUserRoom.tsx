@@ -9,9 +9,7 @@ import {
   TextField,
 } from "@mui/material";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
-import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { database } from "../firebase";
 import { useAppSelector } from "../redux/hooks";
 import { TRoom, TUser } from "../services/postConverter";
 import { useGetUsers } from "../services/useGetUsers";
@@ -78,7 +76,6 @@ const AddUserRoom = ({ room }: IProps) => {
         <DialogTitle>Invite</DialogTitle>
         <DialogContent>
           <DialogContentText>Invite people.</DialogContentText>
-          {/* här ska du sätta in searchbar */}
           <Autocomplete
             disablePortal
             id="combo-box-invite"

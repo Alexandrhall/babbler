@@ -18,7 +18,6 @@ const Home = () => {
   const auth = useAppSelector((state) => state.auth);
   const [usrr] = useGetUsers();
   const [selectedFile, setSelectedFile] = useState<File>();
-  const fileInput = useRef<HTMLInputElement>(null);
   const [usrPhoto, setUsrPhoto] = useState("");
   const [usrRef, setUsrRef] = useState<DocumentReference<DocumentData>>();
   const [changeName, setChangeName] = useState<boolean>(false);

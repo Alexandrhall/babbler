@@ -1,4 +1,4 @@
-import { Button, List, ListItemText } from "@mui/material";
+import { List, ListItemText } from "@mui/material";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useAppSelector } from "../redux/hooks";
@@ -6,8 +6,6 @@ import { TRoom } from "../services/postConverter";
 import { useGetRoom } from "../services/useGetRoom";
 import { useGetUsers } from "../services/useGetUsers";
 import CreateRoom from "./CreateRoom";
-import Drawer from "./Drawer";
-import SearchUserBar from "./SearchUserBar";
 
 const RoomList = () => {
   const auth = useAppSelector((state) => state.auth);
