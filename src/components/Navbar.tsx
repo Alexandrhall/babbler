@@ -7,7 +7,6 @@ import {
   Typography,
 } from "@mui/material";
 import Link from "next/link";
-import router from "next/router";
 import React, { useState } from "react";
 import { logout } from "../contexts/authContext";
 import { updateDetails } from "../redux/auth";
@@ -31,8 +30,6 @@ const Navbar = () => {
     <>
       <AppBar position="relative" className="w-auto">
         <Toolbar
-          // 1F1F1F
-          // 171717
           sx={{
             height: "60px",
             backgroundColor: "#141414",
@@ -40,7 +37,6 @@ const Navbar = () => {
             zIndex: 1,
           }}
         >
-          {/* <Drawer /> */}
           <Typography variant="h6" color="white" sx={{ marginLeft: "20px" }}>
             <Link href="/">BabbleR</Link>
           </Typography>
@@ -92,54 +88,6 @@ const Navbar = () => {
               Logout
             </MenuItem>
           </Menu>
-
-          {/* <Typography
-            sx={{
-              display: "flex",
-              position: "relative",
-              alignItems: "flex-end",
-              // left: "80%",
-              float: "right",
-            }}
-          >
-            <Link href="/">Home</Link>
-          </Typography> */}
-
-          {/* <Typography
-            sx={{
-              display: "flex",
-              position: "relative",
-              alignItems: "flex-end",
-              // left: "80%",
-              marginLeft: "10px",
-            }}
-          >
-            <Link href="/profile">Profile</Link>
-          </Typography>
-          <Button
-            sx={{
-              // left: "81%",
-              height: "30px",
-              width: "80px",
-            }}
-            variant="contained"
-            onClick={() => {
-              logout();
-              dispatch(
-                updateDetails({
-                  user: {
-                    id: "",
-                    role: "",
-                    email: "",
-                    username: "",
-                  },
-                  msg: "",
-                })
-              );
-            }}
-          >
-            logout
-          </Button> */}
         </Toolbar>
       </AppBar>
     </>

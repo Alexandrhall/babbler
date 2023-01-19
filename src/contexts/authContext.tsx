@@ -98,10 +98,6 @@ export const AuthProvider = ({ children }: IChildren) => {
     }
   }, [currentUser, dispatch, logoutFailedLogin]);
 
-  // useEffect(() => {
-  //   console.log(currentUser?.uid);
-  // }, [currentUser]);
-
   return (
     <AuthContext.Provider value={currentUser}>
       {!loading && children}

@@ -1,13 +1,9 @@
 import * as React from "react";
-import { createTheme, styled, useTheme } from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItemText from "@mui/material/ListItemText";
 import CreateRoom from "./CreateRoom";
 import { useAppSelector } from "../redux/hooks";
@@ -16,10 +12,9 @@ import { useGetUsers } from "../services/useGetUsers";
 import { useEffect, useState } from "react";
 import { TRoom } from "../services/postConverter";
 import Link from "next/link";
-import { ListItemButton, useMediaQuery } from "@mui/material";
+import { ListItemButton } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 
-// const drawerWidth = 240;
 const drawerWidth = {
   width: 120,
   "@media (min-width: 780px)": {
@@ -98,21 +93,6 @@ export default function PersistentDrawerLeft() {
   return (
     <div>
       <Box sx={{ display: "flex" }} key={uuidv4()}>
-        {/* <IconButton
-          aria-label="open drawer"
-          onClick={handleDrawerOpen}
-          edge="start"
-          sx={{
-            mr: 2,
-            ...(open && { display: "none" }),
-            position: "absolute",
-            color: "white",
-            top: "12px",
-            left: "10px",
-          }}
-        >
-          <MenuIcon />
-        </IconButton> */}
         <Drawer
           key={uuidv4()}
           sx={{
@@ -130,19 +110,10 @@ export default function PersistentDrawerLeft() {
           anchor="left"
           open={open}
         >
-          <DrawerHeader key={uuidv4()}>
-            {/* <IconButton onClick={handleDrawerClose} sx={{ color: "white" }}>
-              {theme.direction === "ltr" ? (
-                <ChevronLeftIcon />
-              ) : (
-                <ChevronRightIcon />
-              )}
-            </IconButton> */}
-          </DrawerHeader>
+          <DrawerHeader key={uuidv4()} />
           <Divider />
           <List>
             <CreateRoom />
-
             <ListItemText className="text-white p-3">
               <h4 className="font-bold">Rooms</h4>
               {personalRooms &&

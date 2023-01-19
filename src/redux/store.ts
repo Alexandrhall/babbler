@@ -6,7 +6,6 @@ import {
 } from "@reduxjs/toolkit";
 import authReducer from "./auth";
 import logger from "redux-logger";
-import counterSlice from "./counterSlice";
 
 const middlewares: Middleware<{}, any, Dispatch<AnyAction>>[] = [];
 
@@ -17,7 +16,6 @@ if (process.env.NODE_ENV === "development") {
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    // counter: counterSlice,
   },
   middleware: middlewares,
 });

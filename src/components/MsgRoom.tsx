@@ -1,4 +1,3 @@
-import { Drawer } from "@mui/material";
 import React, { useEffect, useRef } from "react";
 import { TRoom } from "../services/postConverter";
 import ReturnMessage from "./ReturnMessage";

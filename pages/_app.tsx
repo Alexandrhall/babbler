@@ -7,7 +7,6 @@ import Head from "next/head";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { useRouter } from "next/router";
 import Navbar from "../src/components/Navbar";
-import RoomList from "../src/components/RoomList";
 import Drawer from "../src/components/Drawer";
 
 const theme = createTheme({
